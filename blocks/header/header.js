@@ -180,9 +180,13 @@ function buildTools(section, nav) {
   tools.className = 'nav-tools';
   const items = section ? [...section.querySelectorAll('li')] : [];
   items.forEach((li) => {
+    // The icon is authored as ":name:" text; published pages already turn it into
+    // <span class="icon icon-name"> (the local preview keeps the text).
     const text = li.textContent;
+    const iconSpan = li.querySelector('span.icon');
+    const spanName = iconSpan ? ([...iconSpan.classList].find((c) => c.startsWith('icon-')) || '').slice(5) : '';
     const m = /:([\w-]+):\s*(.*)/.exec(text);
-    const name = m ? m[1] : '';
+    const name = m ? m[1] : spanName;
     const label = m ? m[2].trim() : text.trim();
     const a = li.querySelector('a');
     if (name === 'search') {
