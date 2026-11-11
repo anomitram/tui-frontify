@@ -94,7 +94,8 @@ Model detection: `/tuimagiclife` → `/api/custom-route/tuimagiclife` → `desti
 
 ## Resume state: homepage (2026-11-11, ~17:00 UTC)
 - **Done:** detection, export, captures, images (named), import, local verification (see memory `tui-brandhub-homepage` for numbers), DA upload of `/index`, `/brandhub/nav`, `/brandhub/footer` with 63 images.
-- **Open, in order:** (1) the code must reach a branch (commit + push; ask the user); (2) preview the homepage there and render-check it and the TUI MAGIC LIFE preview — needs preview access again (401 since ~16:50 UTC); (3) then delete the 45 old DA files listed in `da-old-media.json` (approved by the user once previews show every image); (4) upload `/nav` (guidelines Brand Hub → `/`) when asked; (5) publish only when asked.
+- **17:10 UTC:** code pushed to `aem-20261111-0835` (not merged to `main`); all 6 pages published at 17:00 by the user's Sync; DA media cleaned (123 unused images and 15 empty folders deleted; log `migration-work/preview-publish/da-cleanup-log.json`; 79 references, 0 missing).
+- **Open:** (1) merge the branch into `main` (until then `main` shows the new content with old code); (2) visual check of the published pages on preview/live (`hub_render_check.py`, `IMAGE_MAP=…`) once the site's 401 `access-not-allowed` is lifted or access is granted.
 - Server ports: 8099 docs, 8098 portal 162, 8097 homepage.
 
 ## Next migrations (not started)

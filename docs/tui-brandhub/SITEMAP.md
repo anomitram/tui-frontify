@@ -8,8 +8,8 @@ Surfaces: local = content/ in this repo; DA = Document Authoring; preview = .aem
 | Item | Status |
 |---|---|
 | Document 396 "TUI Master Brand Home" (portal 112), all pages + 4 chrome documents | migrated; see the page table |
-| Portal 161 home "TUI Brand Hub homepage" (`/index (= /)`, `/brandhub/nav`, `/brandhub/footer`) | migrated: local; DA uploaded 2026-11-11 ~16:45 UTC (3 pages, 63 images in .index/ and brandhub/.nav/ with descriptive names). Not previewed: the code it needs (hub-cell changes, theme-brandhub.css) is not on any branch yet |
-| Portal 162 home "TUI MAGIC LIFE portal home" (`/tuimagiclife`, `/tuimagiclife/nav`, `/tuimagiclife/footer`) | migrated: local and DA re-uploaded 2026-11-11 ~16:50 UTC with descriptive image names (.tuimagiclife/, tuimagiclife/.nav/); preview run 16:51 UTC (admin status 200) but not render-checked, because preview and live answer 401 since then; live still serves the 12:22 publish (old image copies) |
+| Portal 161 home "TUI Brand Hub homepage" (`/index (= /)`, `/brandhub/nav`, `/brandhub/footer`) | migrated: local, DA, preview, live (published 17:00 UTC 2026-11-11 by the user's Sync, branch aem-20261111-0835). Code is on that branch only, not merged to main. Rendering not checked on preview/live: the site answers 401 (access-not-allowed) since ~16:50 UTC |
+| Portal 162 home "TUI MAGIC LIFE portal home" (`/tuimagiclife`, `/tuimagiclife/nav`, `/tuimagiclife/footer`) | migrated: local, DA, preview, live; re-published 17:00 UTC 2026-11-11 with descriptive image names. Rendering of the new publish not checked (site answers 401 since ~16:50 UTC) |
 | 84 other Frontify targets linked from the migrated pages | not migrated (out of scope); see the last table |
 
 ## Portals
