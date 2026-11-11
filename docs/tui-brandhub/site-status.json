@@ -35,7 +35,7 @@
     "/brandhub/nav",
     "/brandhub/footer"
    ],
-   "status": "migrated: local; DA uploaded 2026-11-11 ~16:45 UTC (3 pages, 63 images in .index/ and brandhub/.nav/ with descriptive names). Not previewed: the code it needs (hub-cell changes, theme-brandhub.css) is not on any branch yet"
+   "status": "migrated: local, DA, preview, live (published 17:00 UTC 2026-11-11 by the user's Sync, branch aem-20261111-0835). Code is on that branch only, not merged to main. Rendering not checked on preview/live: the site answers 401 (access-not-allowed) since ~16:50 UTC"
   },
   {
    "title": "TUI MAGIC LIFE portal home",
@@ -46,7 +46,7 @@
     "/tuimagiclife/nav",
     "/tuimagiclife/footer"
    ],
-   "status": "migrated: local and DA re-uploaded 2026-11-11 ~16:50 UTC with descriptive image names (.tuimagiclife/, tuimagiclife/.nav/); preview run 16:51 UTC (admin status 200) but not render-checked, because preview and live answer 401 since then; live still serves the 12:22 publish (old image copies)"
+   "status": "migrated: local, DA, preview, live; re-published 17:00 UTC 2026-11-11 with descriptive image names. Rendering of the new publish not checked (site answers 401 since ~16:50 UTC)"
   }
  ],
  "portals": [
@@ -1226,5 +1226,6 @@
    "linked_from_hub161": 1
   }
  ],
- "branch_note": "Content is shared across branches, so a publish applies to every branch; code is per branch."
+ "branch_note": "Content is shared across branches, so a publish applies to every branch; code is per branch.",
+ "da_media_note": "2026-11-11 17:10 UTC: DA media cleaned - 123 unused images deleted (45 old random-named, 78 superseded upload copies) and 15 empty /assets/cell-* folders removed; every image the published pages reference remains (79 references, 0 missing). Log: migration-work/preview-publish/da-cleanup-log.json"
 }
