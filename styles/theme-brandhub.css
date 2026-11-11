@@ -1,0 +1,216 @@
+/*
+ * Theme "brandhub": TUI Brand Hub homepage (Frontify portal 161, the site root "/").
+ * Values from /api/guideline-stylesheets/portal/161 (hub typography and buttons) and the page
+ * captured at 1440/768/375 (header geometry), 2026-11-11. Fonts are the site's own (byte-identical
+ * to the portal's font files).
+ */
+/* stylelint-disable no-descending-specificity -- footer, header and cell links never overlap */
+body.brandhub {
+  --header-background: var(--tui-sky-blue, rgb(112 203 244));
+  --header-link-color: rgb(255 255 255 / 80%);
+  --header-link-font: 'TUITypeLtRg_W', arial, sans-serif;
+
+  /* Frontify header grid: 200px auto minmax(min-content, 60px), gap 50px, padding 0 32px, no max width */
+  --header-logo-width: 113px; /* logo height 50px */
+  --header-logo-column: 200px;
+  --header-inner-max: none;
+  --header-inner-padding: 0 32px;
+
+  /* space of the excluded Search button, so "Brand Hub" keeps its position (1271px at 1440) */
+  --header-tools-reserve: 39px;
+
+  color: rgb(27 17 92);
+  font-family: 'TUITypeLtRg_W', arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+/* Frontify draws the logo shifted by translate(9px, 5px); 32px high on the 768/375 captures. The
+   switch point between 768 and 1440 isn't in the captures; the header block's 900px breakpoint is
+   used (not verified against the source). */
+.brandhub header nav img {
+  transform: translate(9px, 5px);
+}
+
+@media (width < 900px) {
+  body.brandhub {
+    --header-logo-width: 72px;
+    --header-tools-reserve: 0;
+  }
+}
+
+/* "Brand Hub" tool: 24px icon, 0.3em gap, 14px text */
+.brandhub header .nav-tool-brand-hub {
+  gap: 0.3em;
+}
+
+/* Portal 161 custom page footer (portal setting "footer", .o-tui__page-footer). In Frontify it is
+   absolutely positioned after the content; here it is the normal page footer below the content. */
+.brandhub footer {
+  background-color: #fff;
+}
+
+.brandhub footer .footer > div {
+  max-width: none;
+  margin: 0;
+  padding: 10px 20px 20px 50px;
+  border-top: 1px solid #eaebeb;
+  color: rgb(9 42 94);
+  font-family: TUITypeLt, arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.brandhub footer .footer p {
+  display: inline-block;
+  margin: 0;
+  padding: 0 50px;
+}
+
+/* links touch, as the source anchors have no whitespace between them (no wrap point either) */
+.brandhub footer .footer ul {
+  display: inline-flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.brandhub footer .footer li {
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.brandhub footer .footer a:any-link {
+  display: inline-block;
+  padding: 0 6px;
+  color: rgb(9 42 94);
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  text-decoration: none;
+}
+
+.brandhub footer .footer li:first-child a:any-link {
+  padding-right: 9px;
+  border-right: 1px solid rgb(9 42 94);
+}
+
+@media (width <= 700px) {
+  .brandhub footer .footer p {
+    display: block;
+    padding-left: 6px;
+  }
+
+  .brandhub footer .footer ul {
+    display: flex;
+  }
+}
+
+/* rich text inside hub cells (.co-editor) */
+.brandhub .hub-cell .co-editor {
+  color: rgb(27 17 92);
+  font-family: 'TUITypeLtRg_W', arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.brandhub .hub-cell .co-editor p {
+  margin-top: 0;
+}
+
+.brandhub .hub-cell .co-editor h1,
+.brandhub .hub-cell .co-editor h2,
+.brandhub .hub-cell .co-editor h3,
+.brandhub .hub-cell .co-editor h4,
+.brandhub .hub-cell .co-editor .custom1,
+.brandhub .hub-cell .co-editor .custom2,
+.brandhub .hub-cell .co-editor .custom3 {
+  margin-top: 0;
+  color: rgb(27 17 92);
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: 1.3;
+  text-transform: none;
+}
+
+.brandhub .hub-cell .co-editor h1 { margin-bottom: 10px; font-family: 'Ambit Bold', arial, sans-serif; font-size: 40px; font-weight: 700; }
+.brandhub .hub-cell .co-editor h2 { margin-bottom: 10px; font-family: 'Ambit Bold', arial, sans-serif; font-size: 22px; font-weight: 400; }
+.brandhub .hub-cell .co-editor h3 { margin-bottom: 10px; font-family: 'Ambit SemiBold', arial, sans-serif; font-size: 18px; font-weight: 700; }
+.brandhub .hub-cell .co-editor h4 { margin-bottom: 5px; font-family: 'Ambit SemiBold', arial, sans-serif; font-size: 16px; font-weight: 700; }
+.brandhub .hub-cell .co-editor .custom1 { margin-bottom: 8px; font-family: 'TUITypeLtRg_W', arial, sans-serif; font-size: 16px; font-weight: 700; }
+
+.brandhub .hub-cell .co-editor .custom2,
+.brandhub .hub-cell .co-editor .custom3 { margin-bottom: 10px; font-family: 'TUITypeLtRg_W', arial, sans-serif; font-size: 16px; font-weight: 700; }
+
+.brandhub .hub-cell .co-editor blockquote {
+  margin: 0 0 10px;
+  color: rgb(185 185 185);
+  font-family: 'Ambit Regular', arial, sans-serif;
+  font-size: 24px;
+  line-height: 1.3;
+}
+
+.brandhub .hub-cell .co-editor a:any-link {
+  color: rgb(53 103 246);
+  font-family: 'Ambit Regular', arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.3;
+  text-decoration: underline;
+}
+
+/* buttons (Frontify .btn-primary / .btn-secondary / .btn-tertiary) */
+.brandhub .hub-cell .co-editor a.button:any-link {
+  display: inline-block;
+  box-sizing: border-box;
+  max-width: 100%;
+  margin: 10px 0;
+  padding: 10px 20px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  border-radius: 30px;
+  color: #fff;
+  font-family: 'Ambit SemiBold', arial, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.3;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  text-transform: none;
+  white-space: nowrap;
+  vertical-align: middle;
+  transition: all 0.2s ease-in-out;
+}
+
+.brandhub .hub-cell .co-editor a.button.primary {
+  border-color: rgb(53 103 246);
+  background-color: rgb(53 103 246);
+}
+
+.brandhub .hub-cell .co-editor a.button.primary:hover,
+.brandhub .hub-cell .co-editor a.button.primary:active {
+  border-color: rgb(53 103 246);
+  background-color: rgb(27 17 92);
+  color: #fff;
+}
+
+.brandhub .hub-cell .co-editor a.button.secondary {
+  border-color: rgb(27 17 92);
+  background-color: rgb(27 17 92);
+  font-size: 13px;
+}
+
+.brandhub .hub-cell .co-editor a.button.secondary:hover,
+.brandhub .hub-cell .co-editor a.button.secondary:active {
+  border-color: rgb(255 255 255 / 0%);
+  background-color: rgb(226 245 253);
+  color: rgb(27 17 92);
+}
+
+/* Frontify tertiary = bold + italic link = the site's "accent" button */
+.brandhub .hub-cell .co-editor a.button.accent {
+  border-color: rgb(212 14 20);
+  background-color: rgb(212 14 20);
+  font-size: 13px;
+}

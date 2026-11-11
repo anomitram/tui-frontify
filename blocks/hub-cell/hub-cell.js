@@ -3,11 +3,16 @@
  * the ported layout rules apply 1:1.
  * Variants: textover | text | image | leftright | rightleft | topbottom | bottomtop, w-<n>,
  * text-<position>, image-<position>, cover.
- * Rows: picture, rich text, then key/value rows: Link, Image Link, New Window, Content Padding,
- * Image Padding, Content Width, Image Width, Ratio, Overlay, Content Background, Border, Styles.
+ * Rows: picture, rich text, then key/value rows: Link, Image Link, New Window, Image New Window,
+ * Image Background, Content Padding, Image Padding, Content Width, Image Width, Ratio, Overlay,
+ * Content Background, Border, Styles.
+ * Links as in Frontify: the image area goes to Image Link (else Link), the rest of the cell to Link
+ * (else Image Link); each has its own new-window flag.
  */
+import { contentPath } from '../../scripts/scripts.js';
+
 const LAYOUTS = ['textover', 'text', 'image', 'leftright', 'rightleft', 'topbottom', 'bottomtop'];
-const KEYS = ['link', 'image link', 'new window', 'content padding', 'image padding', 'content width',
+const KEYS = ['link', 'image link', 'new window', 'image new window', 'image background', 'content padding', 'image padding', 'content width',
   'image width', 'ratio', 'overlay', 'content background', 'border', 'styles', 'frontify cell'];
 
 function readRows(block) {
@@ -46,39 +51,91 @@ function applyStyles(content, spec) {
       const [prop, ...rest] = decl.split(':');
       const value = rest.join(':').trim();
       if (prop.trim() === 'class') el.classList.add(value);
-      else el.style.setProperty(prop.trim(), value);
+      else if (prop.trim() === 'spaces') {
+        // restore the source's runs of spaces between inline elements (rendering collapses them)
+        const lengths = value.split(',').map(Number);
+        const gaps = [...el.childNodes].filter((n) => n.nodeType === 3 && n.previousSibling
+          && n.nextSibling && /^\s+$/.test(n.nodeValue));
+        gaps.forEach((g, i) => { if (lengths[i] > 0) g.nodeValue = ' '.repeat(lengths[i]); });
+      } else el.style.setProperty(prop.trim(), value);
     });
+  });
+}
+
+/**
+ * Frontify puts several buttons in one paragraph (e.g. "Global Campaign Playbooks / Assets /
+ * Guidelines"). The site's decorateButtons() only handles a link that is alone in its paragraph,
+ * so formatted links that share a paragraph are turned into buttons here, with the same mapping:
+ * bold = primary, italic = secondary, bold + italic = accent (Frontify tertiary).
+ */
+function decorateInlineButtons(content) {
+  content.querySelectorAll(':is(p, h1, h2, h3, h4, h5, h6) a[href]:not(.button)').forEach((a) => {
+    const strong = a.closest('strong');
+    const em = a.closest('em');
+    if ((!strong && !em) || a.querySelector('img')) return;
+    // the outermost formatting element around the link
+    let outer = strong || em;
+    if (strong && em) outer = strong.contains(em) ? strong : em;
+    if (outer.textContent.trim() !== a.textContent.trim()) return;
+    a.className = 'button';
+    if (strong && em) a.classList.add('accent');
+    else a.classList.add(strong ? 'primary' : 'secondary');
+    outer.replaceWith(a);
+    a.closest('p, h1, h2, h3, h4, h5, h6').classList.add('button-wrapper');
   });
 }
 
 export default function decorate(block) {
   const { cfg, picture, content } = readRows(block);
+  if (block.classList.contains('none')) {
+    // empty Frontify cell: only holds its column width
+    block.textContent = '';
+    if (cfg['frontify cell']) block.dataset.frontifyCell = cfg['frontify cell'];
+    return;
+  }
   const layout = LAYOUTS.find((l) => block.classList.contains(l)) || (picture ? 'image' : 'text');
   const pos = (prefix) => ([...block.classList].find((c) => c.startsWith(prefix)) || `${prefix}topleft`).slice(prefix.length);
-  const href = cfg.link || cfg['image link'];
+  // contentPath: local preview mounts pages under /content (no-op on Edge Delivery)
+  const href = contentPath(cfg.link || cfg['image link']);
+  const imageHref = contentPath(cfg['image link'] || cfg.link);
+  const imageNewWindow = cfg['image new window'] === 'true' || (!cfg['image link'] && cfg['new window'] === 'true');
+  const contain = block.classList.contains('cover-mode-contain');
+  const cover = layout === 'image' && block.classList.contains('cover');
 
   const wrap = document.createElement('div');
   wrap.className = `pb-text-image__content layout-${layout}`;
+  if (contain) wrap.classList.add('pb-text-image__content--cover-mode-contain');
 
-  const image = document.createElement(href ? 'a' : 'div');
+  const image = document.createElement(imageHref ? 'a' : 'div');
   image.className = 'pb-text-image__image';
-  if (href) {
-    image.href = href;
-    if (cfg['new window'] === 'true') { image.target = '_blank'; image.rel = 'noopener'; }
+  if (imageHref) {
+    image.href = imageHref;
+    if (imageNewWindow) { image.target = '_blank'; image.rel = 'noopener'; }
   }
+  if (cfg['image background']) image.style.background = cfg['image background'];
   if (!picture) image.classList.add('state-empty');
   if (cfg['image padding']) image.style.padding = cfg['image padding'];
   const inner = document.createElement('div');
   inner.className = `pb-text-image__image-inner state-${pos('image-')}`;
+  if (cover) inner.classList.add('state-cover');
   inner.style.width = '100%';
   const container = document.createElement('div');
   container.className = 'pb-text-image__image-container';
   if (picture) {
     const legacy = document.createElement('div');
     legacy.className = 'cm-image-legacy';
+    if (cover) {
+      // Frontify's script drops "state-cover" from the holder when the columns stack (< 768px;
+      // verified on all 26 cover images of portal 161), so the image keeps its own ratio there
+      const wide = window.matchMedia('(width >= 768px)');
+      const sync = () => legacy.classList.toggle('state-cover', wide.matches);
+      sync();
+      wide.addEventListener('change', sync);
+    }
     if (cfg.ratio) legacy.style.paddingBottom = cfg.ratio;
     const img = picture.querySelector('img') || picture;
     img.classList.add('cm-image-legacy__image');
+    if (contain) img.classList.add('cm-image-legacy__wrap--contain');
     img.loading = block.closest('.section')?.previousElementSibling ? 'lazy' : 'eager';
     legacy.append(picture);
     container.append(legacy);
@@ -99,6 +156,7 @@ export default function decorate(block) {
   if (cfg['content background']) text.style.background = cfg['content background'];
   if (content) {
     applyStyles(content, cfg.styles);
+    decorateInlineButtons(content);
     textInner.append(...content.childNodes);
   }
   text.append(textInner);

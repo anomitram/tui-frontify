@@ -5,7 +5,9 @@ import {
 /* Frontify hub TEXTIMAGE cell -> "Hub Cell" block.
  * Variants: layout (textover|text|image|leftright|rightleft|topbottom|bottomtop), w-<1..12>,
  * text-<position>, image-<position>, cover, contain.
- * Rows: picture, rich text, then key/value settings (only when set). */
+ * Rows: picture, rich text, then key/value settings (only when set): Link, Image Link, New Window,
+ * Image New Window, Image Background, paddings, widths, Ratio, Overlay, Content Background, Border,
+ * Styles, Frontify Cell. */
 export default function parse(cell, ctx) {
   const s = cell.settings || {};
   const variants = [
@@ -21,7 +23,9 @@ export default function parse(cell, ctx) {
   if (src) {
     const el = ctx.document.createElement('img');
     el.src = src;
-    el.alt = s.image_alt || '';
+    // Frontify renders these images with alt="" even when they carry text (brand logos, pills);
+    // the descriptive name built from the link target / cell heading doubles as alt text.
+    el.alt = s.image_alt || (ctx.assetAlts || {})[key] || '';
     rows.push([el]);
   } else if (img?.file_id && s.layout !== 'text') {
     ctx.notes.push(`cell ${key}: image ${img.file_id} has no file in the hub data (not rendered by Frontify)`);
@@ -36,6 +40,9 @@ export default function parse(cell, ctx) {
   kv('Link', s.link?.url ? resolveLink(s.link.url, ctx) : null);
   kv('Image Link', s.image_link?.url ? resolveLink(s.image_link.url, ctx) : null);
   if (s.new_window || s.link?.new_window) kv('New Window', 'true');
+  if (s.image_new_window) kv('Image New Window', 'true');
+  const transparent = (c) => !c || /rgba\([^)]*,\s*0\)$/.test(c);
+  if (src && !transparent(s.image_background)) kv('Image Background', s.image_background);
   kv('Content Padding', box(s.content_padding));
   const ip = box(s.image_padding);
   if (ip && ip !== '0 0 0 0') kv('Image Padding', ip);

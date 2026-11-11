@@ -21,10 +21,20 @@ Edge Delivery Services. Read a block first. Omissions are in the repo or known.
 - All committed files are served. Use `.hlxignore`.
 - Skills: `/plugin marketplace add adobe/skills`, then `aem-edge-delivery-services` (24 skills, incl. `docs-search`).
 
-## TUI Brand Hub (migrated from Frontify document 396)
-Reference: `docs/tui-brandhub/CONTEXT.md` (file locations, glossary, resume state) and `docs/tui-brandhub/SITEMAP.md`.
-Procedures: project skills `frontify-export`, `frontify-block-mapping`, `frontify-assets`, `frontify-links-redirects`, `frontify-visual-verify`, `tui-new-page`, `frontify-hub-page`.
-Tokens in `styles/styles.css :root`, from Frontify design settings, captured 2026-11-10. Revisit if the source is edited after that date.
+## TUI Brand Hub (migrated from Frontify: document 396, portal 162 home, homepage = portal 161)
+Reference: `docs/tui-brandhub/CONTEXT.md` (file locations, glossary, resume state) and `docs/tui-brandhub/SITEMAP.md` (status per page, document and portal).
+Procedures: start with skill `frontify-migrate`, which detects document vs hub and orders the rest:
+`frontify-export`, `frontify-styles-fonts`, `frontify-assets`, `frontify-block-mapping`, `frontify-links-redirects`, `frontify-visual-verify`; `tui-new-page` for new pages.
+
+### Frontify-hosted sites: rules that held in both migrations (2026-11-10/11)
+- Frontify is a single-page app. Read the same-origin JSON APIs; use a browser only for reference captures.
+- Detect the page model first. `/document/<id>` is a document. `/hub/<id>` or `/<route>` (resolve with `/api/custom-route/<route>`) is a portal hub. The site root `/` is the dashboard: `/api/dashboard/portal-destination` names the hub it shows (TUI Brand Hub: portal 161).
+- Import offline from local source pages built from the export; never import from the live site.
+- Scope is the requested page or document only. Links elsewhere point at the resolved Frontify target (never `/r/`) and are listed as out of scope.
+- Keep local images under `/assets/` with meaningful file names: documents `/assets/<key>/<url-safe original name>`; hubs `/assets/<route>/<descriptive-name>` (Frontify hub images only have random ids, so names come from `image-names.json` overrides, the cell heading or the link target). Never write `content.da.live` URLs into local pages: the platform's Sync copies local images into each page's DA media folder as `<local name>-<hash>`, so random local names become random DA names. `upload-pages-to-da.mjs` follows the same convention.
+- Test scripts must add a doctype, because the local preview runs in quirks mode. Grow the window to page height, as the reference capture does.
+- Before any preview, check that the branch serves the code the page needs. After publishing, re-check live from several requests, because a CDN node can stay stale for up to 2 h.
+- Published markup differs from local: `:icon:` text becomes `<span class="icon">`, and images become `media_*`. Code must handle both forms.
 
 ### Brand rules for every page
 - Text colour: TUI Deep Blue `#1B115C`. The palette has no black; use Deep Blue for black.
@@ -63,7 +73,7 @@ Tokens in `styles/styles.css :root`, from Frontify design settings, captured 202
 - Tone of voice pillars: Positive energy, Bold expertise, Insightful edge.
   Read `/tone-of-voice/*` before writing copy. Further detail is unverified.
 
-### Migration conventions
+### Migration conventions: document pages (document 396)
 - Page paths: `/<category-slug>/<page-slug>`, or `/<slug>` without a category.
   - Keep Frontify slugs exactly, including `-1` suffixes.
   - Heading ids are the Frontify heading slugs; the sidebar matches them by text.
@@ -80,8 +90,7 @@ Tokens in `styles/styles.css :root`, from Frontify design settings, captured 202
   - Images must stay ≤ 18 MB (Edge Delivery's limit is 20 MB).
 - Links:
   - Links within this document are rewritten to new paths.
-  - `/r/<token>` links go through the redirect sheet.
-  - Links to other Frontify documents and portals stay absolute and are listed as out of scope.
+  - `/r/<token>` links that point to this document resolve offline (the tokens are in the export); old URLs go to the redirect sheet.
 - Local preview serves content under `/content/`. Use `contentPath()`/`localizeLinks()` from `scripts/scripts.js`.
 
 ### TUI MAGIC LIFE portal (Frontify portal 162, page `/tuimagiclife`, template `hub`, theme `tuimagiclife`)
@@ -100,7 +109,17 @@ Tokens are in `styles/theme-tuimagiclife.css`, from the portal 162 hub styleshee
 - Layout: the grid is ported 1:1 from Frontify in `styles/hub.css`.
   - Column widths step at 768px and 992px.
   - Rows are sections with `hub-row` metadata; cells are `hub-cell` / `hub-divider` blocks.
-- Procedure: skill `frontify-hub-page`.
+
+### Migration conventions: portal hub pages (differences from documents, verified on portals 162 and 161)
+- Path `/<route>`, with per-portal `/<route>/nav` and `/<route>/footer` named in page metadata (`Nav`, `Footer`).
+  The homepage (portal 161) is `/index` (= `/`) with theme and chrome `brandhub` (`/brandhub/nav`, `/brandhub/footer`); the guideline chrome no longer writes `/index`.
+- Links to migrated targets become local paths (`tools/frontify-export/migrated-targets.mjs`, config `migrated`): document 396 pages, `/tuimagiclife`, and the dashboard / hub 161 → `/`. Everything else stays on Frontify.
+  Metadata: `Template: hub`, `Theme: <route>` (loads `styles/theme-<route>.css`).
+- No sidebar, pagination, headings or anchors. One grid row = one section; each cell = one block, with `w-<1..12>` for its width.
+- `scripts/hub.js` applies Section Metadata itself before blocks load.
+- The cell DOM and CSS are rebuilt 1:1 from Frontify's app CSS. Inline text styles travel in a `Styles` row.
+- `/r/` targets on a hub sit in other documents: resolve them with `/api/permanent-link/<token>` and record them in the link map (no redirect sheet).
+- Search, Brand Assistant, Intercom, analytics and view tracking are excluded. The header keeps the excluded icons' space (`--header-tools-reserve`).
 
 ### Hard rules
 - Never print, store or paste credentials, cookies, tokens or signed URLs. Auth for tui-brandhub.com is injected by the workspace proxy.

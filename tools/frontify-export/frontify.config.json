@@ -6,5 +6,23 @@
   "language": "en",
   "dataDir": "migration-work/frontify",
   "edsImageLimitBytes": 20000000,
-  "resizeTargetBytes": 18000000
+  "resizeTargetBytes": 18000000,
+  "migrated": {
+    "_comment": "Frontify targets that exist on the migrated site. Links to them are rewritten to the local path; every other Frontify link stays absolute. Used by migrated-targets.mjs.",
+    "root": "/",
+    "documents": {
+      "396": {
+        "redirectMap": "migration-work/frontify/redirect-map.json",
+        "navigation": "migration-work/frontify/raw/navigation.json"
+      }
+    },
+    "hubs": {
+      "161": "/",
+      "162": "/tuimagiclife"
+    },
+    "routes": {
+      "tuimagiclife": "/tuimagiclife",
+      "dashboard": "/"
+    }
+  }
 }

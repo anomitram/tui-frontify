@@ -2,7 +2,10 @@
 /* Import script for a Frontify hub (portal home) page, first used for the TUI MAGIC LIFE portal
  * (portal 162, route "tuimagiclife"). Source = offline snapshot built by
  * tools/frontify-export/build-hub-sources.mjs; nothing is fetched from Frontify at import time.
- * Output: /<route> (page), /<route>/nav (portal header), /<route>/footer (portal footer). */
+ * Output: <pagePath> (page; default /<route>, /index for the site root), /<route>/nav (portal
+ * header), /<route>/footer (portal footer). Links use the payload's link map: migrated targets
+ * become local paths, everything else stays on Frontify. */
+import { resolveLink } from './utils/hub.js';
 import hubCell from './parsers/hub-cell.js';
 import hubDivider from './parsers/hub-divider.js';
 
@@ -27,9 +30,10 @@ function buildPage(document, data, notes) {
     if (i > 0) main.append(document.createElement('hr'));
     counts.rows += 1;
     const ctx = {
-      document, WebImporter, assets: data.assets, linkMap: data.linkMap, host: data.host, notes, rowId: row.id,
+      document, WebImporter, assets: data.assets, assetAlts: data.assetAlts, linkMap: data.linkMap, host: data.host, notes, rowId: row.id,
     };
     let visible = 0;
+    const hasContent = row.cells.some((c) => c.block_type === 'TEXTIMAGE' || c.block_type === 'DIVIDER');
     row.cells.forEach((cell) => {
       counts.cells += 1;
       if (cell.block_type === 'TEXTIMAGE') {
@@ -38,6 +42,12 @@ function buildPage(document, data, notes) {
       } else if (cell.block_type === 'DIVIDER') {
         main.append(hubDivider(cell, ctx));
         visible += 1;
+      } else if (hasContent) {
+        // an empty (NONE) cell next to real cells still takes its column width in Frontify
+        main.append(WebImporter.Blocks.createBlock(document, {
+          name: `Hub Cell (none, w-${cell.width || 12})`,
+          cells: [['Frontify Cell', `${cell.teaser} (row ${row.id}, sort ${cell.sort}, empty)`]],
+        }));
       } else {
         notes.push(`row ${row.id}: ${cell.block_type} cell ${cell.teaser} has no content (editor placeholder) - kept as empty row`);
       }
@@ -59,7 +69,7 @@ function buildPage(document, data, notes) {
     Nav: `/${data.route}/nav`,
     Footer: `/${data.route}/footer`,
     'Frontify Portal': `${data.portal.id} (${data.portal.title})`,
-    'Original Url': `${data.host}/${data.route}`,
+    'Original Url': data.originalUrl || `${data.host}/${data.route}`,
   }));
   return { main, counts };
 }
@@ -67,7 +77,9 @@ function buildPage(document, data, notes) {
 function buildNav(document, data) {
   const div = document.createElement('div');
   const logo = data.assets[data.logoKey];
-  div.innerHTML = `<p><a href="/${data.route}"><img src="${logo}" alt="Go to ${data.portal.title}"></a></p><p><a href="${data.host}/dashboard">Back to dashboard</a></p>`;
+  const home = data.pagePath === '/index' ? '/' : (data.pagePath || `/${data.route}`);
+  const rail = data.railHref || `${data.host}/dashboard`;
+  div.innerHTML = `<p><a href="${home}"><img src="${logo}" alt="Go to ${data.portal.title}"></a></p><p><a href="${rail}">Back to dashboard</a></p>`;
   div.append(document.createElement('hr'));
   const ul = document.createElement('ul');
   data.navItems.forEach((n) => {
@@ -85,7 +97,38 @@ function buildNav(document, data) {
   });
   div.append(ul, document.createElement('hr'));
   // Search and the AI brand assistant are excluded from this migration (not reproduced).
-  if (data.portal.brandHub?.url) div.insertAdjacentHTML('beforeend', `<ul><li><a href="${data.portal.brandHub.url}">:brand-hub: ${data.portal.brandHub.label || 'Brand Hub'}</a></li></ul>`);
+  const bh = data.portal.brandHub?.url;
+  if (bh) {
+    const href = resolveLink(bh.startsWith('/') ? data.host + bh : bh, { linkMap: data.linkMap, host: data.host });
+    div.insertAdjacentHTML('beforeend', `<ul><li><a href="${href}">:brand-hub: ${data.portal.brandHub.label || 'Brand Hub'}</a></li></ul>`);
+  }
+  return div;
+}
+
+/* Portal footer: the portal's custom page footer (portal 161: copyright + Imprint + General Terms),
+ * else empty. Copyright text in the first paragraph, links in a list; the theme lays them out. */
+function buildFooter(document, data) {
+  const div = document.createElement('div');
+  const f = data.customFooter;
+  if (!f) {
+    div.innerHTML = '<p></p>'; // the portal footer content is empty in Frontify
+    return div;
+  }
+  const src = document.createElement('div');
+  src.innerHTML = f.markup.replace(/\\\//g, '/');
+  const copy = src.querySelector('.o-tui__copyright');
+  const p = document.createElement('p');
+  p.textContent = (copy ? copy.textContent : '').trim();
+  const ul = document.createElement('ul');
+  src.querySelectorAll('a[href]').forEach((a) => {
+    const li = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = resolveLink(a.getAttribute('href'), { linkMap: data.linkMap, host: data.host });
+    link.textContent = a.textContent.trim();
+    li.append(link);
+    ul.append(li);
+  });
+  div.append(p, ul);
   return div;
 }
 
@@ -95,12 +138,11 @@ export default {
     const data = readPayload(document);
     const notes = [];
     const { main, counts } = buildPage(document, data, notes);
-    const footer = document.createElement('div');
-    footer.innerHTML = '<p></p>'; // the portal footer content is empty in Frontify
+    const footer = buildFooter(document, data);
     return [
       {
         element: main,
-        path: `/${data.route}`,
+        path: data.pagePath || `/${data.route}`,
         report: {
           rows: counts.rows, cells: counts.cells, notes: JSON.stringify(notes), links: Object.keys(data.linkMap).length,
         },

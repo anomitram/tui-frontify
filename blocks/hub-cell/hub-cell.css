@@ -100,6 +100,12 @@
   display: contents;
 }
 
+/* Frontify's base reset (Tailwind preflight): images are blocks, so no baseline gap under them */
+.hub-cell img {
+  display: block;
+  vertical-align: middle;
+}
+
 .hub-cell .cm-image-legacy__image {
   position: absolute;
   top: 0;
@@ -195,8 +201,14 @@
   height: 100%;
 }
 
+/* Stacking as in Frontify: the image layer and the editor (.co-editor--default) are positioned,
+   the text area is not - so the image (and its background) paints over the text area's background
+   while the text itself stays on top. */
+.hub-cell .pb-text-image__text-inner.co-editor {
+  position: relative;
+}
+
 .hub-cell .layout-textover .pb-text-image__text {
-  position: relative; /* Frontify's editor layer is positioned, so text paints above the image */
   display: flex;
   grid-area: 1 / 1;
   width: auto;
@@ -255,4 +267,34 @@
 
 .hub-cell.w-12 .pb-text-image__content.layout-image {
   min-height: 400px;
+}
+
+/* cover / contain image modes (ported from frontify-bootstrap.css, portal 161, 2026-11-11) */
+.hub-cell .cm-image-legacy__wrap--contain {
+  object-fit: contain;
+}
+
+.hub-cell .pb-text-image .state-cover {
+  height: 100%;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* hub-cell.js toggles "state-cover" on the image holder only from 768px, as Frontify's script does */
+.hub-cell .cm-image-legacy.state-cover {
+  height: 100%;
+  padding-bottom: 0 !important;
+}
+
+.hub-cell.w-12 .pb-text-image__content.layout-image.pb-text-image__content--cover-mode-contain {
+  min-height: auto;
+}
+
+.hub-cell.w-12 .pb-text-image__content.layout-image.pb-text-image__content--cover-mode-contain .cm-image-legacy {
+  height: 100% !important;
+  padding-bottom: 0 !important;
+}
+
+.hub-cell.w-12 .pb-text-image__content.layout-image.pb-text-image__content--cover-mode-contain .cm-image-legacy__image {
+  position: static;
 }
