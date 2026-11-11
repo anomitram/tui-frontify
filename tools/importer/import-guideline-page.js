@@ -1,5 +1,5 @@
 /* global WebImporter */
-/* Import script for TUI Brand Hub (Frontify) document 396 guideline pages.
+/* Import script for Frontify guideline pages (first used for TUI Brand Hub document 396).
  * Source pages are offline snapshots (built by tools/frontify-export/build-sources.mjs) that
  * embed the exported Frontify page JSON; nothing is fetched from the brand hub at import time. */
 import { rewriteLink } from './utils/frontify.js';
@@ -16,7 +16,7 @@ import colorsParser from './parsers/colors.js';
 import assetKitParser from './parsers/asset-kit.js';
 import audioParser from './parsers/audio.js';
 
-const HOST = 'https://tui-brandhub.com';
+let HOST = 'https://tui-brandhub.com'; // replaced by the payload's host in makeCtx()
 
 const PARSERS = {
   Text: textParser,
@@ -44,7 +44,10 @@ function readPayload(document) {
 }
 
 function makeCtx(document, data) {
+  HOST = data.host || HOST;
   return {
+    host: HOST,
+    docId: data.doc.id,
     document,
     WebImporter,
     assets: data.assets,
@@ -174,7 +177,7 @@ function buildNav(document, data) {
   div.insertAdjacentHTML('beforeend', `<ul>
     <li><a href="${HOST}/dashboard">:brand-hub: Brand Hub</a></li>
     <li>:search: Search</li>
-    <li><a href="${HOST}/document/396">:brand-assistant: Brand Assistant</a></li>
+    <li><a href="${HOST}/document/${data.doc.id}">:brand-assistant: Brand Assistant</a></li>
   </ul>`);
   return div;
 }

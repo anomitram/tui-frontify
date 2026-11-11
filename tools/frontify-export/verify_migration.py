@@ -16,6 +16,8 @@ from html.parser import HTMLParser
 from urllib.parse import unquote, urlparse
 
 repo = sys.argv[1]
+CONF = json.load(open(os.path.join(repo, 'tools', 'frontify-export', 'frontify.config.json')))
+SRC_HOST = urlparse(CONF['host']).netloc
 F = os.path.join(repo, 'migration-work', 'frontify')
 C = os.path.join(repo, 'content')
 
@@ -228,7 +230,7 @@ for pid, path in sorted(paths.items(), key=lambda x: x[1]):
     for href in o.links:
         u = urlparse(href)
         if u.scheme in ('http', 'https'):
-            if u.netloc.endswith('tui-brandhub.com'):
+            if u.netloc.endswith(SRC_HOST):
                 out_of_scope[href] += 1
             continue
         if u.scheme == 'mailto' or href.startswith('#'):
@@ -256,7 +258,7 @@ for doc in ('nav', 'sidebar', 'footer'):
     for href in re.findall(r'href="([^"]+)"', txt):
         u = urlparse(href)
         if u.scheme in ('http', 'https'):
-            if u.netloc.endswith('tui-brandhub.com'):
+            if u.netloc.endswith(SRC_HOST):
                 out_of_scope[href] += 1
             continue
         if href.startswith('/assets/'):

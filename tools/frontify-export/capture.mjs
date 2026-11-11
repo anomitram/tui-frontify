@@ -1,4 +1,4 @@
-/* Capture rendered reference for each page of document 396:
+/* Capture rendered reference for each page of the configured Frontify document:
  * - desktop (1440) + mobile (390) full-page screenshots
  * - GraphQL responses (colors, list styles, design settings, theme)
  * - rendered <main> HTML + computed style samples
@@ -7,6 +7,7 @@
 import { mkdir, writeFile, readFile, access } from 'node:fs/promises';
 import path from 'node:path';
 import { createRequire } from 'node:module';
+import CFG from './config.mjs';
 
 const require = createRequire(import.meta.url);
 const { chromium } = require(process.env.PW_PATH);
@@ -76,7 +77,7 @@ for (const o of wanted) {
   }
   if (process.env.PAGE_DELAY_MS) await new Promise((r) => { setTimeout(r, Number(process.env.PAGE_DELAY_MS)); });
   const hash = o.cat ? `#/${o.cat}/${o.slug}` : `#/-/${o.slug}`;
-  const url = `https://tui-brandhub.com/document/396${hash}`;
+  const url = `${CFG.host}/document/${CFG.documentId}${hash}`;
   for (const [vp, size] of Object.entries(VIEWPORTS)) {
     const ctx = await browser.newContext({ viewport: size, deviceScaleFactor: 1 });
     const page = await ctx.newPage();

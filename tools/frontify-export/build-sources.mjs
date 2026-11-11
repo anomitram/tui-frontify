@@ -1,4 +1,4 @@
-/* Build offline import sources for document 396 (no requests to the brand hub).
+/* Build offline import sources for the configured Frontify document (no requests to the source).
  * For every page: <srcDir>/<cat>/<slug>.html containing
  *   - the captured rendered <main> text (for the import runner's completeness check; media stripped)
  *   - <script id="frontify-export" type="application/json"> with page JSON, nav, colours,
@@ -8,17 +8,21 @@
  * Usage: node build-sources.mjs <frontifyDir> <srcDir> <contentDir> */
 import { mkdir, readFile, writeFile, copyFile, access, stat, rename } from 'node:fs/promises';
 import path from 'node:path';
+import CFG from './config.mjs';
 
 const [fdir, srcDir, contentDir] = process.argv.slice(2);
 const raw = (f) => readFile(path.join(fdir, 'raw', f), 'utf8').then(JSON.parse);
 const exists = (f) => access(f).then(() => true, () => false);
-const HOST = 'https://tui-brandhub.com';
+const HOST = CFG.host;
+const DOC_ID = CFG.documentId;
 
 const nav = (await raw('navigation.json')).data;
 const doc = (await raw('document.json')).data;
 const pagesList = (await raw('pages.json')).data;
 const pageMeta = new Map(pagesList.map((p) => [p.id, p]));
-const portalNav = (await raw('portal-navigation_112.json')).data;
+// portal files: new export names, falling back to the first-pass names (portal-navigation_112.json)
+const rawAny = async (...names) => { for (const n of names) { if (await exists(path.join(fdir, 'raw', n))) return raw(n); } return { data: [] }; };
+const portalNav = (await rawAny('portal-navigation.json', `portal-navigation_${CFG.portalId}.json`)).data;
 const manifest = JSON.parse(await readFile(path.join(fdir, 'assets', 'manifest.json')));
 
 // ---- navigation order + new paths ----
@@ -74,8 +78,11 @@ for (const m of manifest) {
   const legacy = path.join(contentDir, `assets/${m.key}/${fileName}`);
   if (legacy !== dest && await exists(legacy) && !(await exists(dest))) await rename(legacy, dest);
   if (!m.key.startsWith('font-') && !m.key.startsWith('bfont-')) {
-    const srcFile = path.join(fdir, 'assets', m.file);
-    if (!(await exists(dest)) || (await stat(dest)).size !== m.size) {
+    // Images resized for the Edge Delivery 20 MB limit (resize_for_eds.py) replace the original.
+    const resizedFile = path.join(fdir, 'resized', rel);
+    const srcFile = await exists(resizedFile) ? resizedFile : path.join(fdir, 'assets', m.file);
+    const srcSize = (await stat(srcFile)).size;
+    if (!(await exists(dest)) || (await stat(dest)).size !== srcSize) {
       await mkdir(path.dirname(dest), { recursive: true });
       await copyFile(srcFile, dest);
       copied += 1;
@@ -88,7 +95,7 @@ for (const m of manifest) {
 // ---- permanent links + redirect map ----
 const pathById = new Map(order.map((p) => [p.id, p.path]));
 const redirects = [];
-redirects.push({ from: `${HOST}/document/396`, to: order[0].path, type: 'document root' });
+redirects.push({ from: `${HOST}/document/${DOC_ID}`, to: order[0].path, type: 'document root' });
 if (doc.permanent_link) redirects.push({ from: HOST + doc.permanent_link, to: order[0].path, type: 'document permanent link' });
 const headingPerma = new Map();
 
@@ -106,7 +113,7 @@ for (const pg of order) {
 // The header shows the CDN rendition of the document logo (same image as the S3 original).
 const logo = manifest.find((m) => m.key.startsWith('theme-') && m.source_url.includes('media.ffycdn.net'));
 const logoKey = (logo || manifest.find((m) => m.key.startsWith('theme-'))).key;
-const portalTitle = (await raw('portal_112_language_en.json')).data?.title || 'TUI MASTER BRAND NEW';
+const portalTitle = (await rawAny('portal.json', `portal_${CFG.portalId}_language_${CFG.language}.json`)).data?.title || '';
 
 // ---- per-page sources ----
 const urls = [];
@@ -150,7 +157,7 @@ for (const pg of order) {
     tabTitle = page.title ? `${page.title.trim()} - ${doc.title} - ${portalTitle}` : `${doc.title} - ${portalTitle}`;
   }
   const pm = pageMeta.get(pg.id) || {};
-  const frontifyUrl = `${HOST}/document/396#${pg.cat ? `/${pg.cat}` : '/-'}/${pg.slug}`;
+  const frontifyUrl = `${HOST}/document/${DOC_ID}#${pg.cat ? `/${pg.cat}` : '/-'}/${pg.slug}`;
   redirects.push({ from: frontifyUrl, to: pg.path, type: 'page (hash route)', page_id: pg.id });
   if (pm.permanent_link) redirects.push({ from: HOST + pm.permanent_link, to: pg.path, type: 'page permanent link', page_id: pg.id });
   for (const s of page.sections) {
@@ -171,7 +178,7 @@ for (const pg of order) {
     prev: order[idx - 1] ? { path: order[idx - 1].path, title: order[idx - 1].title, cat: order[idx - 1].catTitle } : null,
     next: order[idx + 1] ? { path: order[idx + 1].path, title: order[idx + 1].title, cat: order[idx + 1].catTitle } : null,
     self: pg, frontifyUrl, permanentLink: pm.permanent_link ? HOST + pm.permanent_link : null, portalNav,
-    emitChrome: idx === 0, permalinks, tabTitle, logoKey, portalTitle,
+    emitChrome: idx === 0, permalinks, tabTitle, logoKey, portalTitle, host: HOST,
   };
   // Strip media + scripts from rendered markup: only its text is needed, and nothing may load remotely.
   const mainText = rendered

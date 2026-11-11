@@ -1,8 +1,7 @@
 /* eslint-disable no-use-before-define */
 /* Shared helpers for importing Frontify (TUI Brand Hub) guideline pages. */
 
-const HOST = 'https://tui-brandhub.com';
-const DOC_ID = '396';
+// Source host and document id come from the import payload (ctx.host / ctx.docId).
 
 const esc = (s) => String(s)
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -25,10 +24,11 @@ export function rewriteLink(url, ctx) {
   // Source bug: "https://ci-support@tui-brandhub.com" was meant as an e-mail address.
   const mailLike = /^https?:\/\/([^/@\s]+@[^/\s]+\.[a-z]{2,})\/?$/i.exec(u);
   if (mailLike) return { href: `mailto:${mailLike[1]}`, kind: 'email', fixed: true };
+  const HOST = ctx.host;
   if (u.startsWith('/')) u = HOST + u;
   let parsed;
   try { parsed = new URL(u); } catch (e) { return { href: url, kind: 'external' }; }
-  if (parsed.host !== 'tui-brandhub.com') return { href: url, kind: 'external' };
+  if (parsed.host !== new URL(HOST).host) return { href: url, kind: 'external' };
   // permanent links
   if (parsed.pathname.startsWith('/r/')) {
     const target = ctx.permalinks[parsed.pathname];
@@ -36,7 +36,7 @@ export function rewriteLink(url, ctx) {
     return { href: u, kind: 'out-of-scope' };
   }
   const m = /^\/document\/(\d+)\/?$/.exec(parsed.pathname);
-  if (m && m[1] === DOC_ID) {
+  if (m && m[1] === String(ctx.docId)) {
     const hash = parsed.hash.replace(/^#\/?/, '');
     if (!hash) return { href: ctx.firstPath, kind: 'internal' };
     const [cat, slug, heading] = hash.split('/');

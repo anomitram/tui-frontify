@@ -1,0 +1,10 @@
+{
+  "host": "https://tui-brandhub.com",
+  "documentId": 396,
+  "portalId": 112,
+  "projectId": 540,
+  "language": "en",
+  "dataDir": "migration-work/frontify",
+  "edsImageLimitBytes": 20000000,
+  "resizeTargetBytes": 18000000
+}

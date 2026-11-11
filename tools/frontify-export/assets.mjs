@@ -1,4 +1,4 @@
-/* Collect + download every asset referenced by document 396.
+/* Collect + download every asset referenced by the configured Frontify document.
  * Usage: node assets.mjs <rawDir> <assetsDir>
  * Writes <assetsDir>/manifest.json. Never logs signed URLs or tokens. */
 import { mkdir, readFile, writeFile, readdir, stat } from 'node:fs/promises';
@@ -7,8 +7,9 @@ import { createHash } from 'node:crypto';
 import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import path from 'node:path';
+import CFG from './config.mjs';
 
-const HOST = 'https://tui-brandhub.com';
+const HOST = CFG.host;
 const [rawDir, outDir] = process.argv.slice(2);
 const strip = (u) => (u ? u.split('?')[0] : u);
 const abs = (u) => (u && u.startsWith('/') ? HOST + u : u);
@@ -71,7 +72,7 @@ for (const f of pageFiles) {
 // ---- fonts ----
 // Guideline (project 540) fonts: take exactly the @font-face sources the hub stylesheet
 // declares for this document's project. Brand-essentials fonts come from font-styles.
-const PROJECT = '540';
+const PROJECT = String(CFG.projectId);
 const sheet = JSON.parse(await readFile(path.join(rawDir, 'stylesheet.json'))).data;
 const fontFaces = [];
 for (const css of Object.values(sheet)) {
@@ -124,12 +125,12 @@ async function fetchFile(url) {
     const r = await fetch(u, { redirect: 'manual' });
     const loc = r.headers.get('location');
     if (r.status === 401 || r.status === 403) {
-      if (new URL(u).host === 'tui-brandhub.com') throw new AuthError(`${r.status}`);
+      if (new URL(u).host === CFG.hostname) throw new AuthError(`${r.status}`);
       return { error: r.status };
     }
     if (r.status >= 300 && r.status < 400 && loc) {
       const next = new URL(loc, u).href;
-      if (next.includes('tui-brandhub.com/auth')) throw new AuthError('redirect to /auth');
+      if (next.includes(`${CFG.hostname}/auth`)) throw new AuthError('redirect to /auth');
       u = next; continue;
     }
     if (!r.ok) return { error: r.status };

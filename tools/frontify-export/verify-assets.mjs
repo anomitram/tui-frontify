@@ -4,9 +4,10 @@
 import { readFile, writeFile, open } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import path from 'node:path';
+import CFG from './config.mjs';
 
 const [rawDir, outDir] = process.argv.slice(2);
-const HOST = 'https://tui-brandhub.com';
+const HOST = CFG.host;
 const manifest = JSON.parse(await readFile(path.join(outDir, 'manifest.json')));
 
 // Rebuild fresh source URLs (signed URLs are not stored in the manifest).
@@ -31,11 +32,11 @@ async function probe(url) {
     const loc = r.headers.get('location');
     if (r.status >= 300 && r.status < 400 && loc) {
       const next = new URL(loc, u).href;
-      if (next.includes('tui-brandhub.com/auth')) throw new Error('AUTH redirect');
+      if (next.includes(`${CFG.hostname}/auth`)) throw new Error('AUTH redirect');
       u = next; continue;
     }
     if (r.status === 401 || r.status === 403) throw new Error(`AUTH ${r.status}`);
-    if (r.status === 405 && new URL(u).host === 'tui-brandhub.com') throw new Error('AUTH bot check (405)');
+    if (r.status === 405 && new URL(u).host === CFG.hostname) throw new Error('AUTH bot check (405)');
     const cr = r.headers.get('content-range');
     await r.body?.cancel();
     return { status: r.status, etag: (r.headers.get('etag') || '').replace(/"/g, '') || null, total: cr ? Number(cr.split('/')[1]) : Number(r.headers.get('content-length')) || null };

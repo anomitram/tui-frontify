@@ -26,8 +26,6 @@ var CustomImportScript = (() => {
   });
 
   // tools/importer/utils/frontify.js
-  var HOST = "https://tui-brandhub.com";
-  var DOC_ID = "396";
   var esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   var decodeEntities = (s) => String(s).replace(/&#0?39;/g, "'").replace(/&quot;/g, '"').replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&nbsp;/g, "\xA0");
   function rewriteLink(url, ctx) {
@@ -35,21 +33,22 @@ var CustomImportScript = (() => {
     let u = url.trim();
     const mailLike = /^https?:\/\/([^/@\s]+@[^/\s]+\.[a-z]{2,})\/?$/i.exec(u);
     if (mailLike) return { href: `mailto:${mailLike[1]}`, kind: "email", fixed: true };
-    if (u.startsWith("/")) u = HOST + u;
+    const HOST2 = ctx.host;
+    if (u.startsWith("/")) u = HOST2 + u;
     let parsed;
     try {
       parsed = new URL(u);
     } catch (e) {
       return { href: url, kind: "external" };
     }
-    if (parsed.host !== "tui-brandhub.com") return { href: url, kind: "external" };
+    if (parsed.host !== new URL(HOST2).host) return { href: url, kind: "external" };
     if (parsed.pathname.startsWith("/r/")) {
       const target = ctx.permalinks[parsed.pathname];
       if (target) return { href: target, kind: "internal" };
       return { href: u, kind: "out-of-scope" };
     }
     const m = /^\/document\/(\d+)\/?$/.exec(parsed.pathname);
-    if (m && m[1] === DOC_ID) {
+    if (m && m[1] === String(ctx.docId)) {
       const hash = parsed.hash.replace(/^#\/?/, "");
       if (!hash) return { href: ctx.firstPath, kind: "internal" };
       const [cat, slug, heading] = hash.split("/");
@@ -506,7 +505,7 @@ var CustomImportScript = (() => {
   }
 
   // tools/importer/import-guideline-page.js
-  var HOST2 = "https://tui-brandhub.com";
+  var HOST = "https://tui-brandhub.com";
   var PARSERS = {
     Text: parse,
     Heading: parse2,
@@ -530,7 +529,10 @@ var CustomImportScript = (() => {
     return payload;
   }
   function makeCtx(document, data) {
+    HOST = data.host || HOST;
     return {
+      host: HOST,
+      docId: data.doc.id,
       document,
       WebImporter,
       assets: data.assets,
@@ -605,15 +607,15 @@ var CustomImportScript = (() => {
   function libraryHref(item) {
     if (item.type === "link_document") {
       const u = item.url || "";
-      return u.startsWith("/") ? HOST2 + u : u;
+      return u.startsWith("/") ? HOST + u : u;
     }
-    return `${HOST2}/document/${item.id}`;
+    return `${HOST}/document/${item.id}`;
   }
   function buildNav(document, data) {
     const div = document.createElement("div");
     const logo = data.assets[data.logoKey];
     div.innerHTML = `<p><a href="${data.nav.order[0].path}"><img src="${logo}" alt="${data.portalTitle} logo"></a></p>
-    <p><a href="${HOST2}/dashboard">Back to dashboard</a></p>`;
+    <p><a href="${HOST}/dashboard">Back to dashboard</a></p>`;
     div.append(hr(document));
     const ul = document.createElement("ul");
     data.portalNav.filter((n) => !n.is_hidden_in_navigation).forEach((n) => {
@@ -645,9 +647,9 @@ var CustomImportScript = (() => {
     div.append(ul);
     div.append(hr(document));
     div.insertAdjacentHTML("beforeend", `<ul>
-    <li><a href="${HOST2}/dashboard">:brand-hub: Brand Hub</a></li>
+    <li><a href="${HOST}/dashboard">:brand-hub: Brand Hub</a></li>
     <li>:search: Search</li>
-    <li><a href="${HOST2}/document/396">:brand-assistant: Brand Assistant</a></li>
+    <li><a href="${HOST}/document/${data.doc.id}">:brand-assistant: Brand Assistant</a></li>
   </ul>`);
     return div;
   }
