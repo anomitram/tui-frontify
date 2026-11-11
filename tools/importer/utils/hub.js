@@ -47,6 +47,12 @@ export function convertCellHtml(html, ctx) {
     const fs = el.style?.fontSize;
     if (fs) css.push(`font-size: ${fs}`);
     if (el.style?.color) css.push(`color: ${el.style.color}`);
+    // Frontify's editor keeps runs of spaces (white-space: pre-wrap), e.g. the gaps between buttons
+    // sharing a paragraph. Rendering collapses them to one space, so the lengths of whitespace-only
+    // runs between elements travel as "spaces: n,n" and the hub-cell block restores them.
+    const runs = [...el.childNodes].filter((n) => n.nodeType === 3 && n.previousSibling && n.nextSibling
+      && /^[\s\u00a0]+$/.test(n.nodeValue)).map((n) => n.nodeValue.length);
+    if (runs.some((n) => n > 1)) css.push('white-space: pre-wrap', `spaces: ${runs.join(',')}`);
     const spans = [...el.querySelectorAll('span[style]')];
     const colors = [...new Set(spans.map((s) => s.style.color).filter(Boolean))];
     if (colors.length === 1 && !el.style?.color) css.push(`color: ${colors[0]}`);

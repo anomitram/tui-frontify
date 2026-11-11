@@ -73,6 +73,8 @@ var CustomImportScript = (() => {
       const fs = (_a = el.style) == null ? void 0 : _a.fontSize;
       if (fs) css.push(`font-size: ${fs}`);
       if ((_b = el.style) == null ? void 0 : _b.color) css.push(`color: ${el.style.color}`);
+      const runs = [...el.childNodes].filter((n) => n.nodeType === 3 && n.previousSibling && n.nextSibling && /^[\s\u00a0]+$/.test(n.nodeValue)).map((n) => n.nodeValue.length);
+      if (runs.some((n) => n > 1)) css.push("white-space: pre-wrap", `spaces: ${runs.join(",")}`);
       const spans = [...el.querySelectorAll("span[style]")];
       const colors = [...new Set(spans.map((s) => s.style.color).filter(Boolean))];
       if (colors.length === 1 && !((_c = el.style) == null ? void 0 : _c.color)) css.push(`color: ${colors[0]}`);
@@ -116,7 +118,7 @@ var CustomImportScript = (() => {
     if (src) {
       const el = ctx.document.createElement("img");
       el.src = src;
-      el.alt = s.image_alt || "";
+      el.alt = s.image_alt || (ctx.assetAlts || {})[key] || "";
       rows.push([el]);
     } else if ((img == null ? void 0 : img.file_id) && s.layout !== "text") {
       ctx.notes.push(`cell ${key}: image ${img.file_id} has no file in the hub data (not rendered by Frontify)`);
@@ -133,6 +135,9 @@ var CustomImportScript = (() => {
     kv("Link", ((_a = s.link) == null ? void 0 : _a.url) ? resolveLink(s.link.url, ctx) : null);
     kv("Image Link", ((_b = s.image_link) == null ? void 0 : _b.url) ? resolveLink(s.image_link.url, ctx) : null);
     if (s.new_window || ((_c = s.link) == null ? void 0 : _c.new_window)) kv("New Window", "true");
+    if (s.image_new_window) kv("Image New Window", "true");
+    const transparent = (c) => !c || /rgba\([^)]*,\s*0\)$/.test(c);
+    if (src && !transparent(s.image_background)) kv("Image Background", s.image_background);
     kv("Content Padding", box(s.content_padding));
     const ip = box(s.image_padding);
     if (ip && ip !== "0 0 0 0") kv("Image Padding", ip);
@@ -182,12 +187,14 @@ var CustomImportScript = (() => {
         document,
         WebImporter,
         assets: data.assets,
+        assetAlts: data.assetAlts,
         linkMap: data.linkMap,
         host: data.host,
         notes,
         rowId: row.id
       };
       let visible = 0;
+      const hasContent = row.cells.some((c) => c.block_type === "TEXTIMAGE" || c.block_type === "DIVIDER");
       row.cells.forEach((cell) => {
         counts.cells += 1;
         if (cell.block_type === "TEXTIMAGE") {
@@ -196,6 +203,11 @@ var CustomImportScript = (() => {
         } else if (cell.block_type === "DIVIDER") {
           main.append(parse2(cell, ctx));
           visible += 1;
+        } else if (hasContent) {
+          main.append(WebImporter.Blocks.createBlock(document, {
+            name: `Hub Cell (none, w-${cell.width || 12})`,
+            cells: [["Frontify Cell", `${cell.teaser} (row ${row.id}, sort ${cell.sort}, empty)`]]
+          }));
         } else {
           notes.push(`row ${row.id}: ${cell.block_type} cell ${cell.teaser} has no content (editor placeholder) - kept as empty row`);
         }
@@ -217,7 +229,7 @@ var CustomImportScript = (() => {
       Nav: `/${data.route}/nav`,
       Footer: `/${data.route}/footer`,
       "Frontify Portal": `${data.portal.id} (${data.portal.title})`,
-      "Original Url": `${data.host}/${data.route}`
+      "Original Url": data.originalUrl || `${data.host}/${data.route}`
     }));
     return { main, counts };
   }
@@ -225,7 +237,9 @@ var CustomImportScript = (() => {
     var _a;
     const div = document.createElement("div");
     const logo = data.assets[data.logoKey];
-    div.innerHTML = `<p><a href="/${data.route}"><img src="${logo}" alt="Go to ${data.portal.title}"></a></p><p><a href="${data.host}/dashboard">Back to dashboard</a></p>`;
+    const home = data.pagePath === "/index" ? "/" : data.pagePath || `/${data.route}`;
+    const rail = data.railHref || `${data.host}/dashboard`;
+    div.innerHTML = `<p><a href="${home}"><img src="${logo}" alt="Go to ${data.portal.title}"></a></p><p><a href="${rail}">Back to dashboard</a></p>`;
     div.append(document.createElement("hr"));
     const ul = document.createElement("ul");
     data.navItems.forEach((n) => {
@@ -247,7 +261,35 @@ var CustomImportScript = (() => {
       ul.append(li);
     });
     div.append(ul, document.createElement("hr"));
-    if ((_a = data.portal.brandHub) == null ? void 0 : _a.url) div.insertAdjacentHTML("beforeend", `<ul><li><a href="${data.portal.brandHub.url}">:brand-hub: ${data.portal.brandHub.label || "Brand Hub"}</a></li></ul>`);
+    const bh = (_a = data.portal.brandHub) == null ? void 0 : _a.url;
+    if (bh) {
+      const href = resolveLink(bh.startsWith("/") ? data.host + bh : bh, { linkMap: data.linkMap, host: data.host });
+      div.insertAdjacentHTML("beforeend", `<ul><li><a href="${href}">:brand-hub: ${data.portal.brandHub.label || "Brand Hub"}</a></li></ul>`);
+    }
+    return div;
+  }
+  function buildFooter(document, data) {
+    const div = document.createElement("div");
+    const f = data.customFooter;
+    if (!f) {
+      div.innerHTML = "<p></p>";
+      return div;
+    }
+    const src = document.createElement("div");
+    src.innerHTML = f.markup.replace(/\\\//g, "/");
+    const copy = src.querySelector(".o-tui__copyright");
+    const p = document.createElement("p");
+    p.textContent = (copy ? copy.textContent : "").trim();
+    const ul = document.createElement("ul");
+    src.querySelectorAll("a[href]").forEach((a) => {
+      const li = document.createElement("li");
+      const link = document.createElement("a");
+      link.href = resolveLink(a.getAttribute("href"), { linkMap: data.linkMap, host: data.host });
+      link.textContent = a.textContent.trim();
+      li.append(link);
+      ul.append(li);
+    });
+    div.append(p, ul);
     return div;
   }
   var import_hub_page_default = {
@@ -259,12 +301,11 @@ var CustomImportScript = (() => {
       const data = readPayload(document);
       const notes = [];
       const { main, counts } = buildPage(document, data, notes);
-      const footer = document.createElement("div");
-      footer.innerHTML = "<p></p>";
+      const footer = buildFooter(document, data);
       return [
         {
           element: main,
-          path: `/${data.route}`,
+          path: data.pagePath || `/${data.route}`,
           report: {
             rows: counts.rows,
             cells: counts.cells,

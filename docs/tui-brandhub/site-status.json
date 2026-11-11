@@ -1,0 +1,1230 @@
+{
+ "updated": "2026-11-11",
+ "note": "Status data for SITEMAP.md. Edit here, then run tools/frontify-export/write_sitemap.py.",
+ "surfaces_legend": "local = content/ in this repo; DA = Document Authoring; preview = .aem.page; live = .aem.live",
+ "document_396": {
+  "title": "TUI Master Brand Home",
+  "portal": 112,
+  "url": "https://tui-brandhub.com/document/396",
+  "default_status": "migrated on local and DA; preview OK on 2026-11-11 (branch aem-20261111-0835); live state not checked",
+  "published": {
+   "/logo/live-happy-1": "migrated: local, DA, preview, **live** (published 2026-11-11 after the image resize)",
+   "/photography/captures-from-a-detail": "migrated: local, DA, preview, **live** (published 2026-11-11 after the image resize)",
+   "/photography/captures-from-a-human-perspective-1": "migrated: local, DA, preview, **live** (published 2026-11-11 after the image resize)",
+   "/photography/capturing-multiple-perspectives-1": "migrated: local, DA, preview, **live** (published 2026-11-11 after the image resize)",
+   "/sales-mechanics/inspiration-2": "migrated: local, DA, preview, **live** (published 2026-11-11 after the image resize)",
+   "/smile-mechanics/hero-smile-1": "migrated: local, DA, preview, **live** (published 2026-11-11 after the image resize)"
+  },
+  "chrome": {
+   "/nav": "portal header (rail, logo, navigation, tools)",
+   "/sidebar": "navigation tree",
+   "/footer": "empty",
+   "/document/396": "template redirect for old hash routes"
+  },
+  "chrome_status": "migrated: local, DA; preview OK (2026-11-11); live not checked",
+  "default_row": "migrated: local, DA, preview",
+  "chrome_note": "/index was the redirect to /our-story/brand until 2026-11-11; it is now the homepage (portal 161)."
+ },
+ "migrated_hubs": [
+  {
+   "title": "TUI Brand Hub homepage",
+   "portal": 161,
+   "url": "https://tui-brandhub.com/ (dashboard -> /api/dashboard/portal-destination -> /hub/161)",
+   "paths": [
+    "/index (= /)",
+    "/brandhub/nav",
+    "/brandhub/footer"
+   ],
+   "status": "migrated: local; DA uploaded 2026-11-11 ~16:45 UTC (3 pages, 63 images in .index/ and brandhub/.nav/ with descriptive names). Not previewed: the code it needs (hub-cell changes, theme-brandhub.css) is not on any branch yet"
+  },
+  {
+   "title": "TUI MAGIC LIFE portal home",
+   "portal": 162,
+   "url": "https://tui-brandhub.com/tuimagiclife (= /hub/162)",
+   "paths": [
+    "/tuimagiclife",
+    "/tuimagiclife/nav",
+    "/tuimagiclife/footer"
+   ],
+   "status": "migrated: local and DA re-uploaded 2026-11-11 ~16:50 UTC with descriptive image names (.tuimagiclife/, tuimagiclife/.nav/); preview run 16:51 UTC (admin status 200) but not render-checked, because preview and live answer 401 since then; live still serves the 12:22 publish (old image copies)"
+  }
+ ],
+ "portals": [
+  {
+   "portal": 161,
+   "title": "TUI Brand Hub - Home",
+   "home": "migrated (/ = /index; local only)",
+   "documents": "none in its navigation (only the hidden home); its page links to 74 targets, see the hub link map"
+  },
+  {
+   "portal": 112,
+   "title": "TUI MASTER BRAND NEW",
+   "home": "not migrated (hub/112 not linked or exported)",
+   "documents": "document 396 migrated. In its navigation, not migrated: document 157, document 195, document 199, document 215, document 305, document 402, document 456, document 458, document 489, document 490, document 502, document 505, document 571, document 603, document 747, document 881, document 1112, document 1584, document 1673, document 2154, hub 52, hub 89, hub 170"
+  },
+  {
+   "portal": 162,
+   "title": "TUI MAGIC LIFE",
+   "home": "migrated (/tuimagiclife)",
+   "documents": "none migrated. In its navigation: documents 708, 710, 753, 755, 757, 766, 842, 933, 1169, 1226, 1506, 1833, 2428; document 758 is linked from the home but not in the navigation"
+  }
+ ],
+ "not_migrated": [
+  {
+   "kind": "document",
+   "id": 114,
+   "title": "Brand Guideline",
+   "title_source": "document/portal API (title lookup)",
+   "urls": [
+    "https://tui-brandhub.com/document/114"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 2
+  },
+  {
+   "kind": "document",
+   "id": 157,
+   "title": "Corporate",
+   "urls": [
+    "https://tui-brandhub.com/document/157"
+   ],
+   "linked_from_doc396": 1,
+   "linked_from_hub162": 0,
+   "title_source": "portal 112 navigation API",
+   "status": "not migrated (out of scope)",
+   "in_portal_nav": "112 › Other Masterbrand guidelines",
+   "linked_from_hub161": 1
+  },
+  {
+   "kind": "document",
+   "id": 178,
+   "title": "Learn more about the TUI Brand ",
+   "title_source": "document/portal API (title lookup)",
+   "urls": [
+    "https://tui-brandhub.com/document/178#/brand-identity-c1239/tui-diversity-inclusivity-guidelines-p2151",
+    "https://tui-brandhub.com/document/178#/history-of-the-business/video-tui-history"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 2
+  },
+  {
+   "kind": "document",
+   "id": 195,
+   "title": "Retail",
+   "urls": [
+    "https://tui-brandhub.com/document/195"
+   ],
+   "linked_from_doc396": 1,
+   "linked_from_hub162": 0,
+   "title_source": "portal 112 navigation API",
+   "status": "not migrated (out of scope)",
+   "in_portal_nav": "112 › Other Masterbrand guidelines",
+   "linked_from_hub161": 1
+  },
+  {
+   "kind": "document",
+   "id": 199,
+   "title": "Uniforms",
+   "urls": [
+    "https://tui-brandhub.com/document/199"
+   ],
+   "linked_from_doc396": 1,
+   "linked_from_hub162": 0,
+   "title_source": "portal 112 navigation API",
+   "status": "not migrated (out of scope)",
+   "in_portal_nav": "112 › Other Masterbrand guidelines",
+   "linked_from_hub161": 1
+  },
+  {
+   "kind": "document",
+   "id": 215,
+   "title": "Global Campaign",
+   "urls": [
+    "https://tui-brandhub.com/document/215#/global-campaign-playbooks/tui-live-happy-refresh",
+    "https://tui-brandhub.com/document/215#/global-campaigns/tui-blue-campaign-21-22-1/brand-identity",
+    "https://tui-brandhub.com/document/215"
+   ],
+   "linked_from_doc396": 2,
+   "linked_from_hub162": 0,
+   "title_source": "portal 112 navigation API",
+   "status": "not migrated (out of scope)",
+   "in_portal_nav": "112 › Other Masterbrand guidelines",
+   "linked_from_hub161": 1
+  },
+  {
+   "kind": "document",
+   "id": 231,
+   "title": "SPLASHWORLD Guideline",
+   "title_source": "document/portal API (title lookup)",
+   "urls": [
+    "https://tui-brandhub.com/document/231#/about/overview"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 2
+  },
+  {
+   "kind": "document",
+   "id": 243,
+   "title": "Local Concepts &amp; Labels",
+   "title_source": "link text (not the verified Frontify title)",
+   "urls": [
+    "https://tui-brandhub.com/document/243"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 1
+  },
+  {
+   "kind": "document",
+   "id": 245,
+   "title": "Holiday Villages",
+   "title_source": "link text (not the verified Frontify title)",
+   "urls": [
+    "https://tui-brandhub.com/document/245"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 1
+  },
+  {
+   "kind": "document",
+   "id": 250,
+   "title": "Marella Cruises Guidelines",
+   "title_source": "document/portal API (title lookup)",
+   "urls": [
+    "https://tui-brandhub.com/document/250#/marella-cruises/marella-cruises",
+    "https://tui-brandhub.com/document/250#/about-the-brand/marella-cruises"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 3
+  },
+  {
+   "kind": "document",
+   "id": 255,
+   "title": "airtours",
+   "title_source": "link text (not the verified Frontify title)",
+   "urls": [
+    "https://tui-brandhub.com/document/255#/about/coming-soon"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 1
+  },
+  {
+   "kind": "document",
+   "id": 273,
+   "title": "Blue Star",
+   "title_source": "link text (not the verified Frontify title)",
+   "urls": [
+    "https://tui-brandhub.com/document/273#/about/overview"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 1
+  },
+  {
+   "kind": "document",
+   "id": 277,
+   "title": "Brand Guideline ",
+   "title_source": "document/portal API (title lookup)",
+   "urls": [
+    "https://tui-brandhub.com/document/277#/about-the-brand/time-to-smile"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 2
+  },
+  {
+   "kind": "document",
+   "id": 290,
+   "title": "Document Library",
+   "title_source": "document/portal API (title lookup)",
+   "urls": [
+    "https://tui-brandhub.com/document/290/collection/88",
+    "https://tui-brandhub.com/document/290"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 4
+  },
+  {
+   "kind": "document",
+   "id": 305,
+   "title": "Contact",
+   "urls": [
+    "https://tui-brandhub.com/document/305#/contact/overview",
+    "https://tui-brandhub.com/document/305#/news-updates-1/tui-brand-news-updates",
+    "https://tui-brandhub.com/document/305"
+   ],
+   "linked_from_doc396": 1,
+   "linked_from_hub162": 0,
+   "title_source": "portal 112 navigation API",
+   "status": "not migrated (out of scope)",
+   "in_portal_nav": "112",
+   "linked_from_hub161": 2
+  },
+  {
+   "kind": "document",
+   "id": 337,
+   "title": "unknown (links read \"here\" and a search \"?q=hero\")",
+   "urls": [
+    "https://tui-brandhub.com/document/337",
+    "https://tui-brandhub.com/document/337/?q=hero"
+   ],
+   "linked_from_doc396": 2,
+   "linked_from_hub162": 0,
+   "title_source": "checked by hand",
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 0
+  },
+  {
+   "kind": "document",
+   "id": 353,
+   "title": "Local Concepts &amp; Labels",
+   "title_source": "link text (not the verified Frontify title)",
+   "urls": [
+    "https://tui-brandhub.com/document/353"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 1
+  },
+  {
+   "kind": "document",
+   "id": 358,
+   "title": "TUI Musement Guideline",
+   "title_source": "document/portal API (title lookup)",
+   "urls": [
+    "https://tui-brandhub.com/document/358#/about-the-brand/tui-experiences-1"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 1
+  },
+  {
+   "kind": "document",
+   "id": 401,
+   "title": "Gradient Library",
+   "urls": [
+    "https://tui-brandhub.com/document/401/collection/606",
+    "https://tui-brandhub.com/document/401/collection/638"
+   ],
+   "linked_from_doc396": 2,
+   "linked_from_hub162": 0,
+   "title_source": "link text (not the verified Frontify title)",
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 0
+  },
+  {
+   "kind": "document",
+   "id": 402,
+   "title": "Motion Library",
+   "urls": [
+    "https://tui-brandhub.com/document/402"
+   ],
+   "linked_from_doc396": 2,
+   "linked_from_hub162": 0,
+   "title_source": "portal 112 navigation API",
+   "status": "not migrated (out of scope)",
+   "in_portal_nav": "112 › Download Area",
+   "linked_from_hub161": 2
+  },
+  {
+   "kind": "document",
+   "id": 430,
+   "title": "Brand Guideline",
+   "title_source": "document/portal API (title lookup)",
+   "urls": [
+    "https://tui-brandhub.com/document/430"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 2
+  },
+  {
+   "kind": "document",
+   "id": 440,
+   "title": "RIU Guideline",
+   "title_source": "document/portal API (title lookup)",
+   "urls": [
+    "https://tui-brandhub.com/document/440?#/about/overview-1"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 2
+  },
+  {
+   "kind": "document",
+   "id": 455,
+   "title": "Learn more about TUI",
+   "title_source": "document/portal API (title lookup)",
+   "urls": [
+    "https://tui-brandhub.com/document/455"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 1
+  },
+  {
+   "kind": "document",
+   "id": 456,
+   "title": "Employer",
+   "urls": [
+    "https://tui-brandhub.com/document/456",
+    "https://tui-brandhub.com/document/456#/overview/quick-links"
+   ],
+   "linked_from_doc396": 1,
+   "linked_from_hub162": 0,
+   "title_source": "portal 112 navigation API",
+   "status": "not migrated (out of scope)",
+   "in_portal_nav": "112 › Other Masterbrand guidelines",
+   "linked_from_hub161": 1
+  },
+  {
+   "kind": "document",
+   "id": 458,
+   "title": "Icons Assets",
+   "urls": [
+    "https://tui-brandhub.com/document/458"
+   ],
+   "linked_from_doc396": 2,
+   "linked_from_hub162": 0,
+   "title_source": "portal 112 navigation API",
+   "status": "not migrated (out of scope)",
+   "in_portal_nav": "112 › Download Area",
+   "linked_from_hub161": 1
+  },
+  {
+   "kind": "document",
+   "id": 474,
+   "title": "TUI PRIDE Guideline",
+   "title_source": "document/portal API (title lookup)",
+   "urls": [
+    "https://tui-brandhub.com/document/474"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 1
+  },
+  {
+   "kind": "document",
+   "id": 489,
+   "title": "Stamps & Bullet Icons",
+   "urls": [
+    "https://tui-brandhub.com/document/489"
+   ],
+   "linked_from_doc396": 2,
+   "linked_from_hub162": 0,
+   "title_source": "portal 112 navigation API",
+   "status": "not migrated (out of scope)",
+   "in_portal_nav": "112 › Download Area",
+   "linked_from_hub161": 2
+  },
+  {
+   "kind": "document",
+   "id": 490,
+   "title": "Overseas",
+   "urls": [
+    "https://tui-brandhub.com/document/490#/overseas-branding/introduction",
+    "https://tui-brandhub.com/document/490"
+   ],
+   "linked_from_doc396": 1,
+   "linked_from_hub162": 0,
+   "title_source": "portal 112 navigation API",
+   "status": "not migrated (out of scope)",
+   "in_portal_nav": "112 › Other Masterbrand guidelines",
+   "linked_from_hub161": 1
+  },
+  {
+   "kind": "document",
+   "id": 502,
+   "title": "Typography Library",
+   "urls": [
+    "https://tui-brandhub.com/document/502"
+   ],
+   "linked_from_doc396": 3,
+   "linked_from_hub162": 0,
+   "title_source": "portal 112 navigation API",
+   "status": "not migrated (out of scope)",
+   "in_portal_nav": "112 › Download Area",
+   "linked_from_hub161": 0
+  },
+  {
+   "kind": "document",
+   "id": 505,
+   "title": "Sustainability",
+   "urls": [
+    "https://tui-brandhub.com/document/505#/marketing-guidelines-for-sustainability/our-sustainability-identity"
+   ],
+   "linked_from_doc396": 1,
+   "linked_from_hub162": 0,
+   "title_source": "portal 112 navigation API",
+   "status": "not migrated (out of scope)",
+   "in_portal_nav": "112 › Other Masterbrand guidelines",
+   "linked_from_hub161": 0
+  },
+  {
+   "kind": "document",
+   "id": 507,
+   "title": "MAKERS OF HAPPY Guideline",
+   "title_source": "document/portal API (title lookup)",
+   "urls": [
+    "https://tui-brandhub.com/document/507"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 1
+  },
+  {
+   "kind": "document",
+   "id": 528,
+   "title": "Merchandise & Goodies Guidelines",
+   "title_source": "document/portal API (title lookup)",
+   "urls": [
+    "https://tui-brandhub.com/document/528",
+    "https://tui-brandhub.com/document/528#/introduction/merchandise-goodies"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 4
+  },
+  {
+   "kind": "document",
+   "id": 532,
+   "title": "Events Guidelines",
+   "title_source": "document/portal API (title lookup)",
+   "urls": [
+    "https://tui-brandhub.com/document/532"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 1
+  },
+  {
+   "kind": "document",
+   "id": 571,
+   "title": "Digital ID",
+   "urls": [
+    "https://tui-brandhub.com/document/571",
+    "https://tui-brandhub.com/document/571#/introduction/introduction"
+   ],
+   "linked_from_doc396": 2,
+   "linked_from_hub162": 0,
+   "title_source": "portal 112 navigation API",
+   "status": "not migrated (out of scope)",
+   "in_portal_nav": "112 › Other Masterbrand guidelines",
+   "linked_from_hub161": 1
+  },
+  {
+   "kind": "document",
+   "id": 603,
+   "title": "Hero Smile Assets",
+   "urls": [
+    "https://tui-brandhub.com/document/603"
+   ],
+   "linked_from_doc396": 2,
+   "linked_from_hub162": 0,
+   "title_source": "portal 112 navigation API",
+   "status": "not migrated (out of scope)",
+   "in_portal_nav": "112 › Download Area",
+   "linked_from_hub161": 0
+  },
+  {
+   "kind": "document",
+   "id": 688,
+   "title": "Inflight Magazine",
+   "title_source": "document/portal API (title lookup)",
+   "urls": [
+    "https://tui-brandhub.com/document/688#/introduction/introduction"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 1
+  },
+  {
+   "kind": "document",
+   "id": 708,
+   "title": "Brand Guideline",
+   "urls": [
+    "https://tui-brandhub.com/document/708",
+    "https://tui-brandhub.com/document/708#/brand-elements/colours",
+    "https://tui-brandhub.com/document/708#/brand-elements/layout",
+    "https://tui-brandhub.com/document/708#/brand-elements/logo-guidance",
+    "https://tui-brandhub.com/document/708#/brand-elements/pattern",
+    "https://tui-brandhub.com/document/708#/brand-elements/picture-look",
+    "https://tui-brandhub.com/document/708#/brand-elements/tone-of-voice",
+    "https://tui-brandhub.com/document/708#/brand-elements/typography"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 8,
+   "title_source": "portal 162 navigation API",
+   "status": "not migrated (out of scope)",
+   "in_portal_nav": "162",
+   "linked_from_hub161": 0
+  },
+  {
+   "kind": "document",
+   "id": 710,
+   "title": "Support",
+   "urls": [
+    "https://tui-brandhub.com/document/710"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 2,
+   "title_source": "portal 162 navigation API",
+   "status": "not migrated (out of scope)",
+   "in_portal_nav": "162",
+   "linked_from_hub161": 0
+  },
+  {
+   "kind": "document",
+   "id": 723,
+   "title": "Global Advertising Guidelines",
+   "title_source": "link text (not the verified Frontify title)",
+   "urls": [
+    "https://tui-brandhub.com/document/723#/global-guidelines-c1236/a-day-in-xxx-with-tui-p3818"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 1
+  },
+  {
+   "kind": "document",
+   "id": 726,
+   "title": "TUI Social Media Toolkit",
+   "title_source": "document/portal API (title lookup)",
+   "urls": [
+    "https://tui-brandhub.com/document/726#/introduction/introduction-1690824680"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 1
+  },
+  {
+   "kind": "document",
+   "id": 747,
+   "title": "Radiant Smile Assets",
+   "urls": [
+    "https://tui-brandhub.com/document/747",
+    "https://tui-brandhub.com/document/747/collection/618"
+   ],
+   "linked_from_doc396": 2,
+   "linked_from_hub162": 0,
+   "title_source": "portal 112 navigation API",
+   "status": "not migrated (out of scope)",
+   "in_portal_nav": "112 › Download Area",
+   "linked_from_hub161": 2
+  },
+  {
+   "kind": "document",
+   "id": 753,
+   "title": "Logo Library",
+   "urls": [
+    "https://tui-brandhub.com/document/753"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 2,
+   "title_source": "portal 162 navigation API",
+   "status": "not migrated (out of scope)",
+   "in_portal_nav": "162",
+   "linked_from_hub161": 0
+  },
+  {
+   "kind": "document",
+   "id": 755,
+   "title": "Font Library",
+   "urls": [
+    "https://tui-brandhub.com/document/755"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 1,
+   "title_source": "portal 162 navigation API",
+   "status": "not migrated (out of scope)",
+   "in_portal_nav": "162",
+   "linked_from_hub161": 0
+  },
+  {
+   "kind": "document",
+   "id": 757,
+   "title": "Pictogram Library",
+   "urls": [
+    "https://tui-brandhub.com/document/757"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 1,
+   "title_source": "portal 162 navigation API",
+   "status": "not migrated (out of scope)",
+   "in_portal_nav": "162",
+   "linked_from_hub161": 0
+  },
+  {
+   "kind": "document",
+   "id": 758,
+   "title": "unknown (title lookup returned 403)",
+   "urls": [
+    "https://tui-brandhub.com/document/758"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 1,
+   "title_source": "checked by hand",
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 0
+  },
+  {
+   "kind": "document",
+   "id": 766,
+   "title": "Template Library",
+   "urls": [
+    "https://tui-brandhub.com/document/766"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 1,
+   "title_source": "portal 162 navigation API",
+   "status": "not migrated (out of scope)",
+   "in_portal_nav": "162",
+   "linked_from_hub161": 0
+  },
+  {
+   "kind": "document",
+   "id": 796,
+   "title": "myTUI  Guideline",
+   "title_source": "document/portal API (title lookup)",
+   "urls": [
+    "https://tui-brandhub.com/document/796?#/mytui-loyalty/mytui-loyalty"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 1
+  },
+  {
+   "kind": "document",
+   "id": 803,
+   "title": "TUI Descriptor Logo Library",
+   "title_source": "document/portal API (title lookup)",
+   "urls": [
+    "https://tui-brandhub.com/document/803/collection/1624"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 2
+  },
+  {
+   "kind": "document",
+   "id": 842,
+   "title": "Campaigns",
+   "urls": [
+    "https://tui-brandhub.com/document/842",
+    "https://tui-brandhub.com/document/842#/campaigns/like-holidays-but-epic"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 2,
+   "title_source": "portal 162 navigation API",
+   "status": "not migrated (out of scope)",
+   "in_portal_nav": "162",
+   "linked_from_hub161": 0
+  },
+  {
+   "kind": "document",
+   "id": 881,
+   "title": "Layout Templates",
+   "urls": [
+    "https://tui-brandhub.com/document/881"
+   ],
+   "linked_from_doc396": 1,
+   "linked_from_hub162": 0,
+   "title_source": "portal 112 navigation API",
+   "status": "not migrated (out of scope)",
+   "in_portal_nav": "112 › Download Area",
+   "linked_from_hub161": 2
+  },
+  {
+   "kind": "document",
+   "id": 933,
+   "title": "Campaigns Media library",
+   "urls": [
+    "https://tui-brandhub.com/document/933"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 1,
+   "title_source": "portal 162 navigation API",
+   "status": "not migrated (out of scope)",
+   "in_portal_nav": "162",
+   "linked_from_hub161": 0
+  },
+  {
+   "kind": "document",
+   "id": 1112,
+   "title": "Illustration Assets",
+   "urls": [
+    "https://tui-brandhub.com/document/1112"
+   ],
+   "linked_from_doc396": 3,
+   "linked_from_hub162": 0,
+   "title_source": "portal 112 navigation API",
+   "status": "not migrated (out of scope)",
+   "in_portal_nav": "112 › Download Area",
+   "linked_from_hub161": 2
+  },
+  {
+   "kind": "document",
+   "id": 1169,
+   "title": "Club Branding Library",
+   "urls": [
+    "https://tui-brandhub.com/document/1169"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 1,
+   "title_source": "portal 162 navigation API",
+   "status": "not migrated (out of scope)",
+   "in_portal_nav": "162",
+   "linked_from_hub161": 0
+  },
+  {
+   "kind": "document",
+   "id": 1226,
+   "title": "Club Branding",
+   "urls": [
+    "https://tui-brandhub.com/document/1226"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 2,
+   "title_source": "portal 162 navigation API",
+   "status": "not migrated (out of scope)",
+   "in_portal_nav": "162",
+   "linked_from_hub161": 0
+  },
+  {
+   "kind": "document",
+   "id": 1238,
+   "title": "unknown (link reads \"here\")",
+   "urls": [
+    "https://tui-brandhub.com/document/1238"
+   ],
+   "linked_from_doc396": 1,
+   "linked_from_hub162": 0,
+   "title_source": "checked by hand",
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 1
+  },
+  {
+   "kind": "document",
+   "id": 1439,
+   "title": "unknown (title lookup returned 403)",
+   "title_source": "checked by hand",
+   "urls": [
+    "https://tui-brandhub.com/document/1439#/umbrella-brand/introduction",
+    "https://tui-brandhub.com/document/1439#/hotel-club-brands/akra",
+    "https://tui-brandhub.com/document/1439#/hotel-club-brands/atlantica",
+    "https://tui-brandhub.com/document/1439#/hotel-club-brands/grupotel",
+    "https://tui-brandhub.com/document/1439#/hotel-club-brands/jaz",
+    "https://tui-brandhub.com/document/1439#/hotel-club-brands/royalton"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 11
+  },
+  {
+   "kind": "document",
+   "id": 1452,
+   "title": "Start now",
+   "title_source": "link text (not the verified Frontify title)",
+   "urls": [
+    "https://tui-brandhub.com/document/1452#/tui-quick-designer/how-to-create-a-new-publication"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 1
+  },
+  {
+   "kind": "document",
+   "id": 1489,
+   "title": "Hotel Concepts Media Library",
+   "title_source": "document/portal API (title lookup)",
+   "urls": [
+    "https://tui-brandhub.com/document/1489"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 2
+  },
+  {
+   "kind": "document",
+   "id": 1506,
+   "title": "Pattern Library",
+   "urls": [
+    "https://tui-brandhub.com/document/1506"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 1,
+   "title_source": "portal 162 navigation API",
+   "status": "not migrated (out of scope)",
+   "in_portal_nav": "162",
+   "linked_from_hub161": 0
+  },
+  {
+   "kind": "document",
+   "id": 1584,
+   "title": "Grid explanation",
+   "urls": [
+    "https://tui-brandhub.com/document/1584"
+   ],
+   "linked_from_doc396": 1,
+   "linked_from_hub162": 0,
+   "title_source": "portal 112 navigation API",
+   "status": "not migrated (out of scope)",
+   "in_portal_nav": "112",
+   "linked_from_hub161": 0
+  },
+  {
+   "kind": "document",
+   "id": 1673,
+   "title": "Special cases Module Layout",
+   "urls": [
+    "https://tui-brandhub.com/document/1673"
+   ],
+   "linked_from_doc396": 1,
+   "linked_from_hub162": 0,
+   "title_source": "portal 112 navigation API",
+   "status": "not migrated (out of scope)",
+   "in_portal_nav": "112",
+   "linked_from_hub161": 0
+  },
+  {
+   "kind": "document",
+   "id": 1833,
+   "title": "Media Library (Canto)",
+   "urls": [
+    "https://tui-brandhub.com/document/1833"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 1,
+   "title_source": "portal 162 navigation API",
+   "status": "not migrated (out of scope)",
+   "in_portal_nav": "162",
+   "linked_from_hub161": 0
+  },
+  {
+   "kind": "document",
+   "id": 1879,
+   "title": "Dine & Discover",
+   "title_source": "document/portal API (title lookup)",
+   "urls": [
+    "https://tui-brandhub.com/document/1879?#/dine-discover/dine-discover"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 2
+  },
+  {
+   "kind": "document",
+   "id": 1896,
+   "title": "Home",
+   "title_source": "document/portal API (title lookup)",
+   "urls": [
+    "https://tui-brandhub.com/document/1896#/-/cover"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 2
+  },
+  {
+   "kind": "document",
+   "id": 1899,
+   "title": "About AQI",
+   "title_source": "document/portal API (title lookup)",
+   "urls": [
+    "https://tui-brandhub.com/document/1899#/-/about-aqi"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 2
+  },
+  {
+   "kind": "document",
+   "id": 2154,
+   "title": "TUI Smiles Reward Club",
+   "urls": [
+    "https://tui-brandhub.com/document/2154"
+   ],
+   "linked_from_doc396": 1,
+   "linked_from_hub162": 0,
+   "title_source": "portal 112 navigation API",
+   "status": "not migrated (out of scope)",
+   "in_portal_nav": "112 › Download Area",
+   "linked_from_hub161": 0
+  },
+  {
+   "kind": "document",
+   "id": 2355,
+   "title": "Home",
+   "title_source": "document/portal API (title lookup)",
+   "urls": [
+    "https://tui-brandhub.com/document/2355#/-/cover-page"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 2
+  },
+  {
+   "kind": "document",
+   "id": 2428,
+   "title": "AI Code of Conduct",
+   "urls": [
+    "https://tui-brandhub.com/document/2428"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 1,
+   "title_source": "portal 162 navigation API",
+   "status": "not migrated (out of scope)",
+   "in_portal_nav": "162",
+   "linked_from_hub161": 0
+  },
+  {
+   "kind": "hub",
+   "id": 52,
+   "title": "Airline/Airport",
+   "urls": [
+    "https://tui-brandhub.com/hub/52"
+   ],
+   "linked_from_doc396": 1,
+   "linked_from_hub162": 0,
+   "title_source": "portal 112 navigation API",
+   "status": "not migrated (out of scope)",
+   "in_portal_nav": "112 › Other Masterbrand guidelines",
+   "linked_from_hub161": 2
+  },
+  {
+   "kind": "hub",
+   "id": 74,
+   "title": "Crystal Ski Holidays",
+   "title_source": "link text (not the verified Frontify title)",
+   "urls": [
+    "https://tui-brandhub.com/hub/74"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 1
+  },
+  {
+   "kind": "hub",
+   "id": 89,
+   "title": "Media Pool Library",
+   "urls": [
+    "https://tui-brandhub.com/hub/89"
+   ],
+   "linked_from_doc396": 2,
+   "linked_from_hub162": 0,
+   "title_source": "portal 112 navigation API",
+   "status": "not migrated (out of scope)",
+   "in_portal_nav": "112 › Download Area",
+   "linked_from_hub161": 1
+  },
+  {
+   "kind": "hub",
+   "id": 136,
+   "title": "SUSTAINABILITY",
+   "title_source": "document/portal API (title lookup)",
+   "urls": [
+    "https://tui-brandhub.com/hub/136"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 1
+  },
+  {
+   "kind": "hub",
+   "id": 155,
+   "title": "First Choice",
+   "title_source": "link text (not the verified Frontify title)",
+   "urls": [
+    "https://tui-brandhub.com/hub/155"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 1
+  },
+  {
+   "kind": "hub",
+   "id": 170,
+   "title": "Logo Assets",
+   "urls": [
+    "https://tui-brandhub.com/hub/170"
+   ],
+   "linked_from_doc396": 7,
+   "linked_from_hub162": 0,
+   "title_source": "portal 112 navigation API",
+   "status": "not migrated (out of scope)",
+   "in_portal_nav": "112 › Download Area",
+   "linked_from_hub161": 1
+  },
+  {
+   "kind": "hub",
+   "id": 177,
+   "title": "TUI BLUE Brand Home",
+   "title_source": "document/portal API (title lookup)",
+   "urls": [
+    "https://tui-brandhub.com/hub/177"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 2
+  },
+  {
+   "kind": "hub",
+   "id": 213,
+   "title": "Campaign section (label cut off in the source: \"ampaign section\")",
+   "urls": [
+    "https://tui-brandhub.com/hub/213"
+   ],
+   "linked_from_doc396": 1,
+   "linked_from_hub162": 0,
+   "title_source": "checked by hand",
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 2
+  },
+  {
+   "kind": "hub",
+   "id": 332,
+   "title": "MARKET-SPECIFIC GUIDELINES",
+   "urls": [
+    "https://tui-brandhub.com/hub/332"
+   ],
+   "linked_from_doc396": 1,
+   "linked_from_hub162": 0,
+   "title_source": "link text (not the verified Frontify title)",
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 0
+  },
+  {
+   "kind": "other",
+   "id": "/d/MbwHjksJNY7U/general-conditions",
+   "title": "General Terms & Conditions",
+   "title_source": "link text (not the verified Frontify title)",
+   "urls": [
+    "https://tui-brandhub.com/d/MbwHjksJNY7U/general-conditions"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 1
+  },
+  {
+   "kind": "other",
+   "id": "/d/MbwHjksJNY7U/imprint",
+   "title": "Imprint",
+   "title_source": "link text (not the verified Frontify title)",
+   "urls": [
+    "https://tui-brandhub.com/d/MbwHjksJNY7U/imprint"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 1
+  },
+  {
+   "kind": "other",
+   "id": "/projects/624/templates-assets",
+   "title": "",
+   "title_source": "link text (not the verified Frontify title)",
+   "urls": [
+    "https://tui-brandhub.com/projects/624/templates-assets"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 1
+  },
+  {
+   "kind": "other",
+   "id": "https://brand.tuicruises.com/document/1538",
+   "title": "",
+   "title_source": "link text (not the verified Frontify title)",
+   "urls": [
+    "https://brand.tuicruises.com/document/1538"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 2
+  },
+  {
+   "kind": "other",
+   "id": "https://brand.tuicruises.com/hub/235",
+   "title": "",
+   "title_source": "link text (not the verified Frontify title)",
+   "urls": [
+    "https://brand.tuicruises.com/hub/235"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 2
+  },
+  {
+   "kind": "other",
+   "id": "https://brand.tuicruises.com/hub/239",
+   "title": "",
+   "title_source": "link text (not the verified Frontify title)",
+   "urls": [
+    "https://brand.tuicruises.com/hub/239"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 1
+  },
+  {
+   "kind": "other",
+   "id": "https://brand.tuicruises.com/hub/273",
+   "title": "",
+   "title_source": "link text (not the verified Frontify title)",
+   "urls": [
+    "https://brand.tuicruises.com/hub/273"
+   ],
+   "linked_from_doc396": 0,
+   "linked_from_hub162": 0,
+   "status": "not migrated (out of scope)",
+   "linked_from_hub161": 1
+  }
+ ],
+ "branch_note": "Content is shared across branches, so a publish applies to every branch; code is per branch."
+}

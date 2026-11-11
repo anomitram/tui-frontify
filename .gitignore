@@ -15,3 +15,4 @@ helix-importer-ui
 # Frontify export data (gated downloads, signed URLs, screenshots) - keep out of the served repo
 migration-work/frontify/
 migration-work/frontify-portal-*/
+migration-work/frontify-home/

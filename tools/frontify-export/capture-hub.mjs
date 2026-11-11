@@ -59,7 +59,7 @@ for (const [i, width] of widths.entries()) {
     const st = (el) => { const c = getComputedStyle(el); const r = el.getBoundingClientRect(); const o = { rect: [Math.round(r.left), Math.round(r.top + scrollY), Math.round(r.width), Math.round(r.height)] }; P.forEach((p) => { o[p] = c.getPropertyValue(p); }); return o; };
     const sel = (s) => [...document.querySelectorAll(s)];
     const els = {};
-    ['header', 'nav', 'h1', 'h2', 'h3', 'h4', 'p', 'a', '.btn', 'button', 'img', 'footer', 'hr'].forEach((s) => { els[s] = sel(s).slice(0, 40).map((e) => ({ text: (e.innerText || e.getAttribute('alt') || '').trim().slice(0, 60), cls: String(e.className).slice(0, 80), href: e.getAttribute('href'), src: (e.currentSrc || e.getAttribute('src') || '').split('?')[0].slice(-60), ...st(e) })); });
+    ['header', 'nav', 'h1', 'h2', 'h3', 'h4', 'p', 'a', '.btn', 'button', 'img', 'footer', 'hr'].forEach((s) => { els[s] = sel(s).slice(0, 250).map((e) => ({ text: (e.innerText || e.getAttribute('alt') || '').trim().slice(0, 60), cls: String(e.className).slice(0, 80), href: e.getAttribute('href'), src: (e.currentSrc || e.getAttribute('src') || '').split('?')[0].slice(-60), ...st(e) })); });
     return { title: document.title, html: document.body.outerHTML, els, docW: document.documentElement.scrollWidth };
   });
   await writeFile(path.join(outDir, `${width}.html`), info.html);

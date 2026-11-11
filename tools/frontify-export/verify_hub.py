@@ -18,7 +18,11 @@ C = os.path.join(repo, 'content')
 grid = json.load(open(os.path.join(hub, 'raw', 'grid.json')))['rows']
 manifest = json.load(open(os.path.join(hub, 'assets', 'manifest.json')))
 linkmap = json.load(open(os.path.join(hub, 'link-map.json')))
-page = open(os.path.join(C, f'{route}.plain.html'), encoding='utf-8').read()
+_names = os.path.join(hub, 'image-names.generated.json')
+NAMES = json.load(open(_names)) if os.path.exists(_names) else {}
+# PAGE_PATH as in build-hub-sources.mjs (e.g. /index for the site root); default /<route>
+PAGE = os.environ.get('PAGE_PATH', f'/{route}').lstrip('/')
+page = open(os.path.join(C, f'{PAGE}.plain.html'), encoding='utf-8').read()
 nav = open(os.path.join(C, route, 'nav.plain.html'), encoding='utf-8').read()
 WORD = re.compile(r"[0-9A-Za-zÀ-ÿ’'&]+")
 
@@ -78,12 +82,25 @@ for m in manifest:
     if m.get('size_verified') is True:
         asset_rep['size_verified'] += 1
     if m['kind'] != 'font':
-        pub = os.path.join(C, 'assets', m['key'], re.sub(r'[^\w.\-]+', '_', re.sub(r'\s+', '-', os.path.basename(m['file']))))
-        if os.path.exists(pub) and hashlib.sha256(open(pub, 'rb').read()).hexdigest() == sha:
+        # descriptive names (image-names.generated.json from build-hub-sources.mjs) or the old
+        # /assets/<key>/<file name> layout
+        named = NAMES.get(m['key'])
+        if named:
+            rel = named['path']
+        else:
+            rel = f"/assets/{m['key']}/" + re.sub(r'[^\w.\-]+', '_', re.sub(r'\s+', '-', os.path.basename(m['file'])))
+        pub = os.path.join(C, rel.lstrip('/'))
+        if named and named.get('crop'):
+            ok = os.path.exists(pub)  # cropped like Frontify shows it, so the bytes differ from the original
+            if ok:
+                asset_rep['published_cropped'] = asset_rep.get('published_cropped', 0) + 1
+        else:
+            ok = os.path.exists(pub) and hashlib.sha256(open(pub, 'rb').read()).hexdigest() == sha
+        if ok:
             asset_rep['published_ok'] += 1
         else:
             asset_rep['problems'].append(f"{m['key']}: published copy missing/different")
-        if f"/assets/{m['key']}/" not in page + nav:
+        if rel not in page + nav:
             asset_rep['problems'].append(f"{m['key']}: not referenced by the migrated page")
 
 # links + runtime deps

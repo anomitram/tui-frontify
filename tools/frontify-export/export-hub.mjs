@@ -1,6 +1,7 @@
 /* Export a Frontify portal home ("hub") page as raw JSON: route, portal, grid rows, footer,
  * appearance, fonts, stylesheet, navigation. Sequential with pauses; stops on /auth, 401/403, 405.
- * Usage: FRONTIFY_PORTAL_ID=162 HUB_ROUTE=tuimagiclife node export-hub.mjs <outDir> */
+ * Usage: FRONTIFY_PORTAL_ID=162 HUB_ROUTE=tuimagiclife node export-hub.mjs <outDir>
+ *        FRONTIFY_PORTAL_ID=161 HUB_DASHBOARD=1 node export-hub.mjs <outDir>   (site root) */
 import { mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import CFG from './config.mjs';
@@ -27,7 +28,11 @@ async function get(url) {
   try { return JSON.parse(text); } catch (e) { return { status: r.status, error: true, url, nonJson: text.slice(0, 300) }; }
 }
 
+// HUB_DASHBOARD=1: the site root "/" (dashboard) - it shows the hub of the portal named by
+// /api/dashboard/portal-destination (TUI Brand Hub: portal 161).
+const DASHBOARD = process.env.HUB_DASHBOARD === '1';
 const endpoints = {
+  ...(DASHBOARD ? { 'dashboard-destination.json': '/api/dashboard/portal-destination' } : {}),
   ...(ROUTE ? { 'custom-route.json': `/api/custom-route/${ROUTE}` } : {}),
   'portal.json': `/api/portal/${PORTAL}?language=${LANG}`,
   'grid.json': `/api/hub/grid/${PORTAL}`,

@@ -17,6 +17,8 @@ import assetKitParser from './parsers/asset-kit.js';
 import audioParser from './parsers/audio.js';
 
 let HOST = 'https://tui-brandhub.com'; // replaced by the payload's host in makeCtx()
+// The Frontify dashboard ("Brand Hub", "Back to dashboard") is the migrated homepage "/" (portal 161).
+const HOME = '/';
 
 const PARSERS = {
   Text: textParser,
@@ -143,7 +145,7 @@ function buildNav(document, data) {
   const logo = data.assets[data.logoKey];
   // section 1: brand (logo + back to dashboard rail)
   div.innerHTML = `<p><a href="${data.nav.order[0].path}"><img src="${logo}" alt="${data.portalTitle} logo"></a></p>
-    <p><a href="${HOST}/dashboard">Back to dashboard</a></p>`;
+    <p><a href="${HOME}">Back to dashboard</a></p>`;
   div.append(hr(document));
   // section 2: portal navigation
   const ul = document.createElement('ul');
@@ -175,7 +177,7 @@ function buildNav(document, data) {
   div.append(hr(document));
   // section 3: tools
   div.insertAdjacentHTML('beforeend', `<ul>
-    <li><a href="${HOST}/dashboard">:brand-hub: Brand Hub</a></li>
+    <li><a href="${HOME}">:brand-hub: Brand Hub</a></li>
     <li>:search: Search</li>
     <li><a href="${HOST}/document/${data.doc.id}">:brand-assistant: Brand Assistant</a></li>
   </ul>`);
@@ -282,7 +284,8 @@ export default {
       results.push({ element: buildNav(document, data), path: '/nav' });
       results.push({ element: buildSidebar(document, data), path: '/sidebar' });
       results.push({ element: buildFooter(document), path: '/footer' });
-      results.push({ element: buildRedirect(document, data, data.doc.title), path: '/index' });
+      // "/" (index) is the migrated TUI Brand Hub homepage (portal 161, import-hub-page.js) since
+      // 2026-11-11, so the guideline chrome no longer writes it; only the old document URL redirects.
       results.push({ element: buildRedirect(document, data, data.doc.title), path: `/document/${data.doc.id}` });
     }
     return results;
