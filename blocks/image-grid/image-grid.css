@@ -1,0 +1,157 @@
+.image-grid .image-grid-list {
+  display: grid;
+  grid-template-columns: repeat(var(--image-grid-columns, 2), minmax(0, 1fr));
+  gap: 0 30px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.image-grid.columns-1 {
+  --image-grid-columns: 1;
+}
+
+.image-grid.columns-2 {
+  --image-grid-columns: 2;
+}
+
+.image-grid.columns-3 {
+  --image-grid-columns: 3;
+}
+
+.image-grid.columns-4 {
+  --image-grid-columns: 4;
+}
+
+.image-grid .image-grid-item {
+  min-width: 0;
+  margin-bottom: 30px;
+}
+
+.image-grid figure {
+  margin: 0;
+}
+
+.image-grid .image-grid-image {
+  display: flex;
+  overflow: hidden;
+}
+
+.image-grid.border .image-grid-image {
+  border: 1px solid rgb(234 235 235);
+}
+
+.image-grid .image-grid-trigger {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+  font: inherit;
+}
+
+.image-grid .image-grid-trigger:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 3px var(--tui-energy-blue);
+}
+
+.image-grid picture {
+  display: block;
+}
+
+.image-grid .image-grid-trigger img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.image-grid figcaption {
+  margin-top: 12px;
+}
+
+.image-grid .image-grid-title {
+  margin: 0 0 3px;
+  font-family: var(--regular-font-family);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--text-color);
+}
+
+.image-grid .image-grid-caption {
+  margin: 0;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-s);
+  line-height: 1.5;
+  color: var(--text-color);
+}
+
+.image-grid .image-grid-title p,
+.image-grid .image-grid-caption p {
+  margin: 0;
+}
+
+@media (width < 600px) {
+  .image-grid .image-grid-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* asset viewer */
+.image-grid .image-grid-viewer {
+  width: 100vw;
+  max-width: 100vw;
+  height: 100vh;
+  max-height: 100vh;
+  margin: 0;
+  padding: 56px 24px 24px;
+  border: 0;
+  background: rgb(0 0 0 / 92%);
+}
+
+.image-grid .image-grid-viewer[open] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-grid .image-grid-viewer::backdrop {
+  background: transparent;
+}
+
+.image-grid .image-grid-viewer > img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.image-grid .image-grid-viewer-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 15%);
+  cursor: pointer;
+}
+
+.image-grid .image-grid-viewer-close::before,
+.image-grid .image-grid-viewer-close::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 18px;
+  height: 2px;
+  background: #fff;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.image-grid .image-grid-viewer-close::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}

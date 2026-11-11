@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/sales-mechanics/bau-toolkit.html",
+  "path": "sales-mechanics/bau-toolkit",
+  "timestamp": "2026-11-11T02:36:38.291Z",
+  "frontifyPageId": 6383,
+  "originalUrl": "https://tui-brandhub.com/document/396#/sales-mechanics/bau-toolkit",
+  "blockCounts": "{\"Image\":24,\"Callout\":1,\"Heading\":5,\"Text\":32,\"Video\":3}",
+  "outOfScopeLinks": "[\"https://tui-brandhub.com/document/1238\"]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

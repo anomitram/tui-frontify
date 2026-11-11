@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/ui-elements/rounded-assets.html",
+  "path": "ui-elements/rounded-assets",
+  "timestamp": "2026-11-11T02:35:09.627Z",
+  "frontifyPageId": 1801,
+  "originalUrl": "https://tui-brandhub.com/document/396#/ui-elements/rounded-assets",
+  "blockCounts": "{\"Text\":1,\"Image\":1}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

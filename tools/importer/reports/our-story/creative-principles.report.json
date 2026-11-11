@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/our-story/creative-principles.html",
+  "path": "our-story/creative-principles",
+  "timestamp": "2026-11-11T02:32:41.290Z",
+  "frontifyPageId": 1739,
+  "originalUrl": "https://tui-brandhub.com/document/396#/our-story/creative-principles",
+  "blockCounts": "{\"Text\":1,\"Image\":1}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

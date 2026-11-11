@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/illustration/how-to.html",
+  "path": "illustration/how-to",
+  "timestamp": "2026-11-11T02:34:27.307Z",
+  "frontifyPageId": 4441,
+  "originalUrl": "https://tui-brandhub.com/document/396#/illustration/how-to",
+  "blockCounts": "{\"Heading\":27,\"Text\":42,\"Image\":39,\"Callout\":2,\"Colors\":5}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

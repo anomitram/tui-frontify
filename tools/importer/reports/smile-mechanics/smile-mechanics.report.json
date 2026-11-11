@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/smile-mechanics/smile-mechanics.html",
+  "path": "smile-mechanics/smile-mechanics",
+  "timestamp": "2026-11-11T02:32:46.805Z",
+  "frontifyPageId": 1785,
+  "originalUrl": "https://tui-brandhub.com/document/396#/smile-mechanics/smile-mechanics",
+  "blockCounts": "{\"Callout\":3,\"Text\":1,\"Image\":1}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[\"https://ci-support@tui-brandhub.com -> mailto:ci-support@tui-brandhub.com\"]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

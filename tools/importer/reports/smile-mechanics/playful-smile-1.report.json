@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/smile-mechanics/playful-smile-1.html",
+  "path": "smile-mechanics/playful-smile-1",
+  "timestamp": "2026-11-11T02:32:55.786Z",
+  "frontifyPageId": 1787,
+  "originalUrl": "https://tui-brandhub.com/document/396#/smile-mechanics/playful-smile-1",
+  "blockCounts": "{\"Text\":4,\"Callout\":1,\"Image\":4,\"Heading\":3,\"Annotations\":1}",
+  "outOfScopeLinks": "[\"https://tui-brandhub.com/document/1112\"]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

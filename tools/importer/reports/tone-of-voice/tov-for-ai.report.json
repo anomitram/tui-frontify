@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/tone-of-voice/tov-for-ai.html",
+  "path": "tone-of-voice/tov-for-ai",
+  "timestamp": "2026-11-11T02:38:00.543Z",
+  "frontifyPageId": 8066,
+  "originalUrl": "https://tui-brandhub.com/document/396#/tone-of-voice/tov-for-ai",
+  "blockCounts": "{\"Heading\":1,\"Text\":1,\"Attachments\":1}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

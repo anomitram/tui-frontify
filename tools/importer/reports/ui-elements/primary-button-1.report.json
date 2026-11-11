@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/ui-elements/primary-button-1.html",
+  "path": "ui-elements/primary-button-1",
+  "timestamp": "2026-11-11T02:35:25.773Z",
+  "frontifyPageId": 1804,
+  "originalUrl": "https://tui-brandhub.com/document/396#/ui-elements/primary-button-1",
+  "blockCounts": "{\"Heading\":2,\"Text\":2,\"Image\":1,\"Annotations\":1}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

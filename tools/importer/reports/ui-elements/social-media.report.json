@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/ui-elements/social-media.html",
+  "path": "ui-elements/social-media",
+  "timestamp": "2026-11-11T02:35:36.458Z",
+  "frontifyPageId": 2122,
+  "originalUrl": "https://tui-brandhub.com/document/396#/ui-elements/social-media",
+  "blockCounts": "{\"Heading\":2,\"Callout\":2,\"Text\":3,\"Image\":3,\"Annotations\":1}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

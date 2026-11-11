@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/sales-mechanics/module-explanation.html",
+  "path": "sales-mechanics/module-explanation",
+  "timestamp": "2026-11-11T02:36:45.085Z",
+  "frontifyPageId": 6833,
+  "originalUrl": "https://tui-brandhub.com/document/396#/sales-mechanics/module-explanation",
+  "blockCounts": "{\"Text\":2,\"Image\":2,\"Image grid\":1,\"Asset Kit\":1}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[\"Empty section 15442 kept as spacer\"]",
+  "importScript": "b22187ef4dc7"
+}

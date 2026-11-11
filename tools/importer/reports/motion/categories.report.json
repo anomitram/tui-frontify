@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/motion/categories.html",
+  "path": "motion/categories",
+  "timestamp": "2026-11-11T02:36:23.099Z",
+  "frontifyPageId": 4554,
+  "originalUrl": "https://tui-brandhub.com/document/396#/motion/categories",
+  "blockCounts": "{\"Text\":53,\"Heading\":5,\"Image\":3,\"Video\":32,\"Annotations\":4,\"Callout\":1}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

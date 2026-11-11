@@ -1,0 +1,9 @@
+{
+  "sites": {
+    "tui-frontify": {
+      "previewOrg": "anomitram",
+      "previewSite": "tui-frontify",
+      "contentHostUrl": "https://content.da.live/anomitram/tui-frontify/"
+    }
+  }
+}

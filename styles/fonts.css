@@ -1,36 +1,333 @@
 /* stylelint-disable max-line-length */
+
+/* TUI brand fonts (Frontify guideline project 540), declared in the same source order as the original. */
+
 @font-face {
-  font-family: roboto-condensed;
+  font-family: 'TUITypeLtRg_W';
   font-style: normal;
-  font-weight: 700;
+  font-weight: normal;
   font-display: swap;
-  src: url('../fonts/roboto-condensed-bold.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  src: url('../fonts/tuitypeltrg-w-regular.woff') format('woff'), url('../fonts/tuitypeltrg-w-regular.woff2') format('woff2'), url('../fonts/tuitypeltrg-w-regular.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: roboto;
-  font-style: normal;
-  font-weight: 700;
+  font-family: 'TUITypeLtIt_W';
+  font-style: italic;
+  font-weight: normal;
   font-display: swap;
-  src: url('../fonts/roboto-bold.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  src: url('../fonts/tuitypeltit-w-normal-italic.woff') format('woff'), url('../fonts/tuitypeltit-w-normal-italic.woff2') format('woff2'), url('../fonts/tuitypeltit-w-normal-italic.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: roboto;
+  font-family: 'TUITypeLtBd_W';
   font-style: normal;
-  font-weight: 500;
+  font-weight: bold;
   font-display: swap;
-  src: url('../fonts/roboto-medium.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  src: url('../fonts/tuitypeltbd-w-bold-normal.woff') format('woff'), url('../fonts/tuitypeltbd-w-bold-normal.woff2') format('woff2'), url('../fonts/tuitypeltbd-w-bold-normal.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: roboto;
+  font-family: 'TUITypeLtBdIt_W';
+  font-style: italic;
+  font-weight: bold;
+  font-display: swap;
+  src: url('../fonts/tuitypeltbdit-w-bold-italic.woff') format('woff'), url('../fonts/tuitypeltbdit-w-bold-italic.woff2') format('woff2'), url('../fonts/tuitypeltbdit-w-bold-italic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'TUITypeBd_W';
+  font-style: normal;
+  font-weight: bold;
+  font-display: swap;
+  src: url('../fonts/tuitypebd-w-bold-normal.woff') format('woff'), url('../fonts/tuitypebd-w-bold-normal.woff2') format('woff2'), url('../fonts/tuitypebd-w-bold-normal.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'TUITypeBdIt_W';
+  font-style: italic;
+  font-weight: bold;
+  font-display: swap;
+  src: url('../fonts/tuitypebdit-w-bold-italic.woff') format('woff'), url('../fonts/tuitypebdit-w-bold-italic.woff2') format('woff2'), url('../fonts/tuitypebdit-w-bold-italic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Ambit SemiBold';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../fonts/ambit-semibold-600-normal.woff') format('woff'), url('../fonts/ambit-semibold-600-normal.woff2') format('woff2'), url('../fonts/ambit-semibold-600-normal.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Ambit Regular';
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+  src: url('../fonts/ambit-regular-regular.woff') format('woff'), url('../fonts/ambit-regular-regular.woff2') format('woff2'), url('../fonts/ambit-regular-regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Ambit SemiBoldItalic';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../fonts/ambit-semibolditalic-600-italic.woff') format('woff'), url('../fonts/ambit-semibolditalic-600-italic.woff2') format('woff2'), url('../fonts/ambit-semibolditalic-600-italic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Ambit Bold';
+  font-style: normal;
+  font-weight: bold;
+  font-display: swap;
+  src: url('../fonts/ambit-bold-bold-normal.woff') format('woff'), url('../fonts/ambit-bold-bold-normal.woff2') format('woff2'), url('../fonts/ambit-bold-bold-normal.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Ambit BoldItalic';
+  font-style: italic;
+  font-weight: bold;
+  font-display: swap;
+  src: url('../fonts/ambit-bolditalic-bold-italic.woff') format('woff'), url('../fonts/ambit-bolditalic-bold-italic.woff2') format('woff2'), url('../fonts/ambit-bolditalic-bold-italic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: TUIType;
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('../fonts/roboto-regular.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  src: url('../fonts/tuitype-400-normal.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: TUITypeBd;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/tuitypebd-400-normal.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: TUITypeBdIt;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/tuitypebdit-400-normal.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: TUITypeIt;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/tuitypeit-400-normal.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: TUITypeLt;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/tuitypelt-400-normal.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: TUITypeLtBd;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/tuitypeltbd-400-normal.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: TUITypeLtBdIt;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/tuitypeltbdit-400-normal.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: TUITypeLtIt;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/tuitypeltit-400-normal.ttf') format('truetype');
+}
+
+/* Brand-essentials fonts (portal 112). Declared by Frontify but not used by document 396 pages. */
+
+@font-face {
+  font-family: Ambit;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/brand-ambit-400-normal.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: Ambit;
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/brand-ambit-400-italic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: Ambit;
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../fonts/brand-ambit-600-normal.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: Ambit;
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../fonts/brand-ambit-600-italic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: Ambit;
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/brand-ambit-700-normal.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: Ambit;
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/brand-ambit-700-italic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: Ambit;
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url('../fonts/brand-ambit-900-normal.otf') format('opentype');
+}
+
+@font-face {
+  font-family: TUISymbolOT;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/brand-tuisymbolot-400-normal.otf') format('opentype');
+}
+
+@font-face {
+  font-family: TUIType;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/brand-tuitype-400-normal.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: TUIType;
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/brand-tuitype-400-italic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: TUIType;
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/brand-tuitype-700-normal.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: TUIType;
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/brand-tuitype-700-italic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'TUIType LATN';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/brand-tuitype-latn-700-normal.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'TUIType LATN';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/brand-tuitype-latn-700-italic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: TUITypeLight;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/brand-tuitypelight-400-normal.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: TUITypeLight;
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/brand-tuitypelight-400-italic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: TUITypeLight;
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/brand-tuitypelight-700-normal.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: TUITypeLight;
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/brand-tuitypelight-700-italic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'TUITypeLight LATN';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/brand-tuitypelight-latn-400-normal.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'TUITypeLight LATN';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/brand-tuitypelight-latn-400-italic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'TUITypeLight LATN';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/brand-tuitypelight-latn-700-normal.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'TUITypeLight LATN';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/brand-tuitypelight-latn-700-italic.ttf') format('truetype');
 }

@@ -11,3 +11,6 @@ helix-importer-ui
 # Ensure these files are tracked
 !CLAUDE.md
 !AGENTS.md
+
+# Frontify export data (gated downloads, signed URLs, screenshots) - keep out of the served repo
+migration-work/frontify/

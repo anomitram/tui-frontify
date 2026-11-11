@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/colour/gradients.html",
+  "path": "colour/gradients",
+  "timestamp": "2026-11-11T02:33:48.008Z",
+  "frontifyPageId": 1705,
+  "originalUrl": "https://tui-brandhub.com/document/396#/colour/gradients",
+  "blockCounts": "{\"Callout\":1,\"Heading\":3,\"Text\":3,\"Image\":3}",
+  "outOfScopeLinks": "[\"https://tui-brandhub.com/document/401/collection/606\"]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

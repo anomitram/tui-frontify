@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/radiant-templates/template-construction.html",
+  "path": "radiant-templates/template-construction",
+  "timestamp": "2026-11-11T02:38:35.995Z",
+  "frontifyPageId": 1809,
+  "originalUrl": "https://tui-brandhub.com/document/396#/radiant-templates/template-construction",
+  "blockCounts": "{\"Heading\":7,\"Text\":7,\"Image\":6,\"Annotations\":1}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

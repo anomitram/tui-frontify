@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/logo/logo-descriptor.html",
+  "path": "logo/logo-descriptor",
+  "timestamp": "2026-11-11T02:33:23.947Z",
+  "frontifyPageId": 2108,
+  "originalUrl": "https://tui-brandhub.com/document/396#/logo/logo-descriptor",
+  "blockCounts": "{\"Text\":5,\"Callout\":1,\"Image\":9,\"Heading\":2}",
+  "outOfScopeLinks": "[\"https://tui-brandhub.com/hub/170\"]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

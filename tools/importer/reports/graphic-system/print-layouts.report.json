@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/graphic-system/print-layouts.html",
+  "path": "graphic-system/print-layouts",
+  "timestamp": "2026-11-11T02:38:19.076Z",
+  "frontifyPageId": 1815,
+  "originalUrl": "https://tui-brandhub.com/document/396#/graphic-system/print-layouts",
+  "blockCounts": "{\"Heading\":3,\"Text\":5,\"Callout\":1,\"Image\":1,\"Annotations\":2}",
+  "outOfScopeLinks": "[\"https://tui-brandhub.com/document/401/collection/638\"]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[\"Empty section 11274 kept as spacer\"]",
+  "importScript": "b22187ef4dc7"
+}

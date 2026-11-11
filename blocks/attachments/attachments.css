@@ -1,0 +1,95 @@
+/* Attachments (Frontify legacy downloads block) */
+.attachments .attachments-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgb(225 225 219);
+  border-radius: 4px;
+  list-style: none;
+}
+
+.attachments .attachments-item {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.attachments .attachments-item + .attachments-item {
+  border-top: 1px solid rgb(225 225 219);
+}
+
+.attachments .attachments-link {
+  display: flow-root;
+  padding: 10px;
+  color: var(--tui-deep-blue);
+  font-family: var(--body-font-family);
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.attachments a.attachments-link:any-link {
+  color: var(--tui-deep-blue);
+  font-family: var(--body-font-family);
+  font-size: 13px;
+  text-decoration: none;
+}
+
+/* file-type icon floats so long titles/meta wrap underneath it, like Frontify */
+.attachments .attachments-icon {
+  float: left;
+  width: 40px;
+  height: 52px;
+  margin-right: 10px;
+}
+
+.attachments .attachments-icon svg {
+  display: block;
+  width: 40px;
+  height: 52px;
+}
+
+.attachments .attachments-meta {
+  display: block;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.attachments .attachments-title {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 18px;
+  overflow-wrap: break-word;
+  margin-bottom: 3px;
+}
+
+/* meta sits in an 18px line like Frontify's inline span (11px/14.3px on a 13px/18px strut) */
+.attachments .attachments-info {
+  display: block;
+  font-size: 11px;
+  line-height: 18px;
+}
+
+@media (width >= 768px) {
+  .attachments .attachments-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .attachments .attachments-item + .attachments-item {
+    border-top: 0;
+  }
+
+  .attachments .attachments-item:nth-child(n + 3) {
+    border-top: 1px solid rgb(225 225 219);
+  }
+
+  .attachments .attachments-item:nth-child(odd):not(.attachments-item-full) {
+    border-right: 1px solid rgb(225 225 219);
+  }
+
+  .attachments .attachments-item-full {
+    grid-column: 1 / -1;
+  }
+}

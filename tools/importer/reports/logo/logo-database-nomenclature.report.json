@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/logo/logo-database-nomenclature.html",
+  "path": "logo/logo-database-nomenclature",
+  "timestamp": "2026-11-11T02:33:29.022Z",
+  "frontifyPageId": 1789,
+  "originalUrl": "https://tui-brandhub.com/document/396#/logo/logo-database-nomenclature",
+  "blockCounts": "{\"Annotations\":1,\"Text\":1,\"Callout\":1}",
+  "outOfScopeLinks": "[\"https://tui-brandhub.com/hub/170\"]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

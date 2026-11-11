@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/stationery-b2c/envelop.html",
+  "path": "stationery-b2c/envelop",
+  "timestamp": "2026-11-11T02:39:07.463Z",
+  "frontifyPageId": 3793,
+  "originalUrl": "https://tui-brandhub.com/document/396#/stationery-b2c/envelop",
+  "blockCounts": "{\"Heading\":1,\"Text\":1,\"Image\":1,\"Attachments\":1}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

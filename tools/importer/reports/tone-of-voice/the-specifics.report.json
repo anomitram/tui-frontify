@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/tone-of-voice/the-specifics.html",
+  "path": "tone-of-voice/the-specifics",
+  "timestamp": "2026-11-11T02:37:55.735Z",
+  "frontifyPageId": 2722,
+  "originalUrl": "https://tui-brandhub.com/document/396#/tone-of-voice/the-specifics",
+  "blockCounts": "{\"Heading\":2,\"Text\":9,\"Image\":1}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

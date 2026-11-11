@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/sales-mechanics/introduction-3.html",
+  "path": "sales-mechanics/introduction-3",
+  "timestamp": "2026-11-11T02:36:33.624Z",
+  "frontifyPageId": 6382,
+  "originalUrl": "https://tui-brandhub.com/document/396#/sales-mechanics/introduction-3",
+  "blockCounts": "{\"Text\":3,\"Heading\":1,\"Image\":1}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

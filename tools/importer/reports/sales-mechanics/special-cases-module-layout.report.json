@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/sales-mechanics/special-cases-module-layout.html",
+  "path": "sales-mechanics/special-cases-module-layout",
+  "timestamp": "2026-11-11T02:36:53.050Z",
+  "frontifyPageId": 7253,
+  "originalUrl": "https://tui-brandhub.com/document/396#/sales-mechanics/special-cases-module-layout",
+  "blockCounts": "{\"Text\":13,\"Heading\":12,\"Image\":8,\"Divider\":12,\"Image grid\":13,\"Asset Kit\":2}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

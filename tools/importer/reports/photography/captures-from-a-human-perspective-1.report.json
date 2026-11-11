@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/photography/captures-from-a-human-perspective-1.html",
+  "path": "photography/captures-from-a-human-perspective-1",
+  "timestamp": "2026-11-11T02:35:51.615Z",
+  "frontifyPageId": 1755,
+  "originalUrl": "https://tui-brandhub.com/document/396#/photography/captures-from-a-human-perspective-1",
+  "blockCounts": "{\"Text\":1,\"Image\":1}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

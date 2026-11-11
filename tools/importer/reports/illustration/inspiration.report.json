@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/illustration/inspiration.html",
+  "path": "illustration/inspiration",
+  "timestamp": "2026-11-11T02:34:38.128Z",
+  "frontifyPageId": 4443,
+  "originalUrl": "https://tui-brandhub.com/document/396#/illustration/inspiration",
+  "blockCounts": "{\"Heading\":3,\"Text\":5,\"Image\":7}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

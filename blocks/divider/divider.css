@@ -1,0 +1,49 @@
+/* Divider (Frontify "Divider" block): line centred in a fixed-height box */
+.divider {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.divider.align-center {
+  justify-content: center;
+}
+
+.divider.align-right {
+  justify-content: flex-end;
+}
+
+.divider .divider-box {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  height: 36px;
+}
+
+.divider.height-medium .divider-box {
+  height: 60px;
+}
+
+.divider.height-large .divider-box {
+  height: 96px;
+}
+
+.divider hr {
+  width: 100%;
+  height: 0;
+  margin: 0;
+  border: 0;
+  border-top: 1px solid rgb(213 214 214);
+}
+
+.divider.dashed hr {
+  border-top-style: dashed;
+}
+
+.divider.dotted hr {
+  border-top-style: dotted;
+}
+
+.divider hr.no-line {
+  border-top-style: none;
+}

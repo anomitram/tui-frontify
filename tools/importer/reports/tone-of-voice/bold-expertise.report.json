@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/tone-of-voice/bold-expertise.html",
+  "path": "tone-of-voice/bold-expertise",
+  "timestamp": "2026-11-11T02:37:16.319Z",
+  "frontifyPageId": 2714,
+  "originalUrl": "https://tui-brandhub.com/document/396#/tone-of-voice/bold-expertise",
+  "blockCounts": "{\"Image\":7,\"Heading\":3,\"Text\":5}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

@@ -1,0 +1,90 @@
+/* Audio (Frontify "Audio" block): title row above a native audio player */
+.audio {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.audio.title-below {
+  flex-direction: column-reverse;
+}
+
+.audio .audio-header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+}
+
+.audio .audio-text {
+  flex: 1;
+  min-width: 0;
+}
+
+/* title defaults to Frontify's imageTitle style when authored as plain text */
+.audio .audio-title p {
+  margin-bottom: 3px;
+  font-family: var(--regular-font-family);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.audio .audio-description p {
+  font-size: var(--body-font-size-s);
+  line-height: 1.5;
+}
+
+.audio .audio-addons {
+  display: flex;
+  gap: 8px;
+  line-height: 1.5;
+}
+
+/* Fondue small/square/full-rounded default button */
+.audio a.audio-download:any-link {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 9999px;
+  background-color: #e1e1db;
+  color: #111110;
+  font-size: 13px;
+  line-height: 1;
+  text-decoration: none;
+  transition: background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.audio a.audio-download:hover {
+  background-color: #d7d7d0;
+  color: #111110;
+}
+
+.audio a.audio-download:active {
+  background-color: #bfbfb8;
+}
+
+.audio a.audio-download:focus-visible {
+  outline: 4px solid rgb(53 103 246 / 50%);
+  outline-offset: 2px;
+}
+
+.audio a.audio-download svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+.audio .audio-player {
+  display: block;
+  width: 100%;
+  outline: none;
+}
+
+.audio .audio-player:focus-visible {
+  outline: 4px solid rgb(53 103 246 / 50%);
+  outline-offset: 2px;
+}

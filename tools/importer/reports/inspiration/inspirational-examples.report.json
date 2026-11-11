@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/inspiration/inspirational-examples.html",
+  "path": "inspiration/inspirational-examples",
+  "timestamp": "2026-11-11T02:39:15.986Z",
+  "frontifyPageId": 1814,
+  "originalUrl": "https://tui-brandhub.com/document/396#/inspiration/inspirational-examples",
+  "blockCounts": "{\"Image\":4}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

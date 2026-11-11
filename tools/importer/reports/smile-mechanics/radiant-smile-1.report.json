@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/smile-mechanics/radiant-smile-1.html",
+  "path": "smile-mechanics/radiant-smile-1",
+  "timestamp": "2026-11-11T02:33:02.340Z",
+  "frontifyPageId": 1788,
+  "originalUrl": "https://tui-brandhub.com/document/396#/smile-mechanics/radiant-smile-1",
+  "blockCounts": "{\"Text\":7,\"Callout\":2,\"Image\":3,\"Heading\":6,\"Annotations\":5}",
+  "outOfScopeLinks": "[\"https://tui-brandhub.com/document/747/collection/618\"]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

@@ -1,0 +1,38 @@
+/* Text (Frontify "Text" block): rich text flowing in CSS columns */
+.text {
+  container-type: inline-size;
+}
+
+.text .text-content {
+  column-count: 1;
+  column-gap: normal;
+}
+
+/* Frontify switches to 2 columns at a 440px container, 3-5 columns at 740px */
+@container (width >= 440px) {
+  .text.columns-2 .text-content {
+    column-count: 2;
+  }
+}
+
+@container (width >= 740px) {
+  .text.columns-3 .text-content {
+    column-count: 3;
+  }
+
+  .text.columns-4 .text-content {
+    column-count: 4;
+  }
+
+  .text.columns-5 .text-content {
+    column-count: 5;
+  }
+}
+
+/* Frontify buttons sit inline-block with 10px vertical margins */
+.text .text-content a.button:any-link {
+  margin: 10px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}

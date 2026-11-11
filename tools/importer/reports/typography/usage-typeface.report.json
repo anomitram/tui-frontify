@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/typography/usage-typeface.html",
+  "path": "typography/usage-typeface",
+  "timestamp": "2026-11-11T02:34:02.041Z",
+  "frontifyPageId": 1708,
+  "originalUrl": "https://tui-brandhub.com/document/396#/typography/usage-typeface",
+  "blockCounts": "{\"Heading\":3,\"Text\":2,\"Annotations\":3}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

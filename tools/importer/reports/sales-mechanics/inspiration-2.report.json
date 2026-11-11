@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/sales-mechanics/inspiration-2.html",
+  "path": "sales-mechanics/inspiration-2",
+  "timestamp": "2026-11-11T02:36:56.886Z",
+  "frontifyPageId": 6400,
+  "originalUrl": "https://tui-brandhub.com/document/396#/sales-mechanics/inspiration-2",
+  "blockCounts": "{\"Heading\":8,\"Image\":9}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

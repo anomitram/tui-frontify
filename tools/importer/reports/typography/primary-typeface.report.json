@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/typography/primary-typeface.html",
+  "path": "typography/primary-typeface",
+  "timestamp": "2026-11-11T02:33:53.712Z",
+  "frontifyPageId": 1706,
+  "originalUrl": "https://tui-brandhub.com/document/396#/typography/primary-typeface",
+  "blockCounts": "{\"Heading\":1,\"Text\":2,\"Callout\":1,\"Image\":2}",
+  "outOfScopeLinks": "[\"https://tui-brandhub.com/document/502\"]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

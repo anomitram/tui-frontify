@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/sales-mechanics/big-sale-moments.html",
+  "path": "sales-mechanics/big-sale-moments",
+  "timestamp": "2026-11-11T02:36:48.739Z",
+  "frontifyPageId": 6384,
+  "originalUrl": "https://tui-brandhub.com/document/396#/sales-mechanics/big-sale-moments",
+  "blockCounts": "{\"Heading\":9,\"Image\":42,\"Text\":56,\"Video\":7}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

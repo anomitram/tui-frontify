@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/co-branding/partner-lock-ups.html",
+  "path": "co-branding/partner-lock-ups",
+  "timestamp": "2026-11-11T02:38:52.693Z",
+  "frontifyPageId": 1812,
+  "originalUrl": "https://tui-brandhub.com/document/396#/co-branding/partner-lock-ups",
+  "blockCounts": "{\"Heading\":5,\"Text\":5,\"Annotations\":1,\"Image\":6,\"Callout\":2}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

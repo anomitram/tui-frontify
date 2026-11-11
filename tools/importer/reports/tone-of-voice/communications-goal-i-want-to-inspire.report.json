@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/tone-of-voice/communications-goal-i-want-to-inspire.html",
+  "path": "tone-of-voice/communications-goal-i-want-to-inspire",
+  "timestamp": "2026-11-11T02:37:36.831Z",
+  "frontifyPageId": 2718,
+  "originalUrl": "https://tui-brandhub.com/document/396#/tone-of-voice/communications-goal-i-want-to-inspire",
+  "blockCounts": "{\"Image\":5,\"Text\":4}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

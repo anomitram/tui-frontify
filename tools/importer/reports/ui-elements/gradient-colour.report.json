@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/ui-elements/gradient-colour.html",
+  "path": "ui-elements/gradient-colour",
+  "timestamp": "2026-11-11T02:35:19.461Z",
+  "frontifyPageId": 1803,
+  "originalUrl": "https://tui-brandhub.com/document/396#/ui-elements/gradient-colour",
+  "blockCounts": "{\"Text\":1,\"Annotations\":1}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

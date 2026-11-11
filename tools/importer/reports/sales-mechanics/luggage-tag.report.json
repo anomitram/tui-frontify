@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/sales-mechanics/luggage-tag.html",
+  "path": "sales-mechanics/luggage-tag",
+  "timestamp": "2026-11-11T02:37:01.048Z",
+  "frontifyPageId": 7433,
+  "originalUrl": "https://tui-brandhub.com/document/396#/sales-mechanics/luggage-tag",
+  "blockCounts": "{\"Text\":3,\"Image grid\":2,\"Image\":1,\"Asset Kit\":1}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

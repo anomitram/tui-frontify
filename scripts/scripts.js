@@ -1,4 +1,5 @@
 import {
+  getMetadata,
   loadHeader,
   loadFooter,
   decorateIcons,
@@ -34,6 +35,27 @@ if (window.trustedTypes && window.trustedTypes.createPolicy) {
     },
     createScriptURL: (input) => input,
     createScript: (input) => input,
+  });
+}
+
+/**
+ * Local preview serves the content folder under /content; on Edge Delivery pages live at
+ * the root. CONTENT_BASE is '' in production.
+ */
+export const CONTENT_BASE = window.location.pathname.startsWith('/content/') ? '/content' : '';
+
+/** Prefix a root-relative content path with the local preview mount (no-op in production). */
+export function contentPath(path) {
+  if (!CONTENT_BASE || !path || !path.startsWith('/') || path.startsWith(`${CONTENT_BASE}/`)) return path;
+  return `${CONTENT_BASE}${path}`;
+}
+
+/** Rewrite root-relative page links for the local preview mount (no-op in production). */
+export function localizeLinks(root) {
+  if (!CONTENT_BASE) return;
+  root.querySelectorAll('a[href]').forEach((a) => {
+    const href = a.getAttribute('href');
+    if (href.startsWith('/') && !href.startsWith('//') && !href.startsWith('/assets/')) a.setAttribute('href', contentPath(href));
   });
 }
 
@@ -153,18 +175,52 @@ export function decorateMain(main) {
   decorateSections(main);
   decorateBlocks(main);
   decorateButtons(main);
+  localizeLinks(main);
 }
 
 /**
  * Loads everything needed to get to LCP.
  * @param {Element} doc The container element
  */
+/**
+ * Frontify reserves a 10px scrollbar gutter on every platform. Where the browser's own
+ * scrollbar is thinner (overlay scrollbars), pad the page by the difference.
+ */
+function compensateScrollbar() {
+  const sbw = window.innerWidth - document.documentElement.clientWidth;
+  document.documentElement.style.setProperty('--scrollbar-compensation', `${Math.max(0, 10 - sbw)}px`);
+}
+
+/**
+ * "redirect" template: forwards to the Redirect metadata path. Old Frontify routes
+ * (/document/396#/category/page[/heading]) map to /category/page[#heading].
+ */
+function handleRedirectTemplate() {
+  if (getMetadata('template') !== 'redirect') return false;
+  let target = getMetadata('redirect') || '/';
+  const route = window.location.hash.replace(/^#\/?/, '').split('/').filter(Boolean);
+  if (route.length >= 2) {
+    const [cat, slug, heading] = route;
+    target = cat === '-' ? `/${slug}` : `/${cat}/${slug}`;
+    if (heading) target += `#${heading}`;
+  }
+  window.location.replace(contentPath(target));
+  return true;
+}
+
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
+  compensateScrollbar();
+  window.addEventListener('resize', compensateScrollbar);
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
+    if (document.body.classList.contains('guideline')) {
+      // eslint-disable-next-line import/no-cycle
+      const { decorateGuidelineLayout } = await import('./guideline.js');
+      decorateGuidelineLayout(main);
+    }
     document.body.classList.add('appear');
     await loadSection(main.querySelector('.section'), waitForFirstImage);
   }
@@ -189,9 +245,15 @@ async function loadLazy(doc) {
   const main = doc.querySelector('main');
   await loadSections(main);
 
-  const { hash } = window.location;
-  const element = hash ? doc.getElementById(hash.substring(1)) : false;
-  if (hash && element) element.scrollIntoView();
+  if (document.body.classList.contains('guideline')) {
+    // eslint-disable-next-line import/no-cycle
+    const { loadGuideline } = await import('./guideline.js');
+    await loadGuideline(main);
+  } else {
+    const { hash } = window.location;
+    const element = hash ? doc.getElementById(hash.substring(1)) : false;
+    if (hash && element) element.scrollIntoView();
+  }
 
   loadFooter(doc.querySelector('body > footer'));
 
@@ -209,6 +271,7 @@ function loadDelayed() {
 }
 
 async function loadPage() {
+  if (handleRedirectTemplate()) return;
   await loadEager(document);
   await loadLazy(document);
   loadDelayed();
