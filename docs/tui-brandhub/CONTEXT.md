@@ -59,4 +59,8 @@ Revisit when the Frontify source is edited after 2026-11-10 (latest `modified` i
 | Site code | `scripts/hub.js`, `styles/hub.css`, `styles/theme-tuimagiclife.css`, `blocks/hub-cell`, `blocks/hub-divider`, fonts `fonts/mlife-*` |
 | Content | `content/tuimagiclife.plain.html`, `content/tuimagiclife/{nav,footer}.plain.html`, `content/assets/cell-*`, `content/assets/theme-logoAsset-171919` |
 
-Resume state: local migration complete and verified. Not uploaded to DA, not previewed or published. Next steps only on request.
+Resume state (2026-11-11): migrated and verified.
+- Uploaded to DA: page, nav, footer and 15 images under `/assets/`.
+- Previewed and published on branch `aem-20261111-0835`. The code is on that branch only, not on `main`.
+- Local page images now reference `content.da.live`.
+- Upload helper: `tools/frontify-export/upload-to-da.mjs`.

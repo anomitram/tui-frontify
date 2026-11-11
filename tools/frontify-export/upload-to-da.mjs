@@ -10,7 +10,14 @@ import path from 'node:path';
 const [org, repo, ...pages] = process.argv.slice(2);
 const DA = `https://admin.da.live/source/${org}/${repo}`;
 const TYPES = {
-  png: 'image/png', jpg: 'image/jpeg', jpeg: 'image/jpeg', svg: 'image/svg+xml', gif: 'image/gif', webp: 'image/webp', mp4: 'video/mp4', pdf: 'application/pdf',
+  png: 'image/png',
+  jpg: 'image/jpeg',
+  jpeg: 'image/jpeg',
+  svg: 'image/svg+xml',
+  gif: 'image/gif',
+  webp: 'image/webp',
+  mp4: 'video/mp4',
+  pdf: 'application/pdf',
 };
 const sha = (b) => createHash('sha256').update(b).digest('hex');
 const sleep = (ms) => new Promise((r) => { setTimeout(r, ms); });
@@ -38,7 +45,9 @@ for (const src of media) {
   await sleep(800);
   const back = await fetch(`${DA}${src}`);
   const backBuf = Buffer.from(await back.arrayBuffer());
-  const rec = { kind: 'media', path: src, upload: res.status, readback: back.status, match: back.ok && sha(backBuf) === sha(buf), bytes: buf.length };
+  const rec = {
+    kind: 'media', path: src, upload: res.status, readback: back.status, match: back.ok && sha(backBuf) === sha(buf), bytes: buf.length,
+  };
   results.push(rec);
   console.log('media', rec.upload, rec.readback, rec.match ? 'MATCH' : 'DIFFERENT', src);
   if (!String(res.status).startsWith('2')) { console.log('  ', res.body); break; }
@@ -59,14 +68,25 @@ for (const p of failed ? [] : pages) {
   const backMain = (/<main>([\s\S]*)<\/main>/.exec(backHtml) || [])[1] || '';
   const text = (h) => h.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
   const rec = {
-    kind: 'page', path: `/${p}`, upload: res.status, readback: back.status,
-    exact: norm(backMain) === norm(main), text_match: text(backMain) === text(main), imgs_local: (main.match(/<img/g) || []).length, imgs_da: (backMain.match(/<img/g) || []).length,
+    kind: 'page',
+    path: `/${p}`,
+    upload: res.status,
+    readback: back.status,
+    exact: norm(backMain) === norm(main),
+    text_match: text(backMain) === text(main),
+    imgs_local: (main.match(/<img/g) || []).length,
+    imgs_da: (backMain.match(/<img/g) || []).length,
   };
   results.push(rec);
-  console.log('page', rec.upload, rec.readback, rec.exact ? 'EXACT' : (rec.text_match ? 'TEXT MATCH' : 'DIFFERENT'), `/${p}`, `imgs ${rec.imgs_local}/${rec.imgs_da}`);
+  let verdict = 'DIFFERENT';
+  if (rec.exact) verdict = 'EXACT';
+  else if (rec.text_match) verdict = 'TEXT MATCH';
+  console.log('page', rec.upload, rec.readback, verdict, `/${p}`, `imgs ${rec.imgs_local}/${rec.imgs_da}`);
   if (!String(res.status).startsWith('2')) { console.log('  ', res.body); break; }
   if (!rec.exact) await writeFile(path.join(tmp, `${p.replace(/\//g, '_')}.da-readback.html`), backHtml);
   await sleep(800);
 }
-await writeFile(path.join('migration-work', 'preview-publish', `da-upload-${pages[pages.length - 1].replace(/\//g, '_')}.json`), JSON.stringify({ when: new Date().toISOString(), tmp, results }, null, 2));
+const logName = `da-upload-${pages[pages.length - 1].replace(/\//g, '_')}.json`;
+const log = { when: new Date().toISOString(), tmp, results };
+await writeFile(path.join('migration-work', 'preview-publish', logName), JSON.stringify(log, null, 2));
 console.log('readback copies (if any) in', tmp);
