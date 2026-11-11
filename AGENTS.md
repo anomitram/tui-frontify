@@ -23,7 +23,7 @@ Edge Delivery Services. Read a block first. Omissions are in the repo or known.
 
 ## TUI Brand Hub (migrated from Frontify document 396)
 Reference: `docs/tui-brandhub/CONTEXT.md` (file locations, glossary, resume state) and `docs/tui-brandhub/SITEMAP.md`.
-Procedures: project skills `frontify-export`, `frontify-block-mapping`, `frontify-assets`, `frontify-links-redirects`, `frontify-visual-verify`, `tui-new-page`.
+Procedures: project skills `frontify-export`, `frontify-block-mapping`, `frontify-assets`, `frontify-links-redirects`, `frontify-visual-verify`, `tui-new-page`, `frontify-hub-page`.
 Tokens in `styles/styles.css :root`, from Frontify design settings, captured 2026-11-10. Revisit if the source is edited after that date.
 
 ### Brand rules for every page
@@ -83,6 +83,24 @@ Tokens in `styles/styles.css :root`, from Frontify design settings, captured 202
   - `/r/<token>` links go through the redirect sheet.
   - Links to other Frontify documents and portals stay absolute and are listed as out of scope.
 - Local preview serves content under `/content/`. Use `contentPath()`/`localizeLinks()` from `scripts/scripts.js`.
+
+### TUI MAGIC LIFE portal (Frontify portal 162, page `/tuimagiclife`, template `hub`, theme `tuimagiclife`)
+Tokens are in `styles/theme-tuimagiclife.css`, from the portal 162 hub stylesheet (2026-11-11).
+- Colours:
+  - yellow `#FFF500` (header)
+  - navy `#00264F` (text and headings)
+  - turquoise `#81D7E4` (section background)
+  - pink `#FF3E86` (support section)
+  - link `#2BB4CA`
+- Fonts: Ambit for headings and the header; TUI Type 17px/1.2 for body text; TUI Type Light 14px for buttons.
+- Headings: h1 44px, h2 32px (70px top margin), h3 22px, h4 18px.
+- Buttons: padding 10px 20px, radius 5px.
+  - primary `#50C7DA`, hover `#2BB4CA`
+  - secondary `#003166`, hover `#00264F`
+- Layout: the grid is ported 1:1 from Frontify in `styles/hub.css`.
+  - Column widths step at 768px and 992px.
+  - Rows are sections with `hub-row` metadata; cells are `hub-cell` / `hub-divider` blocks.
+- Procedure: skill `frontify-hub-page`.
 
 ### Hard rules
 - Never print, store or paste credentials, cookies, tokens or signed URLs. Auth for tui-brandhub.com is injected by the workspace proxy.

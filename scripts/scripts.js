@@ -221,6 +221,11 @@ async function loadEager(doc) {
       const { decorateGuidelineLayout } = await import('./guideline.js');
       decorateGuidelineLayout(main);
     }
+    if (document.body.classList.contains('hub')) {
+      const { decorateHub, loadHubTheme } = await import('./hub.js');
+      decorateHub(main);
+      await loadHubTheme();
+    }
     document.body.classList.add('appear');
     await loadSection(main.querySelector('.section'), waitForFirstImage);
   }

@@ -1,0 +1,258 @@
+/* stylelint-disable selector-class-pattern -- class names ported 1:1 from Frontify (BEM) */
+
+/* Hub Cell: Frontify "pb-text-image" rules (frontify-bootstrap.css, captured 2026-11-11), scoped. */
+.hub-cell {
+  width: 100%;
+  height: 100%;
+}
+
+.hub-cell .pb-text-image {
+  display: flex;
+  flex-flow: row;
+  width: 100%;
+  height: 100%;
+}
+
+.hub-cell .pb-text-image__content {
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.hub-cell .pb-text-image__content[data-link] {
+  cursor: pointer;
+}
+
+.hub-cell .pb-text-image__text {
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.hub-cell .pb-text-image__text-inner {
+  align-self: center;
+  width: 100%;
+  min-width: 1em;
+  min-height: 1em;
+  overflow-wrap: break-word; /* Frontify breaks over-long words (e.g. 72px hero heading on phones) */
+}
+
+.hub-cell .pb-text-image__text p {
+  margin-bottom: 10px;
+}
+
+.hub-cell .pb-text-image__text p:last-child {
+  margin-bottom: 0;
+}
+
+.hub-cell .pb-text-image__image {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.hub-cell .pb-text-image__image.state-empty {
+  min-height: 250px;
+}
+
+.hub-cell .pb-text-image__image-inner {
+  position: relative;
+  align-self: center;
+  max-width: 100%;
+}
+
+.hub-cell .pb-text-image__image-container {
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+}
+
+.hub-cell .state-topleft { margin: 0 auto auto 0; }
+.hub-cell .state-topcenter { margin: 0 auto auto; }
+.hub-cell .state-topright { margin: 0 0 auto auto; }
+.hub-cell .state-middleleft { margin: auto auto auto 0; }
+.hub-cell .state-middlecenter { margin: auto; }
+.hub-cell .state-middleright { margin: auto 0 auto auto; }
+.hub-cell .state-bottomleft { margin: auto auto 0 0; }
+.hub-cell .state-bottomcenter { margin: auto auto 0; }
+.hub-cell .state-bottomright { margin: auto 0 0 auto; }
+
+.hub-cell .pb-text-image__image-overlay {
+  position: absolute;
+  inset: 0;
+  background: 0 0;
+  pointer-events: none;
+}
+
+/* image box (cm-image-legacy) */
+.hub-cell .cm-image-legacy {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%;
+  overflow: hidden;
+}
+
+.hub-cell .cm-image-legacy picture {
+  display: contents;
+}
+
+.hub-cell .cm-image-legacy__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* layout: top/bottom */
+.hub-cell .pb-text-image__content.layout-topbottom,
+.hub-cell .pb-text-image__content.layout-bottomtop {
+  flex-flow: column wrap;
+}
+
+.hub-cell .layout-topbottom .pb-text-image__image,
+.hub-cell .layout-bottomtop .pb-text-image__image {
+  flex: 0 auto;
+  width: 100%;
+}
+
+.hub-cell .layout-bottomtop .pb-text-image__image { order: 2; }
+
+.hub-cell .layout-topbottom .pb-text-image__image-inner,
+.hub-cell .layout-bottomtop .pb-text-image__image-inner {
+  width: 100%;
+}
+
+.hub-cell .layout-topbottom .pb-text-image__text,
+.hub-cell .layout-bottomtop .pb-text-image__text {
+  display: flex;
+  flex: auto;
+  width: 100%;
+}
+
+.hub-cell .layout-bottomtop .pb-text-image__text { order: 1; }
+
+/* layout: left/right (stacks below 540px) */
+.hub-cell .layout-leftright,
+.hub-cell .layout-leftright .pb-text-image__text,
+.hub-cell .layout-rightleft,
+.hub-cell .layout-rightleft .pb-text-image__text {
+  display: block;
+}
+
+@media (width >= 540px) {
+  .hub-cell .layout-leftright,
+  .hub-cell .layout-leftright .pb-text-image__text,
+  .hub-cell .layout-rightleft,
+  .hub-cell .layout-rightleft .pb-text-image__text {
+    display: flex;
+  }
+}
+
+.hub-cell .layout-leftright .pb-text-image__image,
+.hub-cell .layout-rightleft .pb-text-image__image {
+  flex: 100%;
+  width: auto;
+}
+
+.hub-cell .layout-rightleft .pb-text-image__image { order: 2; }
+
+.hub-cell .layout-leftright .pb-text-image__image-inner,
+.hub-cell .layout-rightleft .pb-text-image__image-inner {
+  width: 100%;
+}
+
+.hub-cell .layout-leftright .pb-text-image__text,
+.hub-cell .layout-rightleft .pb-text-image__text {
+  flex: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.hub-cell .layout-rightleft .pb-text-image__text { order: 1; }
+
+/* layout: text over image */
+.hub-cell .pb-text-image__content.layout-textover {
+  position: relative;
+  display: grid;
+}
+
+.hub-cell .layout-textover .pb-text-image__image {
+  grid-area: 1 / 1;
+  width: auto;
+  height: auto;
+  font-size: 0;
+}
+
+.hub-cell .layout-textover .pb-text-image__image-inner {
+  width: 100%;
+  height: 100%;
+}
+
+.hub-cell .layout-textover .pb-text-image__text {
+  position: relative; /* Frontify's editor layer is positioned, so text paints above the image */
+  display: flex;
+  grid-area: 1 / 1;
+  width: auto;
+  height: auto;
+}
+
+.hub-cell .layout-textover .pb-text-image__text-inner {
+  height: auto;
+  min-height: 1em;
+}
+
+.hub-cell .layout-textover .cm-image-legacy {
+  height: 100% !important;
+  padding-bottom: 0 !important;
+}
+
+.hub-cell .layout-textover .cm-image-legacy__image {
+  position: static;
+}
+
+.hub-cell .layout-textover .pb-text-image__image-overlay {
+  height: 10000px;
+}
+
+.hub-cell .layout-textover .pb-text-image__image.state-empty {
+  height: 100%;
+  min-height: 400px;
+}
+
+/* layout: text only / image only */
+.hub-cell .layout-text .pb-text-image__text {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.hub-cell .layout-text .pb-text-image__image {
+  display: none;
+}
+
+.hub-cell .layout-image .pb-text-image__image-inner {
+  width: 100%;
+}
+
+.hub-cell .layout-image .pb-text-image__text {
+  display: none;
+}
+
+.hub-cell .layout-image .pb-text-image__image.state-empty {
+  min-height: 400px;
+}
+
+.hub-cell .layout-image.pb-text-image__content {
+  min-height: 150px;
+}
+
+.hub-cell.w-12 .pb-text-image__content.layout-image {
+  min-height: 400px;
+}

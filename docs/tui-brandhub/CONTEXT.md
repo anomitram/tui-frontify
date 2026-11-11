@@ -45,3 +45,18 @@ Revisit when the Frontify source is edited after 2026-11-10 (latest `modified` i
 - **Restart point:** the next step depends on the request.
   - For content updates: re-export (skill `frontify-export`), then `build-sources` → import (skill `frontify-block-mapping`) → verify.
   - Existing data is reusable; don't re-scrape unless the source changed.
+
+## TUI MAGIC LIFE portal home (portal 162, added 2026-11-11)
+| What | Location |
+|---|---|
+| Raw export (route, portal, grid, footer, appearance, fonts, stylesheet, navigation, permalinks) | `migration-work/frontify-portal-162/raw/` |
+| Reference captures 1440/768/375 (+ html, styles, hover states) | `migration-work/frontify-portal-162/capture/` |
+| Assets and manifest (65 files) | `migration-work/frontify-portal-162/assets/` (`manifest.json`, `font-faces.json`) |
+| Frontify app CSS (grid/cell rules, reference) | `migration-work/frontify-portal-162/app-css/` (`hub-rules.css`) and `hub-typography.css` |
+| Link map (27 outgoing links) | `migration-work/frontify-portal-162/link-map.{json,csv}` |
+| Verification | `migration-work/frontify-portal-162/verification.json`, `visual-report.json`, `rects-<w>.txt`, `local/` |
+| Import source / importer | `migration-work/frontify-portal-162/source-pages/` (:8098); `tools/importer/import-hub-page.js`, `parsers/hub-*.js`, `utils/hub.js` |
+| Site code | `scripts/hub.js`, `styles/hub.css`, `styles/theme-tuimagiclife.css`, `blocks/hub-cell`, `blocks/hub-divider`, fonts `fonts/mlife-*` |
+| Content | `content/tuimagiclife.plain.html`, `content/tuimagiclife/{nav,footer}.plain.html`, `content/assets/cell-*`, `content/assets/theme-logoAsset-171919` |
+
+Resume state: local migration complete and verified. Not uploaded to DA, not previewed or published. Next steps only on request.

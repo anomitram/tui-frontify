@@ -1,0 +1,154 @@
+/*
+ * Theme "tuimagiclife": TUI MAGIC LIFE brand portal (Frontify portal 162).
+ * Values from /api/guideline-stylesheets/portal/162 (hub typography and buttons) and the captured
+ * page at 1440/768/375 (header geometry), 2026-11-11.
+ */
+body.tuimagiclife {
+  --mlife-yellow: rgb(255 245 0);
+  --mlife-navy: rgb(0 38 79);
+  --mlife-navy-deep: rgb(0 25 51);
+  --mlife-turquoise: rgb(129 215 228);
+  --mlife-pink: rgb(255 62 134);
+  --mlife-link: rgb(43 180 202);
+  --header-background: var(--mlife-yellow);
+  --header-link-color: #000;
+  --header-link-font: 'Ambit', arial, sans-serif;
+  --header-logo-width: 150px;
+  --header-logo-column: 233px;
+  --header-inner-max: none;
+  --header-inner-padding: 0 calc(87 / 1369 * (100vw - var(--rail-width) - 10px)) 0 calc(112 / 1369 * (100vw - var(--rail-width) - 10px));
+
+  /* space of the excluded Search + Brand Assistant icons, so "Brand Hub" keeps its position */
+  --header-tools-reserve: 79px;
+
+  /* Frontify header link spacing 1.7em at 14px */
+  --header-link-gap: 23.8px;
+
+  color: var(--mlife-navy);
+  font-family: 'TUI Type', arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.2;
+}
+
+@media (width < 900px) {
+  body.tuimagiclife {
+    --header-logo-width: 145px;
+    --header-tools-reserve: 0;
+  }
+}
+
+/* rich text inside hub cells (.co-editor) */
+.tuimagiclife .hub-cell .co-editor {
+  color: var(--mlife-navy);
+  font-family: 'TUI Type', arial, sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.tuimagiclife .hub-cell .co-editor p {
+  margin-top: 0;
+}
+
+.tuimagiclife .hub-cell .co-editor h1,
+.tuimagiclife .hub-cell .co-editor h2,
+.tuimagiclife .hub-cell .co-editor h3,
+.tuimagiclife .hub-cell .co-editor h4,
+.tuimagiclife .hub-cell .co-editor .custom1,
+.tuimagiclife .hub-cell .co-editor .custom2 {
+  color: var(--mlife-navy);
+  font-family: Ambit, arial, sans-serif;
+  font-style: normal;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+.tuimagiclife .hub-cell .co-editor h1 { margin: 0 0 10px; font-size: 44px; font-weight: 700; line-height: 1; }
+.tuimagiclife .hub-cell .co-editor h2 { margin: 70px 0 0; font-size: 32px; font-weight: 700; line-height: 1; }
+.tuimagiclife .hub-cell .co-editor h3 { margin: 0 0 10px; font-size: 22px; font-weight: 700; line-height: 1; }
+.tuimagiclife .hub-cell .co-editor h4 { margin: 0 0 5px; font-size: 18px; font-weight: 700; line-height: 1.1; }
+.tuimagiclife .hub-cell .co-editor .custom1 { margin: 0 0 10px; font-size: 26px; font-weight: 500; line-height: 1.2; }
+.tuimagiclife .hub-cell .co-editor .custom2 { margin: 0 0 10px; font-size: 36px; font-weight: 500; line-height: 1; }
+
+.tuimagiclife .hub-cell .co-editor .custom3 {
+  margin: 0 0 10px;
+  font-family: arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.tuimagiclife .hub-cell .co-editor blockquote {
+  margin: 0 0 10px;
+  color: var(--mlife-navy);
+  font-family: 'TUI Type Light', arial, sans-serif;
+  font-size: 16px;
+  font-style: italic;
+  line-height: 1.3;
+}
+
+.tuimagiclife .hub-cell .co-editor a:any-link {
+  color: var(--mlife-link);
+  font-family: 'TUI Type', arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.3;
+  text-decoration: none;
+}
+
+/* buttons (Frontify .btn-primary / .btn-secondary) */
+.tuimagiclife .hub-cell .co-editor a.button:any-link {
+  display: inline-block;
+  box-sizing: border-box;
+  max-width: 100%;
+  margin: 10px 0;
+  padding: 10px 20px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  color: #fff;
+  font-family: 'TUI Type Light', arial, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.2;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  text-transform: none;
+  white-space: nowrap;
+  vertical-align: middle;
+  transition: all 0.2s ease-in-out;
+}
+
+.tuimagiclife .hub-cell .co-editor a.button.primary {
+  border-color: rgb(129 215 228 / 0%);
+  background-color: rgb(80 199 218);
+}
+
+.tuimagiclife .hub-cell .co-editor a.button.primary:hover,
+.tuimagiclife .hub-cell .co-editor a.button.primary:active {
+  border-color: rgb(255 255 255 / 0%);
+  background-color: rgb(43 180 202);
+  color: #fff;
+}
+
+.tuimagiclife .hub-cell .co-editor a.button.secondary {
+  border-color: rgb(207 207 207 / 0%);
+  background-color: rgb(0 49 102);
+}
+
+.tuimagiclife .hub-cell .co-editor a.button.secondary:hover,
+.tuimagiclife .hub-cell .co-editor a.button.secondary:active {
+  border-color: rgb(155 155 155 / 0%);
+  background-color: rgb(0 38 79);
+  color: #fff;
+}
+
+/* "Brand Hub" tool: icon-text gap as in the source header */
+.tuimagiclife header .nav-tool-brand-hub {
+  gap: 4px;
+}
+
+/* links sit 1px higher than the grid centre in the source header (measured at 1440/768) */
+.tuimagiclife header .nav-links {
+  position: relative;
+  top: -1px;
+}

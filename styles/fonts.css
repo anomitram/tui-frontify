@@ -331,3 +331,77 @@
   font-display: swap;
   src: url('../fonts/brand-tuitypelight-latn-700-italic.ttf') format('truetype');
 }
+
+/* TUI MAGIC LIFE brand portal (portal 162, project 1516) fonts, declared in the source order. */
+
+@font-face {
+  font-family: Ambit;
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/mlife-ambit-700-normal.woff') format('woff'), url('../fonts/mlife-ambit-700-normal.woff2') format('woff2'), url('../fonts/mlife-ambit-700-normal.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: Ambit;
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../fonts/mlife-ambit-600-normal.woff') format('woff'), url('../fonts/mlife-ambit-600-normal.woff2') format('woff2'), url('../fonts/mlife-ambit-600-normal.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: Ambit;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/mlife-ambit-400-normal.woff') format('woff'), url('../fonts/mlife-ambit-400-normal.woff2') format('woff2'), url('../fonts/mlife-ambit-400-normal.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'TUI Type';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/mlife-tui-type-700-normal.woff') format('woff'), url('../fonts/mlife-tui-type-700-normal.woff2') format('woff2'), url('../fonts/mlife-tui-type-700-normal.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'TUI Type';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/mlife-tui-type-400-normal.woff') format('woff'), url('../fonts/mlife-tui-type-400-normal.woff2') format('woff2'), url('../fonts/mlife-tui-type-400-normal.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'TUI Type Light';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('../fonts/mlife-tui-type-light-800-normal.woff') format('woff'), url('../fonts/mlife-tui-type-light-800-normal.woff2') format('woff2'), url('../fonts/mlife-tui-type-light-800-normal.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'TUI Type Light';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/mlife-tui-type-light-700-normal.woff') format('woff'), url('../fonts/mlife-tui-type-light-700-normal.woff2') format('woff2'), url('../fonts/mlife-tui-type-light-700-normal.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'TUI Type Light';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/mlife-tui-type-light-400-normal.woff') format('woff'), url('../fonts/mlife-tui-type-light-400-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'TUI Type Light';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/mlife-tui-type-light-400-italic.woff') format('woff'), url('../fonts/mlife-tui-type-light-400-italic.woff2') format('woff2');
+}

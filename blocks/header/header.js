@@ -1,4 +1,4 @@
-import { decorateIcons } from '../../scripts/aem.js';
+import { decorateIcons, getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 import { contentPath, localizeLinks } from '../../scripts/scripts.js';
 
@@ -245,7 +245,9 @@ function buildMobileMenu(links) {
 }
 
 export default async function decorate(block) {
-  const fragment = await loadFragment(contentPath('/nav'));
+  const navMeta = getMetadata('nav');
+  const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
+  const fragment = await loadFragment(contentPath(navPath));
   block.textContent = '';
   if (!fragment) return;
   const [brandSec, linksSec, toolsSec] = [...fragment.children];

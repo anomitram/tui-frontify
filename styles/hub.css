@@ -1,0 +1,81 @@
+/* stylelint-disable selector-class-pattern -- class names ported 1:1 from Frontify (BEM) */
+
+/*
+ * Hub template: Frontify portal home grid (rows, columns, breakpoints), ported from
+ * frontify-bootstrap.css (.po-brandportal__*, .p-row, .p-col). Used by pages with Template "hub".
+ */
+.hub main .section.hub-row {
+  position: relative;
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  padding: 0;
+  background-color: var(--brandportal-background-color, transparent);
+}
+
+/* an empty Frontify row still has one .p-col with min-height 1px */
+.hub main .section.hub-row.empty {
+  min-height: 1px;
+}
+
+.hub .po-brandportal__row-wrap {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--brandportal-width, 100%);
+  margin: var(--brandportal-row-alignment, 0 auto);
+  padding: var(--brandportal-margin-top, 0) var(--brandportal-margin, 0) var(--brandportal-margin-bottom, 0);
+}
+
+.hub .p-row {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: calc(var(--brandportal-margin, 0px) * -0.5);
+  margin-left: calc(var(--brandportal-margin, 0px) * -0.5);
+}
+
+.hub .p-col {
+  position: relative;
+  box-sizing: border-box;
+  flex-grow: 1;
+  flex-basis: 0;
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 1px;
+  padding-right: calc(var(--brandportal-margin, 0px) * 0.5);
+  padding-left: calc(var(--brandportal-margin, 0px) * 0.5);
+}
+
+@media (width >= 768px) {
+  .hub .p-col--1,
+  .hub .p-col--2 { flex: 0 0 25%; min-width: 0; max-width: 25%; }
+
+  .hub .p-col--3,
+  .hub .p-col--4,
+  .hub .p-col--5,
+  .hub .p-col--6 { flex: 0 0 50%; min-width: 0; max-width: 50%; }
+
+  .hub .p-col--7,
+  .hub .p-col--8,
+  .hub .p-col--9,
+  .hub .p-col--10,
+  .hub .p-col--11,
+  .hub .p-col--12 { flex: 0 0 100%; min-width: 0; max-width: 100%; }
+}
+
+@media (width >= 992px) {
+  .hub .p-col { min-width: 25%; }
+  .hub .p-col--1 { flex: 0 0 8.3333%; min-width: 0; max-width: 8.3333%; }
+  .hub .p-col--2 { flex: 0 0 16.6667%; min-width: 0; max-width: 16.6667%; }
+  .hub .p-col--3 { flex: 0 0 25%; min-width: 0; max-width: 25%; }
+  .hub .p-col--4 { flex: 0 0 33.3333%; min-width: 0; max-width: 33.3333%; }
+  .hub .p-col--5 { flex: 0 0 41.6667%; min-width: 0; max-width: 41.6667%; }
+  .hub .p-col--6 { flex: 0 0 50%; min-width: 0; max-width: 50%; }
+  .hub .p-col--7 { flex: 0 0 58.3333%; min-width: 0; max-width: 58.3333%; }
+  .hub .p-col--8 { flex: 0 0 66.6667%; min-width: 0; max-width: 66.6667%; }
+  .hub .p-col--9 { flex: 0 0 75%; min-width: 0; max-width: 75%; }
+  .hub .p-col--10 { flex: 0 0 83.3333%; min-width: 0; max-width: 83.3333%; }
+  .hub .p-col--11 { flex: 0 0 91.6667%; min-width: 0; max-width: 91.6667%; }
+  .hub .p-col--12 { flex: 0 0 100%; min-width: 0; max-width: 100%; }
+}
