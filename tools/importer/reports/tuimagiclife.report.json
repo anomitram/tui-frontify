@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8098/tuimagiclife.html",
+  "path": "tuimagiclife",
+  "timestamp": "2026-11-11T10:42:12.767Z",
+  "rows": 12,
+  "cells": 21,
+  "notes": "[\"row 9: NONE cell 1828 has no content (editor placeholder) - kept as empty row\"]",
+  "links": 27,
+  "fragments": [
+    "tuimagiclife/nav",
+    "tuimagiclife/footer"
+  ],
+  "importScript": "440e311c9891"
+}

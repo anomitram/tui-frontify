@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/radiant-templates/logo-placement.html",
+  "path": "radiant-templates/logo-placement",
+  "timestamp": "2026-11-11T02:38:30.131Z",
+  "frontifyPageId": 1808,
+  "originalUrl": "https://tui-brandhub.com/document/396#/radiant-templates/logo-placement",
+  "blockCounts": "{\"Text\":1,\"Image\":1}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

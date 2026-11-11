@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/tone-of-voice/flexing-our-tone.html",
+  "path": "tone-of-voice/flexing-our-tone",
+  "timestamp": "2026-11-11T02:37:26.553Z",
+  "frontifyPageId": 2716,
+  "originalUrl": "https://tui-brandhub.com/document/396#/tone-of-voice/flexing-our-tone",
+  "blockCounts": "{\"Heading\":1,\"Image\":2,\"Text\":2}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[\"Empty section 11285 kept as spacer\"]",
+  "importScript": "b22187ef4dc7"
+}

@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/graphic-system/layout-construction.html",
+  "path": "graphic-system/layout-construction",
+  "timestamp": "2026-11-11T02:38:10.573Z",
+  "frontifyPageId": 1775,
+  "originalUrl": "https://tui-brandhub.com/document/396#/graphic-system/layout-construction",
+  "blockCounts": "{\"Heading\":2,\"Text\":2,\"Annotations\":2}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

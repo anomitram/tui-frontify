@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/motion/inspiration-1.html",
+  "path": "motion/inspiration-1",
+  "timestamp": "2026-11-11T02:36:29.109Z",
+  "frontifyPageId": 5035,
+  "originalUrl": "https://tui-brandhub.com/document/396#/motion/inspiration-1",
+  "blockCounts": "{\"Text\":1,\"Video\":7}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

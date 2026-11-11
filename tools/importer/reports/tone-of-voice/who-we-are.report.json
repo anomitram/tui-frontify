@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/tone-of-voice/who-we-are.html",
+  "path": "tone-of-voice/who-we-are",
+  "timestamp": "2026-11-11T02:37:51.069Z",
+  "frontifyPageId": 2721,
+  "originalUrl": "https://tui-brandhub.com/document/396#/tone-of-voice/who-we-are",
+  "blockCounts": "{\"Heading\":1,\"Text\":4,\"Image\":1}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

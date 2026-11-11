@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/illustration/our-kits-part.html",
+  "path": "illustration/our-kits-part",
+  "timestamp": "2026-11-11T02:34:32.242Z",
+  "frontifyPageId": 4442,
+  "originalUrl": "https://tui-brandhub.com/document/396#/illustration/our-kits-part",
+  "blockCounts": "{\"Heading\":1,\"Text\":1,\"Image\":1}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

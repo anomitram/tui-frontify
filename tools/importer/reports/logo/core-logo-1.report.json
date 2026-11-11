@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/logo/core-logo-1.html",
+  "path": "logo/core-logo-1",
+  "timestamp": "2026-11-11T02:33:12.670Z",
+  "frontifyPageId": 1698,
+  "originalUrl": "https://tui-brandhub.com/document/396#/logo/core-logo-1",
+  "blockCounts": "{\"Heading\":5,\"Text\":6,\"Callout\":2,\"Image\":6}",
+  "outOfScopeLinks": "[\"https://tui-brandhub.com/hub/170\"]",
+  "rewrittenLinks": "[\"/r/NEPXjpTy0hHdU9zKeRspGjGntUD8BjhAPTRlLzQa4fk -> /graphic-system/layout-construction\"]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/photography/captures-from-a-detail.html",
+  "path": "photography/captures-from-a-detail",
+  "timestamp": "2026-11-11T02:35:56.160Z",
+  "frontifyPageId": 1756,
+  "originalUrl": "https://tui-brandhub.com/document/396#/photography/captures-from-a-detail",
+  "blockCounts": "{\"Text\":1,\"Image\":1}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

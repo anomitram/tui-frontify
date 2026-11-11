@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/co-branding/tui-logo-tui-blue-logo.html",
+  "path": "co-branding/tui-logo-tui-blue-logo",
+  "timestamp": "2026-11-11T02:38:39.517Z",
+  "frontifyPageId": 5455,
+  "originalUrl": "https://tui-brandhub.com/document/396#/co-branding/tui-logo-tui-blue-logo",
+  "blockCounts": "{\"Text\":1,\"Image\":1}",
+  "outOfScopeLinks": "[\"https://tui-brandhub.com/document/215#/global-campaigns/tui-blue-campaign-21-22-1/brand-identity\"]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

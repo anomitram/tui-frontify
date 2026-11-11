@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/photography/things-to-avoid.html",
+  "path": "photography/things-to-avoid",
+  "timestamp": "2026-11-11T02:36:09.173Z",
+  "frontifyPageId": 1759,
+  "originalUrl": "https://tui-brandhub.com/document/396#/photography/things-to-avoid",
+  "blockCounts": "{\"Text\":1,\"Annotations\":1}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

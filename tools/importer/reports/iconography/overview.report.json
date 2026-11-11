@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/iconography/overview.html",
+  "path": "iconography/overview",
+  "timestamp": "2026-11-11T02:34:41.920Z",
+  "frontifyPageId": 1794,
+  "originalUrl": "https://tui-brandhub.com/document/396#/iconography/overview",
+  "blockCounts": "{\"Text\":1,\"Callout\":2,\"Image\":1}",
+  "outOfScopeLinks": "[\"https://tui-brandhub.com/document/458\"]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[\"null -> mailto:ci-support@tui-brandhub.com\"]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

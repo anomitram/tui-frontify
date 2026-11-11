@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/stationery-b2c/letterhead-b2c.html",
+  "path": "stationery-b2c/letterhead-b2c",
+  "timestamp": "2026-11-11T02:39:01.998Z",
+  "frontifyPageId": 3792,
+  "originalUrl": "https://tui-brandhub.com/document/396#/stationery-b2c/letterhead-b2c",
+  "blockCounts": "{\"Text\":2,\"Image\":1,\"Heading\":1,\"Attachments\":2}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

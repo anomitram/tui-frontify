@@ -1,0 +1,22 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/our-story/brand.html",
+  "path": "our-story/brand",
+  "timestamp": "2026-11-11T02:32:36.879Z",
+  "frontifyPageId": 1695,
+  "originalUrl": "https://tui-brandhub.com/document/396#/our-story/brand",
+  "blockCounts": "{\"Callout\":1,\"Heading\":4,\"Text\":3,\"Image\":4}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "fragments": [
+    "nav",
+    "sidebar",
+    "footer",
+    "index",
+    "document/396"
+  ],
+  "importScript": "b22187ef4dc7"
+}

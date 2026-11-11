@@ -1,0 +1,14 @@
+/* stylelint-disable selector-class-pattern -- class names ported 1:1 from Frontify (BEM) */
+
+/* Hub Divider: Frontify "pb-divider" rules, scoped. */
+.hub-divider .pb-divider__content {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+.hub-divider .pb-divider__line {
+  width: 100%;
+  margin: 0 auto;
+  border: 0;
+}

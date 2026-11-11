@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/typography/things-to-avoid.html",
+  "path": "typography/things-to-avoid",
+  "timestamp": "2026-11-11T02:34:11.661Z",
+  "frontifyPageId": 1748,
+  "originalUrl": "https://tui-brandhub.com/document/396#/typography/things-to-avoid",
+  "blockCounts": "{\"Text\":1,\"Annotations\":1}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

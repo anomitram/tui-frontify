@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/tone-of-voice/communications-goal-i-want-to-reassure.html",
+  "path": "tone-of-voice/communications-goal-i-want-to-reassure",
+  "timestamp": "2026-11-11T02:37:41.454Z",
+  "frontifyPageId": 2719,
+  "originalUrl": "https://tui-brandhub.com/document/396#/tone-of-voice/communications-goal-i-want-to-reassure",
+  "blockCounts": "{\"Image\":5,\"Text\":4}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

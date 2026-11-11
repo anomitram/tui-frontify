@@ -1,0 +1,140 @@
+/* Callout (Frontify "Callout" block) */
+.callout {
+  /* light appearance: accent at 10% on white, text = accent darkened to 4.5:1 contrast (Frontify algorithm) */
+  --callout-accent: var(--accent-info);
+  --callout-text: rgb(51 98 235);
+  --callout-bg: rgb(53 103 246 / 10%);
+
+  box-sizing: border-box;
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 0;
+  background-color: var(--callout-bg);
+  color: var(--callout-text);
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  line-height: var(--line-height);
+}
+
+.callout.note {
+  --callout-accent: var(--accent-note);
+  --callout-text: rgb(162 98 0);
+  --callout-bg: rgb(243 147 0 / 10%);
+}
+
+.callout.tip {
+  --callout-accent: var(--accent-tip);
+  --callout-text: rgb(34 127 82);
+  --callout-bg: rgb(48 182 117 / 10%);
+}
+
+.callout.warning {
+  --callout-accent: var(--accent-warning);
+  --callout-text: rgb(212 14 20);
+  --callout-bg: rgb(212 14 20 / 10%);
+}
+
+/* strong appearance: solid accent, black or white text (whichever contrasts more) */
+.callout.strong {
+  --callout-bg: var(--callout-accent);
+  --callout-text: #fff;
+}
+
+.callout.strong.note,
+.callout.strong.tip {
+  --callout-text: #000;
+}
+
+/* padding presets (tw-px-4 tw-py-3 / px-25 py-5 / px-30 py-25) */
+.callout.padding-m {
+  padding: 20px 25px;
+}
+
+.callout.padding-l {
+  padding: 25px 30px;
+}
+
+/* radius presets */
+.callout.radius-small {
+  border-radius: 2px;
+}
+
+.callout.radius-medium {
+  border-radius: 4px;
+}
+
+.callout.radius-large {
+  border-radius: 12px;
+}
+
+/* width: hug contents + alignment */
+.callout.width-hugcontents {
+  width: fit-content;
+  max-width: 100%;
+  margin-right: auto;
+}
+
+.callout.width-hugcontents.align-center {
+  margin-left: auto;
+}
+
+.callout.width-hugcontents.align-right {
+  margin-right: 0;
+  margin-left: auto;
+}
+
+.callout .callout-content {
+  display: flex;
+  align-items: center;
+  min-height: 20px;
+}
+
+.callout .callout-icon {
+  display: flex;
+  flex: none;
+  color: var(--callout-text);
+}
+
+.callout .callout-icon svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  fill: currentcolor;
+}
+
+.callout .callout-text {
+  width: 100%;
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+/* rich text inherits the callout colour */
+.callout .callout-text :is(p, h1, h2, h3, h4, h5, h6, li, blockquote, strong, em) {
+  color: inherit;
+}
+
+.callout .callout-text p {
+  margin: 0;
+  font-size: var(--body-font-size-m);
+  line-height: var(--line-height);
+}
+
+.callout .callout-text a:any-link:not(.button) {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.callout .callout-text > :first-child {
+  margin-top: 0;
+}
+
+.callout .callout-text > :last-child {
+  margin-bottom: 0;
+}
+
+/* with an icon Frontify zeroes all text-style margins */
+.callout.has-icon .callout-text > * {
+  margin-top: 0;
+  margin-bottom: 0;
+}

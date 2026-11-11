@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/illustration/our-illustration-style.html",
+  "path": "illustration/our-illustration-style",
+  "timestamp": "2026-11-11T02:34:22.217Z",
+  "frontifyPageId": 4440,
+  "originalUrl": "https://tui-brandhub.com/document/396#/illustration/our-illustration-style",
+  "blockCounts": "{\"Heading\":5,\"Text\":5,\"Image\":5}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[\"Empty section 11293 kept as spacer\"]",
+  "importScript": "b22187ef4dc7"
+}

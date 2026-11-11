@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/iconography/our-icons-are-responsive.html",
+  "path": "iconography/our-icons-are-responsive",
+  "timestamp": "2026-11-11T02:34:46.224Z",
+  "frontifyPageId": 1795,
+  "originalUrl": "https://tui-brandhub.com/document/396#/iconography/our-icons-are-responsive",
+  "blockCounts": "{\"Text\":1,\"Image\":1,\"Callout\":1}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

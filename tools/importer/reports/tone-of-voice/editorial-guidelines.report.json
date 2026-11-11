@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/tone-of-voice/editorial-guidelines.html",
+  "path": "tone-of-voice/editorial-guidelines",
+  "timestamp": "2026-11-11T02:38:05.606Z",
+  "frontifyPageId": 9601,
+  "originalUrl": "https://tui-brandhub.com/document/396#/tone-of-voice/editorial-guidelines",
+  "blockCounts": "{\"Heading\":2,\"Text\":3,\"Divider\":1,\"Attachments\":1}",
+  "outOfScopeLinks": "[\"https://tui-brandhub.com/hub/332\"]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

@@ -1,0 +1,146 @@
+.annotations {
+  --annotations-bubble: rgb(53 103 246);
+  --annotations-bubble-text: #fff;
+  --annotations-bubble-size: 20px;
+}
+
+.annotations.bubble-light {
+  --annotations-bubble-text: var(--text-color);
+}
+
+.annotations .annotations-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 20px;
+}
+
+.annotations .annotations-figure {
+  min-width: 0;
+  margin: 0;
+}
+
+.annotations .annotations-canvas {
+  position: relative;
+  max-width: 100%;
+}
+
+.annotations.border .annotations-canvas {
+  border: 1px solid rgb(234 235 235);
+}
+
+.annotations .annotations-canvas picture {
+  display: block;
+}
+
+.annotations .annotations-canvas img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.annotations .annotations-bubbles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.annotations .annotations-bubble {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--annotations-bubble-size);
+  height: var(--annotations-bubble-size);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: var(--annotations-bubble);
+  color: var(--annotations-bubble-text);
+  font-family: var(--regular-font-family);
+  font-size: 10px;
+  line-height: 1;
+  padding-top: 1px;
+  cursor: pointer;
+  pointer-events: auto;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+}
+
+.annotations .annotations-bubble.is-active,
+.annotations .annotations-bubble:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgb(255 255 255 / 80%);
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+/* notes */
+.annotations .annotations-list {
+  margin: 0;
+  padding: 5px 0 0;
+  list-style: none;
+  counter-reset: annotation;
+}
+
+.annotations .annotations-item {
+  position: relative;
+  min-height: var(--annotations-bubble-size);
+  margin: 0 0 10px;
+  padding-left: 27px;
+  counter-increment: annotation;
+  break-inside: avoid;
+}
+
+.annotations .annotations-item::before {
+  content: counter(annotation);
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--annotations-bubble-size);
+  height: var(--annotations-bubble-size);
+  border-radius: 50%;
+  background-color: var(--annotations-bubble);
+  color: var(--annotations-bubble-text);
+  font-family: var(--regular-font-family);
+  font-size: 10px;
+  line-height: 1;
+  padding-top: 1px;
+}
+
+.annotations .annotations-item-content > :last-child {
+  margin-bottom: 0;
+}
+
+.annotations .annotations-item-content p {
+  margin: 0;
+}
+
+/* text-top: notes above the image, full: notes below; both in three columns */
+.annotations.mode-text-top .annotations-layout {
+  gap: 21px;
+}
+
+.annotations.mode-text-top .annotations-list {
+  order: -1;
+}
+
+.annotations.mode-full .annotations-layout {
+  gap: 15px;
+}
+
+@media (width >= 768px) {
+  .annotations.mode-figure .annotations-layout {
+    grid-template-columns: minmax(0, 1fr) 33.5%;
+    gap: 30px;
+    align-items: start;
+  }
+
+  .annotations.mode-text-top .annotations-list,
+  .annotations.mode-full .annotations-list {
+    column-count: 3;
+    column-gap: 16px;
+  }
+}

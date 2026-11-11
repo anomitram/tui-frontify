@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/logo/logo-misuse.html",
+  "path": "logo/logo-misuse",
+  "timestamp": "2026-11-11T02:33:33.425Z",
+  "frontifyPageId": 1700,
+  "originalUrl": "https://tui-brandhub.com/document/396#/logo/logo-misuse",
+  "blockCounts": "{\"Text\":1,\"Annotations\":1}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/colour/extended-palette.html",
+  "path": "colour/extended-palette",
+  "timestamp": "2026-11-11T02:33:42.999Z",
+  "frontifyPageId": 1704,
+  "originalUrl": "https://tui-brandhub.com/document/396#/colour/extended-palette",
+  "blockCounts": "{\"Heading\":4,\"Text\":5,\"Colors\":2,\"Image\":2}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

@@ -1,0 +1,193 @@
+/* Frontify "Asset Kit" block */
+.asset-kit {
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  line-height: var(--line-height);
+}
+
+.asset-kit .asset-kit-container {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 20px;
+  border-radius: 0;
+}
+
+.asset-kit .asset-kit-container > * + * {
+  margin-top: 32px;
+}
+
+/* head: title + description, download button */
+.asset-kit .asset-kit-head > * + * {
+  margin-top: 12px;
+}
+
+.asset-kit .asset-kit-intro {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Frontify rich-text containers don't collapse margins */
+.asset-kit .asset-kit-title,
+.asset-kit .asset-kit-description {
+  display: flow-root;
+}
+
+.asset-kit .asset-kit-description {
+  margin-top: 8px;
+}
+
+.asset-kit .asset-kit-title > :first-child,
+.asset-kit .asset-kit-description > :first-child {
+  margin-top: 0;
+}
+
+.asset-kit .asset-kit-title h1,
+.asset-kit .asset-kit-title h2,
+.asset-kit .asset-kit-title h3,
+.asset-kit .asset-kit-title h4 {
+  overflow-wrap: break-word;
+}
+
+.asset-kit .asset-kit-description p {
+  margin: 0;
+  overflow-wrap: break-word;
+}
+
+.asset-kit .asset-kit-action {
+  flex: none;
+}
+
+.asset-kit a.button.asset-kit-download {
+  box-sizing: border-box;
+  margin: 10px 0;
+  overflow: visible;
+  vertical-align: middle;
+  text-overflow: ellipsis;
+  overflow-wrap: normal;
+  white-space: pre-wrap;
+}
+
+/* assets: count + thumbnail grid */
+.asset-kit .asset-kit-count {
+  margin: 0;
+  font-size: var(--body-font-size-s);
+  line-height: 1.5;
+}
+
+.asset-kit .asset-kit-count.is-empty {
+  font-size: var(--body-font-size-m);
+  line-height: var(--line-height);
+  opacity: 0.7;
+}
+
+.asset-kit .asset-kit-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.asset-kit .asset-kit-thumbnail {
+  aspect-ratio: 1 / 1;
+  min-width: 0;
+}
+
+.asset-kit .asset-kit-thumbnail-frame {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  color: inherit;
+  font-size: inherit;
+  text-decoration: none;
+}
+
+.asset-kit .asset-kit-thumbnail-frame picture {
+  display: contents;
+}
+
+.asset-kit .asset-kit-thumbnail-frame img,
+.asset-kit .asset-kit-file-icon {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.asset-kit .asset-kit-file-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* per-asset download affordance (hover / keyboard focus only) */
+.asset-kit .asset-kit-thumbnail-download {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: var(--tui-energy-blue);
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.asset-kit .asset-kit-thumbnail-download svg {
+  width: 16px;
+  height: 16px;
+}
+
+.asset-kit a.asset-kit-thumbnail-frame:hover .asset-kit-thumbnail-download,
+.asset-kit a.asset-kit-thumbnail-frame:focus-visible .asset-kit-thumbnail-download {
+  opacity: 1;
+}
+
+.asset-kit a.asset-kit-thumbnail-frame:focus-visible {
+  outline: 2px solid var(--link-color);
+  outline-offset: 2px;
+}
+
+/* corner radius variants */
+.asset-kit.radius-small .asset-kit-container,
+.asset-kit.radius-small .asset-kit-thumbnail-frame { border-radius: 2px; }
+
+.asset-kit.radius-medium .asset-kit-container,
+.asset-kit.radius-medium .asset-kit-thumbnail-frame { border-radius: 4px; }
+
+.asset-kit.radius-large .asset-kit-container,
+.asset-kit.radius-large .asset-kit-thumbnail-frame { border-radius: 12px; }
+
+@media (width >= 640px) {
+  .asset-kit .asset-kit-container {
+    padding: 32px;
+  }
+
+  .asset-kit .asset-kit-head {
+    display: flex;
+    gap: 32px;
+  }
+
+  .asset-kit .asset-kit-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (width >= 768px) {
+  .asset-kit .asset-kit-head > * + * {
+    margin-top: 0;
+  }
+
+  .asset-kit .asset-kit-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}

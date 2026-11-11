@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/n-a.html",
+  "path": "n-a",
+  "timestamp": "2026-11-11T02:42:50.805Z",
+  "frontifyPageId": 1709,
+  "originalUrl": "https://tui-brandhub.com/document/396#/-/n-a",
+  "blockCounts": "{}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "4a80dd8aea2d"
+}

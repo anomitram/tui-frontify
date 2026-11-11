@@ -1,0 +1,298 @@
+.image .image-figure {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+}
+
+.image .image-frame {
+  position: relative;
+  display: flex;
+  width: 100%;
+}
+
+.image .image-viewer-trigger,
+.image .image-link {
+  display: flex;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  cursor: zoom-in;
+  font: inherit;
+}
+
+.image .image-link {
+  cursor: pointer;
+}
+
+.image .image-viewer-trigger:focus-visible,
+.image .image-link:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 6px var(--tui-energy-blue);
+}
+
+.image picture {
+  display: flex;
+  width: 100%;
+}
+
+.image .image-frame img {
+  display: flex;
+  width: 100%;
+  height: auto;
+  object-fit: scale-down;
+  object-position: center center;
+}
+
+.image.align-left .image-frame img {
+  object-position: left center;
+}
+
+.image.align-right .image-frame img {
+  object-position: right center;
+}
+
+.image figcaption {
+  width: 100%;
+  text-align: center;
+}
+
+.image.align-left figcaption {
+  text-align: left;
+}
+
+.image.align-right figcaption {
+  text-align: right;
+}
+
+.image .image-title {
+  margin: 0 0 3px;
+  font-family: var(--regular-font-family);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--text-color);
+}
+
+.image .image-caption {
+  margin: 0;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-s);
+  line-height: 1.5;
+  color: var(--text-color);
+}
+
+.image .image-title > p,
+.image .image-caption > p {
+  margin: 0;
+}
+
+/* top-right button area */
+.image .image-frame.has-attachments {
+  min-height: 44px;
+}
+
+.image .image-actions {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  display: flex;
+  gap: 8px;
+}
+
+.image .image-download {
+  display: block;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgb(225 225 219) center / 16px no-repeat url('/icons/download.svg');
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.image .image-download:focus-visible,
+.image .image-frame:hover .image-download {
+  opacity: 1;
+}
+
+/* attachments flyout (Frontify fondue button + flyout) */
+.image .image-attachments {
+  position: relative;
+}
+
+.image .image-attachments-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 24px;
+  margin: 0;
+  padding: 0 8px;
+  border: 0;
+  border-radius: 9999px;
+  background-color: rgb(225 225 219);
+  color: rgb(17 17 16);
+  font-family: diatype, geist, arial, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 16px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.image .image-attachments-trigger:hover,
+.image .image-attachments-trigger[aria-expanded="true"] {
+  background-color: rgb(215 215 208);
+}
+
+.image .image-attachments-trigger:active {
+  background-color: rgb(191 191 184);
+}
+
+.image .image-attachments-trigger:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 6px rgb(65 150 251);
+}
+
+.image .image-attachments-trigger svg {
+  flex: none;
+}
+
+.image .image-attachments-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 300px;
+  max-width: calc(100vw - 16px);
+  overflow: auto;
+  border: 1px solid rgb(135 135 129 / 20%);
+  border-radius: 4px;
+  background-color: #fff;
+  box-shadow: 0 3px 10px rgb(8 8 8 / 15%);
+  color: rgb(17 17 16);
+}
+
+.image .image-attachments-menu[hidden] {
+  display: none;
+}
+
+.image .image-attachments-list {
+  border-bottom: 1px solid rgb(135 135 129 / 50%);
+}
+
+.image .image-attachments-item:any-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 20px;
+  color: rgb(103 103 99);
+  font-family: var(--body-font-family);
+  font-size: 13px;
+  line-height: 1.3;
+  text-align: left;
+  text-decoration: none;
+}
+
+.image .image-attachments-item:hover,
+.image .image-attachments-item:focus-visible {
+  background-color: rgb(240 240 235);
+  color: rgb(17 17 16);
+  text-decoration: none;
+}
+
+.image .image-attachments-item:focus-visible {
+  outline: 2px solid rgb(65 150 251);
+  outline-offset: -4px;
+}
+
+.image .image-attachments-icon {
+  display: flex;
+  flex: none;
+}
+
+.image .image-attachments-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.image .image-attachments-title {
+  overflow: hidden;
+  font-weight: 700;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.image .image-attachments-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* asset viewer (Frontify opens assets full screen) */
+.image .image-viewer {
+  width: 100vw;
+  max-width: 100vw;
+  height: 100vh;
+  max-height: 100vh;
+  margin: 0;
+  padding: 56px 24px 24px;
+  border: 0;
+  background: rgb(0 0 0 / 92%);
+}
+
+.image .image-viewer[open] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image .image-viewer::backdrop {
+  background: transparent;
+}
+
+.image .image-viewer .image-viewer-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.image .image-viewer-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 15%);
+  cursor: pointer;
+}
+
+.image .image-viewer-close::before,
+.image .image-viewer-close::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 18px;
+  height: 2px;
+  background: #fff;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.image .image-viewer-close::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}

@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/photography/retouching-guidance-1.html",
+  "path": "photography/retouching-guidance-1",
+  "timestamp": "2026-11-11T02:36:05.290Z",
+  "frontifyPageId": 1758,
+  "originalUrl": "https://tui-brandhub.com/document/396#/photography/retouching-guidance-1",
+  "blockCounts": "{\"Text\":1,\"Image\":1}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

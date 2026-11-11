@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/smile-mechanics/hero-smile-1.html",
+  "path": "smile-mechanics/hero-smile-1",
+  "timestamp": "2026-11-11T02:32:51.320Z",
+  "frontifyPageId": 1786,
+  "originalUrl": "https://tui-brandhub.com/document/396#/smile-mechanics/hero-smile-1",
+  "blockCounts": "{\"Text\":4,\"Callout\":2,\"Heading\":5,\"Image\":2,\"Annotations\":3}",
+  "outOfScopeLinks": "[\"https://tui-brandhub.com/document/603\",\"https://tui-brandhub.com/document/337/?q=hero\",\"https://tui-brandhub.com/hub/213\"]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/photography/capturing-multiple-perspectives-1.html",
+  "path": "photography/capturing-multiple-perspectives-1",
+  "timestamp": "2026-11-11T02:35:41.384Z",
+  "frontifyPageId": 1753,
+  "originalUrl": "https://tui-brandhub.com/document/396#/photography/capturing-multiple-perspectives-1",
+  "blockCounts": "{\"Text\":1,\"Callout\":1,\"Image\":1}",
+  "outOfScopeLinks": "[\"https://tui-brandhub.com/hub/89\"]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

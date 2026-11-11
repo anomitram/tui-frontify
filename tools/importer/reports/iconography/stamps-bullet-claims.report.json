@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/iconography/stamps-bullet-claims.html",
+  "path": "iconography/stamps-bullet-claims",
+  "timestamp": "2026-11-11T02:35:00.033Z",
+  "frontifyPageId": 6240,
+  "originalUrl": "https://tui-brandhub.com/document/396#/iconography/stamps-bullet-claims",
+  "blockCounts": "{\"Text\":4,\"Callout\":2,\"Heading\":4,\"Image grid\":4,\"Image\":1}",
+  "outOfScopeLinks": "[\"https://tui-brandhub.com/document/489\"]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

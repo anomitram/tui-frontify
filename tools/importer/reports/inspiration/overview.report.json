@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/inspiration/overview.html",
+  "path": "inspiration/overview",
+  "timestamp": "2026-11-11T02:39:10.824Z",
+  "frontifyPageId": 1817,
+  "originalUrl": "https://tui-brandhub.com/document/396#/inspiration/overview",
+  "blockCounts": "{\"Text\":1}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

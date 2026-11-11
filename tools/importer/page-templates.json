@@ -1,0 +1,22 @@
+{
+  "templates": [
+    {
+      "name": "guideline-page",
+      "description": "TUI Brand Hub (Frontify) document 396 guideline page, imported from exported Frontify JSON (offline source snapshots).",
+      "urls": [],
+      "blocks": [
+        { "name": "text", "instances": ["Frontify Text block (multi-column or adjacent)"] },
+        { "name": "callout", "instances": ["Frontify Callout"] },
+        { "name": "image", "instances": ["Frontify Image"] },
+        { "name": "video", "instances": ["Frontify Video"] },
+        { "name": "annotations", "instances": ["Frontify Annotations"] },
+        { "name": "image-grid", "instances": ["Frontify Image grid"] },
+        { "name": "divider", "instances": ["Frontify Divider"] },
+        { "name": "attachments", "instances": ["Frontify Attachments"] },
+        { "name": "colors", "instances": ["Frontify Colors"] },
+        { "name": "asset-kit", "instances": ["Frontify Asset Kit"] },
+        { "name": "audio", "instances": ["Frontify Audio"] }
+      ]
+    }
+  ]
+}

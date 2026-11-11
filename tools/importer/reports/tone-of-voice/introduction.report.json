@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8099/tone-of-voice/introduction.html",
+  "path": "tone-of-voice/introduction",
+  "timestamp": "2026-11-11T02:37:07.210Z",
+  "frontifyPageId": 2712,
+  "originalUrl": "https://tui-brandhub.com/document/396#/tone-of-voice/introduction",
+  "blockCounts": "{\"Text\":2,\"Divider\":1,\"Image\":1}",
+  "outOfScopeLinks": "[]",
+  "rewrittenLinks": "[]",
+  "fixedLinks": "[]",
+  "missing": "[]",
+  "notes": "[]",
+  "importScript": "b22187ef4dc7"
+}

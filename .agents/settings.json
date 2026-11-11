@@ -1,0 +1,6 @@
+{
+  "enabledPlugins": {
+    "project-management@excat-extended": true,
+    "edge-delivery-services@excat-marketplace": true
+  }
+}
