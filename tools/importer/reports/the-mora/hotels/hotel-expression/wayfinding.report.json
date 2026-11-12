@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "http://localhost:8095/hotels/hotel-expression/wayfinding.html",
+  "path": "the-mora/hotels/hotel-expression/wayfinding",
+  "timestamp": "2026-11-12T06:57:22.514Z",
+  "frontifyPageId": 8297,
+  "originalUrl": "https://tui-brandhub.com/document/1888#/hotel-expression/wayfinding",
+  "blocks": "{\"Image\":44,\"Text\":83,\"Heading\":5,\"Flip Card\":1,\"Divider\":17,\"Annotations\":10}",
+  "notes": "[]",
+  "missing": "[]",
+  "importScript": "288e5a23882d"
+}

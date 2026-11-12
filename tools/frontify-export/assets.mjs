@@ -117,6 +117,24 @@ for (const f of ['document.json', 'portal-appearance.json']) {
   }
 }
 
+// ---- page/portal theme assets with real file names (document cover pages, e.g. The Mora):
+// template-asset.json (page header background) and theme-asset-documentPage.json (logo, default
+// header image). Saved from /api/document-page/<id>/template-asset and
+// /api/portal/<id>/theme-asset/documentPage. Signed S3 originals (file_origin_url) when present.
+for (const f of ['template-asset.json', 'theme-asset-documentPage.json']) {
+  let list = [];
+  try { list = JSON.parse(await readFile(path.join(rawDir, f), 'utf8')).data || []; } catch (e) { continue; }
+  for (const t of list) {
+    const x = t.asset || {};
+    const src = x.file_origin_url || (x.generic_url || '').replace(/\?.*$/, '');
+    if (!src) continue;
+    add(`page-${t.setting_id}-${x.id}`, {
+      asset_id: x.id, title: x.title, file_name: x.file_name, ext: x.ext, width: x.width, height: x.height, setting: t.setting_id,
+      src, source_url: src.replace(/\?.*$/, ''),
+    }, { field: f });
+  }
+}
+
 // ---- download ----
 class AuthError extends Error {}
 async function fetchFile(url) {
@@ -159,7 +177,20 @@ try {
   previous = new Map(JSON.parse(await readFile(path.join(outDir, 'manifest.json'))).filter((m) => m.file).map((m) => [m.key, m]));
 } catch (e) { /* first run */ }
 
+// ASSETS_SKIP_EXT=zip,docx,...: file types the site cannot serve (Edge Delivery serves images, svg,
+// pdf, mp4) are not downloaded; their blocks link to the Frontify original instead.
+const SKIP_EXT = new Set((process.env.ASSETS_SKIP_EXT || '').split(',').map((x) => x.trim().toLowerCase()).filter(Boolean));
+const checkpoint = () => writeFile(path.join(outDir, 'manifest.partial.json'), JSON.stringify(list.filter((x) => x.file).map(({ src, src_download, src_alt, ...rest }) => rest)));
+
 async function work(a) {
+  const ext = String(a.ext || path.extname(a.file_name || '').slice(1)).toLowerCase();
+  if (SKIP_EXT.has(ext)) { a.skipped = `type ${ext} not served by the site`; a.optional = true; return; }
+  // a crashed run leaves manifest.partial.json (written after every file): resume from it too
+  if (!previous.size) {
+    try {
+      previous = new Map(JSON.parse(await readFile(path.join(outDir, 'manifest.partial.json'))).map((m) => [m.key, m]));
+    } catch (e) { previous = new Map([['', null]]); }
+  }
   const prev = previous.get(a.key);
   if (prev) {
     try {
@@ -177,7 +208,7 @@ async function work(a) {
     let r;
     try { r = await fetchFile(src); } catch (e) {
       if (e instanceof AuthError) { a.error = `AUTH ${e.message}`; a.auth_failure = true; failures.push({ key: a.key, url: a.source_url, error: a.error }); return; }
-      r = { error: e.message };
+      r = { error: `${e.message}${e.cause?.code ? ` (${e.cause.code})` : ''}${e.cause?.message ? `: ${String(e.cause.message).slice(0, 80)}` : ''}` };
     }
     if (r.error) { a.attempts = [...(a.attempts || []), { via: src === a.src ? 'src' : src === a.src_download ? 'download' : 'cdn', error: r.error }]; continue; }
     const cd = filenameFromDisposition(r.res.headers.get('content-disposition'));
@@ -210,11 +241,19 @@ async function work(a) {
 }
 
 const queue = [...list];
-await Promise.all(Array.from({ length: 6 }, async () => {
+// ASSETS_CONCURRENCY=1 + ASSETS_PAUSE_MS for small, rate-safe runs (default 6 parallel, no pause)
+const CONC = Number(process.env.ASSETS_CONCURRENCY || 6);
+const PAUSE_MS = Number(process.env.ASSETS_PAUSE_MS || 0);
+await Promise.all(Array.from({ length: CONC }, async () => {
   while (queue.length) {
     const a = queue.shift();
+    if (process.env.ASSETS_VERBOSE) console.log('fetch', a.key, a.ext || '', a.declared_size || '');
     // eslint-disable-next-line no-await-in-loop
     await work(a);
+    // eslint-disable-next-line no-await-in-loop
+    if (a.file && !previous.has(a.key)) await checkpoint();
+    // eslint-disable-next-line no-await-in-loop
+    if (PAUSE_MS) await new Promise((r) => { setTimeout(r, PAUSE_MS); });
     done += 1;
     if (done % 50 === 0) console.log('progress', done, '/', list.length);
     if (a.auth_failure) { console.error('AUTH FAILURE at', a.source_url); queue.length = 0; }

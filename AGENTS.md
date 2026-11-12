@@ -121,6 +121,12 @@ Tokens are in `styles/theme-tuimagiclife.css`, from the portal 162 hub styleshee
 - `/r/` targets on a hub sit in other documents: resolve them with `/api/permanent-link/<token>` and record them in the link map (no redirect sheet).
 - Search, Brand Assistant, Intercom, analytics and view tracking are excluded. The header keeps the excluded icons' space (`--header-tools-reserve`).
 
+### The Mora portal (Frontify portal 292, under `/the-mora`, theme `the-mora`, all local only)
+- `/the-mora` = cover document 1896 (template `doc-cover`). Documents 1887/1888/1889/1893 = `/the-mora/{brand,hotels,support,libraries}/<cat>/<page>` (template `guideline` + `Layout: doc-sections`, metadata `Sidebar`, `Nav: /the-mora/nav`, `Pagination: hide`/`Sidebar: none` from Frontify's per-page settings). Libraries 1891/1892/1894/1908 = `/the-mora/libraries/<name>` (template `library`).
+- New Frontify document theme: one section = one EDS section (`doc-row` + `scheme-<hash>` + Columns/Padding/Gutter); one block = one grid cell. Colour schemes are Frontify's resolved `--f-theme-settings-*` variables, shipped verbatim.
+- Edit `tools/frontify-export/themes/the-mora.head.css` and `write_doc_cover_css.py`, never the generated `styles/theme-the-mora.css` / `styles/doc-cover.css`; recompose with `compose_theme.py`.
+- Verify offline with `tools/frontify-export/local-render-server.mjs` (:3001) and `doc-compare-sections.js`. Details: `docs/tui-brandhub/CONTEXT.md`.
+
 ### Hard rules
 - Never print, store or paste credentials, cookies, tokens or signed URLs. Auth for tui-brandhub.com is injected by the workspace proxy.
 - Stop and report the URL on any of these, and never retry in a loop or work around them:

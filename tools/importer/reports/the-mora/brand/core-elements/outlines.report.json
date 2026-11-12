@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "http://localhost:8095/brand/core-elements/outlines.html",
+  "path": "the-mora/brand/core-elements/outlines",
+  "timestamp": "2026-11-12T06:56:20.764Z",
+  "frontifyPageId": 8289,
+  "originalUrl": "https://tui-brandhub.com/document/1887#/core-elements/outlines",
+  "blocks": "{\"Image\":32,\"Text\":40,\"Heading\":16,\"Annotations\":9,\"Flip Card\":1,\"Do & Don't\":1}",
+  "notes": "[]",
+  "missing": "[]",
+  "importScript": "288e5a23882d"
+}

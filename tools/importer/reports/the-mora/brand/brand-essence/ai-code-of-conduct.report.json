@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "http://localhost:8095/brand/brand-essence/ai-code-of-conduct.html",
+  "path": "the-mora/brand/brand-essence/ai-code-of-conduct",
+  "timestamp": "2026-11-12T06:55:47.091Z",
+  "frontifyPageId": 11314,
+  "originalUrl": "https://tui-brandhub.com/document/1887#/brand-essence/ai-code-of-conduct",
+  "blocks": "{\"Heading\":2,\"Text\":16,\"Callout\":4,\"Divider\":9,\"Table\":1,\"Cards Grid\":1,\"Asset Kit\":1,\"Annotations\":1}",
+  "notes": "[\"Asset Kit 93953: no package zip; \\\"Download package\\\" links to the Frontify page\"]",
+  "missing": "[]",
+  "importScript": "288e5a23882d"
+}

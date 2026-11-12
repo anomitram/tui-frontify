@@ -3,7 +3,12 @@
 const { chromium } = require(process.env.PW_PATH);
 (async () => {
   const [url, out, w] = process.argv.slice(2);
-  const b = await chromium.launch({ ignoreDefaultArgs: ['--hide-scrollbars'] });
+  // remote (protected) pages: go through the workspace proxy, which injects the site's auth header
+  const b = await chromium.launch({
+    ignoreDefaultArgs: ['--hide-scrollbars'],
+    args: process.env.PROXY_SPKI ? [`--ignore-certificate-errors-spki-list=${process.env.PROXY_SPKI}`] : [],
+    proxy: process.env.HTTPS_PROXY ? { server: process.env.HTTPS_PROXY, bypass: 'localhost,127.0.0.1' } : undefined,
+  });
   const p = await (await b.newContext({ viewport: { width: Number(w), height: 900 } })).newPage();
   const errs = [];
   p.on('pageerror', (e) => errs.push(e.message));

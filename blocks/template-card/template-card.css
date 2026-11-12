@@ -1,0 +1,272 @@
+/* Template Card (Frontify "Template" block), rebuilt from Frontify's block DOM (captures 2026-11-11).
+ * Text styles and the button come from the page theme (--f-theme-settings-*). */
+.template-card {
+  container-type: inline-size;
+}
+
+.template-card .template-card-card {
+  box-sizing: border-box;
+  padding: var(--tpl-padding, 20px);
+  border: var(--tpl-border, 0 solid transparent);
+  border-radius: var(--tpl-radius, 0);
+  background-color: var(--tpl-bg, transparent);
+}
+
+/* preview + text: stacked (text first) on narrow cards, side by side from 24rem card width */
+.template-card .template-card-content {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 16px 24px;
+}
+
+@container (width >= 24rem) {
+  .template-card .template-card-content {
+    flex-direction: row-reverse;
+  }
+
+  .template-card.text-right .template-card-content {
+    flex-direction: row;
+  }
+}
+
+.template-card .template-card-preview {
+  width: 100%;
+  min-width: 0;
+}
+
+.template-card .template-card-preview-frame {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  height: var(--tpl-preview-height, auto);
+  overflow: hidden;
+  border: var(--tpl-preview-border, 0 solid transparent);
+  border-radius: var(--tpl-preview-radius, 0);
+  background-color: var(--tpl-preview-bg, transparent);
+}
+
+.template-card .template-card-preview-frame picture {
+  display: contents;
+}
+
+.template-card .template-card-preview-frame img {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: var(--tpl-preview-position, center);
+}
+
+.template-card.display-fill .template-card-preview-frame img {
+  object-fit: cover;
+}
+
+/* text + button: side by side without a preview (from 24rem), stacked with a preview */
+.template-card .template-card-text-cta {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 8px 32px;
+  min-width: 0;
+}
+
+@container (width >= 24rem) {
+  .template-card:not(.has-preview) .template-card-text-cta {
+    flex-direction: row;
+  }
+}
+
+@media (width >= 1024px) {
+  .template-card.has-preview .template-card-content {
+    align-items: flex-start;
+  }
+
+  .template-card.has-preview.v-center .template-card-content {
+    align-items: center;
+  }
+
+  .template-card.has-preview.v-end .template-card-content {
+    align-items: flex-end;
+  }
+
+  .template-card.has-preview .template-card-preview,
+  .template-card.has-preview .template-card-text-cta {
+    flex-basis: 50%;
+  }
+
+  .template-card.has-preview.ratio-75 .template-card-text-cta,
+  .template-card.has-preview.ratio-25 .template-card-preview {
+    flex-basis: 75%;
+  }
+
+  .template-card.has-preview.ratio-75 .template-card-preview,
+  .template-card.has-preview.ratio-25 .template-card-text-cta {
+    flex-basis: 25%;
+  }
+}
+
+.template-card .template-card-text {
+  flex-grow: 1;
+  min-width: 0;
+  text-align: left;
+}
+
+/* Frontify's rich-text containers are size containers: their margins do not collapse */
+.template-card .template-card-title,
+.template-card .template-card-description {
+  display: flow-root;
+}
+
+.template-card .template-card-description {
+  margin-top: 8px;
+}
+
+.template-card .template-card-text :is(p, li) {
+  margin: 0;
+  color: var(--f-theme-settings-body-color, var(--text-color));
+  font-family: var(--f-theme-settings-body-font-family, var(--body-font-family));
+  font-size: var(--f-theme-settings-body-font-size, var(--body-font-size-m));
+  font-style: var(--f-theme-settings-body-font-style, normal);
+  font-weight: var(--f-theme-settings-body-font-weight, normal);
+  line-height: var(--f-theme-settings-body-line-height, var(--line-height));
+  letter-spacing: var(--f-theme-settings-body-letter-spacing, normal);
+  text-transform: var(--f-theme-settings-body-text-transform, none);
+  overflow-wrap: break-word;
+}
+
+/* the title's top margin is zeroed by Frontify; bottom margins follow the text style */
+.template-card .template-card-text :is(h1, h2, h3, h4, h5, h6) {
+  margin-top: 0;
+  overflow-wrap: break-word;
+}
+
+.template-card .template-card-text h1 {
+  margin-bottom: var(--f-theme-settings-heading1-margin-bottom, 10px);
+  color: var(--f-theme-settings-heading1-color, var(--text-color));
+  font-family: var(--f-theme-settings-heading1-font-family, var(--heading-font-family));
+  font-size: var(--f-theme-settings-heading1-font-size, var(--heading-font-size-m));
+  font-style: var(--f-theme-settings-heading1-font-style, normal);
+  font-weight: var(--f-theme-settings-heading1-font-weight, bold);
+  line-height: var(--f-theme-settings-heading1-line-height, 1.3);
+  letter-spacing: var(--f-theme-settings-heading1-letter-spacing, normal);
+  text-transform: var(--f-theme-settings-heading1-text-transform, none);
+}
+
+.template-card .template-card-text h2 {
+  margin-bottom: var(--f-theme-settings-heading2-margin-bottom, 10px);
+  color: var(--f-theme-settings-heading2-color, var(--text-color));
+  font-family: var(--f-theme-settings-heading2-font-family, var(--heading-font-family));
+  font-size: var(--f-theme-settings-heading2-font-size, var(--heading-font-size-s));
+  font-style: var(--f-theme-settings-heading2-font-style, normal);
+  font-weight: var(--f-theme-settings-heading2-font-weight, bold);
+  line-height: var(--f-theme-settings-heading2-line-height, 1.3);
+  letter-spacing: var(--f-theme-settings-heading2-letter-spacing, normal);
+  text-transform: var(--f-theme-settings-heading2-text-transform, none);
+}
+
+.template-card .template-card-text h3 {
+  margin-bottom: var(--f-theme-settings-heading3-margin-bottom, 10px);
+  color: var(--f-theme-settings-heading3-color, var(--text-color));
+  font-family: var(--f-theme-settings-heading3-font-family, var(--heading-font-family));
+  font-size: var(--f-theme-settings-heading3-font-size, var(--heading-font-size-xs));
+  font-style: var(--f-theme-settings-heading3-font-style, normal);
+  font-weight: var(--f-theme-settings-heading3-font-weight, bold);
+  line-height: var(--f-theme-settings-heading3-line-height, 1.3);
+  letter-spacing: var(--f-theme-settings-heading3-letter-spacing, normal);
+  text-transform: var(--f-theme-settings-heading3-text-transform, none);
+}
+
+.template-card .template-card-text h4 {
+  margin-bottom: var(--f-theme-settings-heading4-margin-bottom, 5px);
+  color: var(--f-theme-settings-heading4-color, var(--text-color));
+  font-family: var(--f-theme-settings-heading4-font-family, var(--heading-font-family));
+  font-size: var(--f-theme-settings-heading4-font-size, var(--heading-font-size-xxs));
+  font-style: var(--f-theme-settings-heading4-font-style, normal);
+  font-weight: var(--f-theme-settings-heading4-font-weight, bold);
+  line-height: var(--f-theme-settings-heading4-line-height, 1.3);
+  letter-spacing: var(--f-theme-settings-heading4-letter-spacing, normal);
+  text-transform: var(--f-theme-settings-heading4-text-transform, none);
+}
+
+.template-card .template-card-text a:any-link {
+  color: var(--f-theme-settings-link-color, var(--link-color));
+  text-decoration: var(--f-theme-settings-link-text-decoration, underline);
+}
+
+/* "Use this Template": Frontify's theme button (margin 0 beside the text, 10px above it when stacked) */
+.template-card .template-card-cta {
+  flex: none;
+  max-width: 100%;
+}
+
+.template-card a.template-card-button:any-link {
+  display: inline-block;
+  box-sizing: border-box;
+  max-width: 100%;
+  margin: 0;
+  padding: var(--f-theme-settings-button-primary-padding-top, 10px) var(--f-theme-settings-button-primary-padding-right, 20px) var(--f-theme-settings-button-primary-padding-bottom, 10px) var(--f-theme-settings-button-primary-padding-left, 20px);
+  border: var(--f-theme-settings-button-primary-border-width, 0) solid var(--f-theme-settings-button-primary-border-color, transparent);
+  border-radius: var(--f-theme-settings-button-primary-border-radius, 30px);
+  background-color: var(--f-theme-settings-button-primary-background-color, var(--tui-energy-blue));
+  color: var(--f-theme-settings-button-primary-color, #fff);
+  font-family: var(--f-theme-settings-button-primary-font-family, var(--body-font-family));
+  font-size: var(--f-theme-settings-button-primary-font-size, 16px);
+  font-style: var(--f-theme-settings-button-primary-font-style, normal);
+  font-weight: var(--f-theme-settings-button-primary-font-weight, normal);
+  line-height: var(--f-theme-settings-button-primary-line-height, 1.3);
+  letter-spacing: normal;
+  text-align: center;
+  text-decoration: none;
+  text-transform: var(--f-theme-settings-button-primary-text-transform, none);
+  white-space: normal;
+  overflow-wrap: normal;
+  vertical-align: middle;
+}
+
+.template-card a.template-card-button.primary:hover {
+  border-color: var(--f-theme-settings-button-primary-border-color-hover, var(--f-theme-settings-button-primary-border-color, transparent));
+  background-color: var(--f-theme-settings-button-primary-background-color-hover, var(--f-theme-settings-button-primary-background-color));
+  color: var(--f-theme-settings-button-primary-color-hover, var(--f-theme-settings-button-primary-color));
+}
+
+.template-card a.template-card-button.secondary:any-link {
+  padding: var(--f-theme-settings-button-secondary-padding-top, 10px) var(--f-theme-settings-button-secondary-padding-right, 20px) var(--f-theme-settings-button-secondary-padding-bottom, 10px) var(--f-theme-settings-button-secondary-padding-left, 20px);
+  border: var(--f-theme-settings-button-secondary-border-width, 0) solid var(--f-theme-settings-button-secondary-border-color, transparent);
+  border-radius: var(--f-theme-settings-button-secondary-border-radius, 30px);
+  background-color: var(--f-theme-settings-button-secondary-background-color, transparent);
+  color: var(--f-theme-settings-button-secondary-color, inherit);
+  font-family: var(--f-theme-settings-button-secondary-font-family, var(--body-font-family));
+  font-size: var(--f-theme-settings-button-secondary-font-size, 16px);
+  font-weight: var(--f-theme-settings-button-secondary-font-weight, normal);
+  line-height: var(--f-theme-settings-button-secondary-line-height, 1.3);
+  text-transform: var(--f-theme-settings-button-secondary-text-transform, none);
+}
+
+.template-card a.template-card-button.secondary:hover {
+  border-color: var(--f-theme-settings-button-secondary-border-color-hover, var(--f-theme-settings-button-secondary-border-color, transparent));
+  background-color: var(--f-theme-settings-button-secondary-background-color-hover, var(--f-theme-settings-button-secondary-background-color));
+  color: var(--f-theme-settings-button-secondary-color-hover, var(--f-theme-settings-button-secondary-color));
+}
+
+.template-card a.template-card-button.tertiary:any-link {
+  padding: var(--f-theme-settings-button-tertiary-padding-top, 0) var(--f-theme-settings-button-tertiary-padding-right, 0) var(--f-theme-settings-button-tertiary-padding-bottom, 0) var(--f-theme-settings-button-tertiary-padding-left, 0);
+  border: var(--f-theme-settings-button-tertiary-border-width, 0) solid var(--f-theme-settings-button-tertiary-border-color, transparent);
+  border-radius: var(--f-theme-settings-button-tertiary-border-radius, 0);
+  background-color: var(--f-theme-settings-button-tertiary-background-color, transparent);
+  color: var(--f-theme-settings-button-tertiary-color, inherit);
+  font-family: var(--f-theme-settings-button-tertiary-font-family, var(--body-font-family));
+  font-size: var(--f-theme-settings-button-tertiary-font-size, 16px);
+  font-weight: var(--f-theme-settings-button-tertiary-font-weight, normal);
+  line-height: var(--f-theme-settings-button-tertiary-line-height, 1.3);
+  text-transform: var(--f-theme-settings-button-tertiary-text-transform, none);
+}
+
+.template-card a.template-card-button.tertiary:hover {
+  border-color: var(--f-theme-settings-button-tertiary-border-color-hover, var(--f-theme-settings-button-tertiary-border-color, transparent));
+  background-color: var(--f-theme-settings-button-tertiary-background-color-hover, var(--f-theme-settings-button-tertiary-background-color));
+  color: var(--f-theme-settings-button-tertiary-color-hover, var(--f-theme-settings-button-tertiary-color));
+}
+
+.template-card.has-preview a.template-card-button:any-link {
+  margin-top: 10px;
+}

@@ -1,0 +1,55 @@
+/* Slider: port of the Frontify "Slider" block (Splide carousel), measured on The Mora. */
+.slider {
+  --slider-gap: 0px;
+  --slider-height: auto;
+  --slider-per-view: 1;
+}
+
+.slider .slider-track {
+  display: flex;
+  gap: var(--slider-gap);
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  list-style: none;
+  cursor: grab;
+}
+
+.slider .slider-track::-webkit-scrollbar {
+  display: none;
+}
+
+.slider .slider-track.is-dragging {
+  scroll-snap-type: none;
+  cursor: grabbing;
+  user-select: none;
+}
+
+/* one slide per view up to 768px (Frontify/Splide breakpoint), <n> above */
+.slider .slider-slide {
+  flex: 0 0 100%;
+  margin: 0;
+  scroll-snap-align: start;
+}
+
+@media (width > 768px) {
+  .slider .slider-slide {
+    flex-basis: calc((100% - (var(--slider-per-view) - 1) * var(--slider-gap)) / var(--slider-per-view));
+  }
+}
+
+.slider .slider-frame {
+  height: var(--slider-height);
+  overflow: hidden;
+}
+
+.slider .slider-frame picture,
+.slider .slider-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}

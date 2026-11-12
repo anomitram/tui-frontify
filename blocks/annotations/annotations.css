@@ -144,3 +144,285 @@
     column-gap: 16px;
   }
 }
+
+/* Document theme pages (The Mora): Frontify's b-annotations layout and the theme text styles.
+ * Values from Frontify's app CSS (frontify-bootstrap.css, .b-annotations__*). */
+.doc-sections .annotations {
+  container-type: inline-size;
+  overflow: hidden;
+  font-family: var(--f-theme-settings-main-font-font-family, var(--f-theme-settings-body-font-family));
+  font-size: 16px;
+}
+
+.doc-sections .annotations .annotations-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.doc-sections .annotations.mode-text-top .annotations-layout {
+  flex-direction: column-reverse;
+}
+
+.doc-sections .annotations.mode-figure .annotations-layout,
+.doc-sections .annotations.mode-text-left .annotations-layout {
+  flex-direction: row;
+  align-items: stretch;
+  margin: -20px 0 0 -30px;
+}
+
+.doc-sections .annotations.mode-text-left .annotations-layout {
+  flex-direction: row-reverse;
+}
+
+.doc-sections .annotations .annotations-figure {
+  position: relative;
+  width: 100%;
+}
+
+.doc-sections .annotations.mode-full .annotations-figure {
+  margin-bottom: 15px;
+}
+
+.doc-sections .annotations.mode-text-top .annotations-figure {
+  margin-top: 10px;
+}
+
+.doc-sections .annotations.mode-figure .annotations-figure,
+.doc-sections .annotations.mode-text-left .annotations-figure {
+  flex: 1 1 500px;
+  width: auto;
+  min-width: 0;
+  margin: 20px 0 0 30px;
+}
+
+/* the image keeps its place on the left (Frontify: figure margin 0 auto 0 0) */
+.doc-sections .annotations .annotations-canvas {
+  margin: 0 auto 0 0;
+}
+
+.doc-sections .annotations .annotations-bubble {
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  padding: 0;
+  border-radius: 20px;
+  box-shadow: inset 0 0 0 1px #2d323240;
+  color: var(--annotations-bubble-contrast, #363d4a);
+  font-family: Diatype, Geist, Arial, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 20px;
+  transform: none;
+  transition: opacity 0.15s ease-in-out;
+}
+
+.doc-sections .annotations .annotations-bubble.is-active,
+.doc-sections .annotations .annotations-bubble:focus-visible {
+  box-shadow: inset 0 0 0 1px #2d323240;
+  opacity: 0.8;
+  transform: none;
+}
+
+.doc-sections .annotations .annotations-list {
+  order: 0;
+  margin: 0;
+  padding: 0 0 5px;
+  column-count: 3;
+  column-gap: normal;
+}
+
+.doc-sections .annotations.mode-figure .annotations-list,
+.doc-sections .annotations.mode-text-left .annotations-list {
+  flex: 1 1 266px;
+  min-width: 0;
+  margin: 20px 0 0 30px;
+  column-count: auto;
+}
+
+.doc-sections .annotations .annotations-item {
+  min-height: 0;
+  margin: 0;
+  padding: 5px 0 5px 1.8em;
+  line-height: 1.4;
+  break-inside: avoid;
+}
+
+.doc-sections .annotations .annotations-item::before {
+  top: 5px;
+  width: 1.6667em;
+  height: auto;
+  padding: 0;
+  border-radius: 20px;
+  box-shadow: inset 0 0 0 1px #0000001a;
+  color: var(--annotations-bubble-contrast, #363d4a);
+  font-family: inherit;
+  font-size: 0.8em;
+  font-weight: 400;
+  line-height: 1.6667em;
+  text-align: center;
+}
+
+.doc-sections .annotations .annotations-item-content {
+  min-height: 1.4em;
+  overflow-wrap: break-word;
+}
+
+@container (width < 740px) {
+  .doc-sections .annotations.mode-full .annotations-list,
+  .doc-sections .annotations.mode-text-top .annotations-list {
+    column-count: 2;
+  }
+}
+
+@container (width < 440px) {
+  .doc-sections .annotations.mode-full .annotations-list,
+  .doc-sections .annotations.mode-text-top .annotations-list {
+    column-count: 1;
+  }
+
+  .doc-sections .annotations .annotations-layout {
+    flex-wrap: wrap;
+  }
+}
+
+/* note text: the theme text styles (as in the Text block) */
+.doc-sections .annotations .annotations-item-content > p {
+  font-family: var(--f-theme-settings-body-font-family);
+  font-size: var(--f-theme-settings-body-font-size);
+  font-style: var(--f-theme-settings-body-font-style);
+  font-weight: var(--f-theme-settings-body-font-weight);
+  line-height: var(--f-theme-settings-body-line-height);
+  letter-spacing: var(--f-theme-settings-body-letter-spacing);
+  text-transform: var(--f-theme-settings-body-text-transform);
+  text-decoration: var(--f-theme-settings-body-text-decoration);
+  color: var(--f-theme-settings-body-color);
+  margin-top: var(--f-theme-settings-body-margin-top);
+  margin-bottom: var(--f-theme-settings-body-margin-bottom);
+}
+
+.doc-sections .annotations .annotations-item-content > h1 {
+  font-family: var(--f-theme-settings-heading1-font-family);
+  font-size: var(--f-theme-settings-heading1-font-size);
+  font-style: var(--f-theme-settings-heading1-font-style);
+  font-weight: var(--f-theme-settings-heading1-font-weight);
+  line-height: var(--f-theme-settings-heading1-line-height);
+  letter-spacing: var(--f-theme-settings-heading1-letter-spacing);
+  text-transform: var(--f-theme-settings-heading1-text-transform);
+  text-decoration: var(--f-theme-settings-heading1-text-decoration);
+  color: var(--f-theme-settings-heading1-color);
+  margin-top: var(--f-theme-settings-heading1-margin-top);
+  margin-bottom: var(--f-theme-settings-heading1-margin-bottom);
+}
+
+.doc-sections .annotations .annotations-item-content > h2 {
+  font-family: var(--f-theme-settings-heading2-font-family);
+  font-size: var(--f-theme-settings-heading2-font-size);
+  font-style: var(--f-theme-settings-heading2-font-style);
+  font-weight: var(--f-theme-settings-heading2-font-weight);
+  line-height: var(--f-theme-settings-heading2-line-height);
+  letter-spacing: var(--f-theme-settings-heading2-letter-spacing);
+  text-transform: var(--f-theme-settings-heading2-text-transform);
+  text-decoration: var(--f-theme-settings-heading2-text-decoration);
+  color: var(--f-theme-settings-heading2-color);
+  margin-top: var(--f-theme-settings-heading2-margin-top);
+  margin-bottom: var(--f-theme-settings-heading2-margin-bottom);
+}
+
+.doc-sections .annotations .annotations-item-content > h3 {
+  font-family: var(--f-theme-settings-heading3-font-family);
+  font-size: var(--f-theme-settings-heading3-font-size);
+  font-style: var(--f-theme-settings-heading3-font-style);
+  font-weight: var(--f-theme-settings-heading3-font-weight);
+  line-height: var(--f-theme-settings-heading3-line-height);
+  letter-spacing: var(--f-theme-settings-heading3-letter-spacing);
+  text-transform: var(--f-theme-settings-heading3-text-transform);
+  text-decoration: var(--f-theme-settings-heading3-text-decoration);
+  color: var(--f-theme-settings-heading3-color);
+  margin-top: var(--f-theme-settings-heading3-margin-top);
+  margin-bottom: var(--f-theme-settings-heading3-margin-bottom);
+}
+
+.doc-sections .annotations .annotations-item-content > h4 {
+  font-family: var(--f-theme-settings-heading4-font-family);
+  font-size: var(--f-theme-settings-heading4-font-size);
+  font-style: var(--f-theme-settings-heading4-font-style);
+  font-weight: var(--f-theme-settings-heading4-font-weight);
+  line-height: var(--f-theme-settings-heading4-line-height);
+  letter-spacing: var(--f-theme-settings-heading4-letter-spacing);
+  text-transform: var(--f-theme-settings-heading4-text-transform);
+  text-decoration: var(--f-theme-settings-heading4-text-decoration);
+  color: var(--f-theme-settings-heading4-color);
+  margin-top: var(--f-theme-settings-heading4-margin-top);
+  margin-bottom: var(--f-theme-settings-heading4-margin-bottom);
+}
+
+.doc-sections .annotations .annotations-item-content > h5 {
+  font-family: var(--f-theme-settings-custom1-font-family);
+  font-size: var(--f-theme-settings-custom1-font-size);
+  font-style: var(--f-theme-settings-custom1-font-style);
+  font-weight: var(--f-theme-settings-custom1-font-weight);
+  line-height: var(--f-theme-settings-custom1-line-height);
+  letter-spacing: var(--f-theme-settings-custom1-letter-spacing);
+  text-transform: var(--f-theme-settings-custom1-text-transform);
+  text-decoration: var(--f-theme-settings-custom1-text-decoration);
+  color: var(--f-theme-settings-custom1-color);
+  margin-top: var(--f-theme-settings-custom1-margin-top);
+  margin-bottom: var(--f-theme-settings-custom1-margin-bottom);
+}
+
+.doc-sections .annotations .annotations-item-content > h6 {
+  font-family: var(--f-theme-settings-custom2-font-family);
+  font-size: var(--f-theme-settings-custom2-font-size);
+  font-style: var(--f-theme-settings-custom2-font-style);
+  font-weight: var(--f-theme-settings-custom2-font-weight);
+  line-height: var(--f-theme-settings-custom2-line-height);
+  letter-spacing: var(--f-theme-settings-custom2-letter-spacing);
+  text-transform: var(--f-theme-settings-custom2-text-transform);
+  text-decoration: var(--f-theme-settings-custom2-text-decoration);
+  color: var(--f-theme-settings-custom2-color);
+  margin-top: var(--f-theme-settings-custom2-margin-top);
+  margin-bottom: var(--f-theme-settings-custom2-margin-bottom);
+}
+
+.doc-sections .annotations .annotations-item-content > .custom1 {
+  font-family: var(--f-theme-settings-custom1-font-family);
+  font-size: var(--f-theme-settings-custom1-font-size);
+  font-style: var(--f-theme-settings-custom1-font-style);
+  font-weight: var(--f-theme-settings-custom1-font-weight);
+  line-height: var(--f-theme-settings-custom1-line-height);
+  letter-spacing: var(--f-theme-settings-custom1-letter-spacing);
+  text-transform: var(--f-theme-settings-custom1-text-transform);
+  text-decoration: var(--f-theme-settings-custom1-text-decoration);
+  color: var(--f-theme-settings-custom1-color);
+  margin-top: var(--f-theme-settings-custom1-margin-top);
+  margin-bottom: var(--f-theme-settings-custom1-margin-bottom);
+}
+
+.doc-sections .annotations .annotations-item-content > .custom2 {
+  font-family: var(--f-theme-settings-custom2-font-family);
+  font-size: var(--f-theme-settings-custom2-font-size);
+  font-style: var(--f-theme-settings-custom2-font-style);
+  font-weight: var(--f-theme-settings-custom2-font-weight);
+  line-height: var(--f-theme-settings-custom2-line-height);
+  letter-spacing: var(--f-theme-settings-custom2-letter-spacing);
+  text-transform: var(--f-theme-settings-custom2-text-transform);
+  text-decoration: var(--f-theme-settings-custom2-text-decoration);
+  color: var(--f-theme-settings-custom2-color);
+  margin-top: var(--f-theme-settings-custom2-margin-top);
+  margin-bottom: var(--f-theme-settings-custom2-margin-bottom);
+}
+
+.doc-sections .annotations .annotations-item-content > .custom3 {
+  font-family: var(--f-theme-settings-custom3-font-family);
+  font-size: var(--f-theme-settings-custom3-font-size);
+  font-style: var(--f-theme-settings-custom3-font-style);
+  font-weight: var(--f-theme-settings-custom3-font-weight);
+  line-height: var(--f-theme-settings-custom3-line-height);
+  letter-spacing: var(--f-theme-settings-custom3-letter-spacing);
+  text-transform: var(--f-theme-settings-custom3-text-transform);
+  text-decoration: var(--f-theme-settings-custom3-text-decoration);
+  color: var(--f-theme-settings-custom3-color);
+  margin-top: var(--f-theme-settings-custom3-margin-top);
+  margin-bottom: var(--f-theme-settings-custom3-margin-bottom);
+}

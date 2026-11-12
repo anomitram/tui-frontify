@@ -1,0 +1,217 @@
+/* Library Collections: Frontify curated collections ("grid", "tile", "small", border), measured
+   on the The Mora Media capture of 2026-11-12. */
+.library-collections {
+  --library-text: rgb(17 17 16);
+  --library-text-weak: rgb(103 103 99);
+  --library-line: rgb(135 135 129 / 50%);
+  --library-ui-font: diatype, geist, arial, sans-serif;
+
+  color: var(--library-text);
+  font-family: var(--library-ui-font);
+}
+
+.library-collections .library-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.library-collections .library-heading {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.library-collections .library-heading h2 {
+  margin: 0;
+  color: var(--library-text);
+  font-family: 'ABC Marfa', arial, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+.library-collections .library-count {
+  color: var(--library-text-weak);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+/* the sort label (Frontify "Default"; shown, not interactive) */
+.library-collections .library-sort-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 24px;
+  padding: 0 8px;
+  color: var(--library-text);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.library-collections .library-collection-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+  gap: 20px 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.library-collections .library-collection-list > li {
+  display: flex;
+  min-width: 0;
+}
+
+.library-collections .library-collection-list > li[hidden] {
+  display: none;
+}
+
+.library-collections .library-collection {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 4px;
+  color: inherit;
+  text-decoration: none;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.library-collections .library-collection:hover,
+.library-collections .library-collection:focus-visible {
+  box-shadow: 0 3px 10px rgb(17 17 16 / 20%);
+}
+
+.library-collections .library-collection:focus-visible {
+  outline: 2px solid var(--library-text);
+  outline-offset: 2px;
+}
+
+/* 96px 2x2 collage, 1px white separators, line border, left corners rounded */
+.library-collections .library-collage {
+  position: relative;
+  display: flex;
+  flex: none;
+  flex-wrap: wrap;
+  width: 96px;
+  height: 96px;
+  overflow: hidden;
+  border-radius: 4px 0 0 4px;
+  background: rgb(225 225 219);
+}
+
+.library-collections .library-collage::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--library-line);
+  border-radius: 4px 0 0 4px;
+  pointer-events: none;
+}
+
+.library-collections .library-collage-cell {
+  box-sizing: border-box;
+  width: 50%;
+  height: 50%;
+  border: 0 solid #fff;
+  background: rgb(248 248 245);
+}
+
+.library-collections .library-collage-cell:nth-child(1) {
+  border-width: 0 1px 1px 0;
+}
+
+.library-collections .library-collage-cell:nth-child(2) {
+  border-width: 0 0 1px;
+}
+
+.library-collections .library-collage-cell:nth-child(3) {
+  border-width: 0 1px 0 0;
+}
+
+.library-collections .library-collage-cell picture {
+  display: contents;
+}
+
+.library-collections .library-collage-cell img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.library-collections .library-collection-text {
+  display: grid;
+  flex: 1;
+  align-content: center;
+  gap: 4px;
+  box-sizing: border-box;
+  min-width: 0;
+  min-height: 64px;
+  padding: 12px 16px;
+  border: 1px solid var(--library-line);
+  border-left: 0;
+  border-radius: 0 4px 4px 0;
+}
+
+.library-collections .library-collection-name {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--library-text);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.library-collections .library-collection-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  color: var(--library-text-weak);
+  font-size: 13px;
+  line-height: 19.5px;
+}
+
+.library-collections .library-collection-featured {
+  color: var(--library-text);
+  font-weight: 500;
+}
+
+/* "Show more": Fondue button medium / default, 24px below the cards */
+.library-collections .library-show-more-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.library-collections .library-show-more-wrap[hidden] {
+  display: none;
+}
+
+.library-collections .library-show-more {
+  height: 36px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 4px;
+  background: rgb(225 225 219);
+  color: var(--library-text);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  cursor: pointer;
+}
+
+.library-collections .library-show-more:hover {
+  background: rgb(215 215 208);
+  color: rgb(53 53 51);
+}

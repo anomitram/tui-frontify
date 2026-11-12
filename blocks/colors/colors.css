@@ -224,3 +224,23 @@
   white-space: nowrap;
   border: 0;
 }
+
+/* Document theme pages (The Mora): the block's text uses the theme body style */
+.doc-sections .colors {
+  --colors-field-hover: color-mix(in srgb, var(--f-theme-settings-body-color, currentcolor) 9%, transparent);
+  --colors-field-focus: color-mix(in srgb, var(--f-theme-settings-body-color, currentcolor) 13%, transparent);
+
+  color: var(--f-theme-settings-body-color);
+  font-family: var(--f-theme-settings-body-font-family);
+  font-size: var(--f-theme-settings-body-font-size);
+  font-style: var(--f-theme-settings-body-font-style);
+  font-weight: var(--f-theme-settings-body-font-weight);
+  line-height: var(--f-theme-settings-body-line-height);
+  letter-spacing: var(--f-theme-settings-body-letter-spacing);
+}
+
+/* name row: 25px in the capture (16px/20.8px text + the inline-block's strut space) */
+.doc-sections .colors .colors-name {
+  display: flex;
+  padding-bottom: 4.2px;
+}

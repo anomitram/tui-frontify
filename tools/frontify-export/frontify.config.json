@@ -14,6 +14,22 @@
       "396": {
         "redirectMap": "migration-work/frontify/redirect-map.json",
         "navigation": "migration-work/frontify/raw/navigation.json"
+      },
+      "1887": {
+        "redirectMap": "migration-work/frontify-mora/1887/redirect-map.json",
+        "navigation": "migration-work/frontify-mora/1887/raw/navigation.json"
+      },
+      "1888": {
+        "redirectMap": "migration-work/frontify-mora/1888/redirect-map.json",
+        "navigation": "migration-work/frontify-mora/1888/raw/navigation.json"
+      },
+      "1889": {
+        "redirectMap": "migration-work/frontify-mora/1889/redirect-map.json",
+        "navigation": "migration-work/frontify-mora/1889/raw/navigation.json"
+      },
+      "1893": {
+        "redirectMap": "migration-work/frontify-mora/1893/redirect-map.json",
+        "navigation": "migration-work/frontify-mora/1893/raw/navigation.json"
       }
     },
     "hubs": {
@@ -23,6 +39,14 @@
     "routes": {
       "tuimagiclife": "/tuimagiclife",
       "dashboard": "/"
+    },
+    "documentPages": {
+      "_comment": "single-page documents migrated as a whole: every link to the document (any hash route) goes to this path",
+      "1896": "/the-mora",
+      "1891": "/the-mora/libraries/logotypes",
+      "1892": "/the-mora/libraries/media",
+      "1894": "/the-mora/libraries/iconography",
+      "1908": "/the-mora/libraries/documents"
     }
   }
 }

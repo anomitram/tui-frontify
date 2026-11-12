@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "http://localhost:8095/hotels/branding-toolkits/fitness-wellbeing-1.html",
+  "path": "the-mora/hotels/branding-toolkits/fitness-wellbeing-1",
+  "timestamp": "2026-11-12T06:58:03.088Z",
+  "frontifyPageId": 8543,
+  "originalUrl": "https://tui-brandhub.com/document/1888#/branding-toolkits/fitness-wellbeing-1",
+  "blocks": "{\"Text\":39,\"Heading\":7,\"Image\":8,\"Asset Kit\":5,\"Template\":6}",
+  "notes": "[\"Asset Kit 80329: no package zip; \\\"Download package\\\" links to the Frontify page\",\"Asset Kit 80329: files Edge Delivery cannot serve: The Pause Spa entrance sign.zip\",\"Asset Kit 80356: no package zip; \\\"Download package\\\" links to the Frontify page\",\"Asset Kit 80356: files Edge Delivery cannot serve: Spa pricelist short.zip\",\"Asset Kit 80359: no package zip; \\\"Download package\\\" links to the Frontify page\",\"Asset Kit 80359: files Edge Delivery cannot serve: Spa menu - detailed.zip\",\"Template block 80338: \\\"Use this Template\\\" opens Frontify's template editor (not migrated); links to the Frontify page\",\"Template block 80341: \\\"Use this Template\\\" opens Frontify's template editor (not migrated); links to the Frontify page\",\"Template block 80344: \\\"Use this Template\\\" opens Frontify's template editor (not migrated); links to the Frontify page\",\"Template block 80347: \\\"Use this Template\\\" opens Frontify's template editor (not migrated); links to the Frontify page\",\"Template block 80351: \\\"Use this Template\\\" opens Frontify's template editor (not migrated); links to the Frontify page\",\"Template block 80350: \\\"Use this Template\\\" opens Frontify's template editor (not migrated); links to the Frontify page\"]",
+  "missing": "[\"asset-584140\",\"asset-584141\",\"asset-584142\"]",
+  "importScript": "288e5a23882d"
+}

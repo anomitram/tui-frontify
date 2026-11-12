@@ -1,0 +1,37 @@
+/*
+ * "library" template: Frontify asset library pages (Library Search, Library Collections, Library
+ * blocks). Frontify layout, measured on The Mora library captures of 2026-11-12 (1440/768/375):
+ * main padding 32px, content column max 1200px (contentAreaWidth), search bar top 65px below the
+ * main padding, 27.5px between the filter row and the first list, 40px between lists, 102.4px
+ * from the last grid to the end of the page.
+ */
+body.library main {
+  box-sizing: border-box;
+  padding: 32px 32px 102.4px;
+}
+
+body.library main > .section {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0;
+  gap: 0;
+}
+
+body.library main > .section.library-search-container {
+  padding-top: 65px;
+}
+
+body.library main > .section.library-search-container + .section {
+  margin-top: 27.5px;
+}
+
+body.library main > .section.library-collections-container + .section {
+  margin-top: 40px;
+}
+
+/* a document library lists its collection 40px lower (Frontify, Documents 1908) */
+body.library main > .section.library-container:has(> .library-wrapper > .library.documents) {
+  padding-top: 40px;
+}

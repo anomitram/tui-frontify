@@ -9,7 +9,7 @@
  * Links as in Frontify: the image area goes to Image Link (else Link), the rest of the cell to Link
  * (else Image Link); each has its own new-window flag.
  */
-import { contentPath } from '../../scripts/scripts.js';
+import { contentPath, decorateInlineButtons } from '../../scripts/scripts.js';
 
 const LAYOUTS = ['textover', 'text', 'image', 'leftright', 'rightleft', 'topbottom', 'bottomtop'];
 const KEYS = ['link', 'image link', 'new window', 'image new window', 'image background', 'content padding', 'image padding', 'content width',
@@ -59,29 +59,6 @@ function applyStyles(content, spec) {
         gaps.forEach((g, i) => { if (lengths[i] > 0) g.nodeValue = ' '.repeat(lengths[i]); });
       } else el.style.setProperty(prop.trim(), value);
     });
-  });
-}
-
-/**
- * Frontify puts several buttons in one paragraph (e.g. "Global Campaign Playbooks / Assets /
- * Guidelines"). The site's decorateButtons() only handles a link that is alone in its paragraph,
- * so formatted links that share a paragraph are turned into buttons here, with the same mapping:
- * bold = primary, italic = secondary, bold + italic = accent (Frontify tertiary).
- */
-function decorateInlineButtons(content) {
-  content.querySelectorAll(':is(p, h1, h2, h3, h4, h5, h6) a[href]:not(.button)').forEach((a) => {
-    const strong = a.closest('strong');
-    const em = a.closest('em');
-    if ((!strong && !em) || a.querySelector('img')) return;
-    // the outermost formatting element around the link
-    let outer = strong || em;
-    if (strong && em) outer = strong.contains(em) ? strong : em;
-    if (outer.textContent.trim() !== a.textContent.trim()) return;
-    a.className = 'button';
-    if (strong && em) a.classList.add('accent');
-    else a.classList.add(strong ? 'primary' : 'secondary');
-    outer.replaceWith(a);
-    a.closest('p, h1, h2, h3, h4, h5, h6').classList.add('button-wrapper');
   });
 }
 

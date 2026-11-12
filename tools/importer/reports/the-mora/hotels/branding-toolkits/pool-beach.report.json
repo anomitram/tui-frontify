@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "http://localhost:8095/hotels/branding-toolkits/pool-beach.html",
+  "path": "the-mora/hotels/branding-toolkits/pool-beach",
+  "timestamp": "2026-11-12T06:58:07.614Z",
+  "frontifyPageId": 8544,
+  "originalUrl": "https://tui-brandhub.com/document/1888#/branding-toolkits/pool-beach",
+  "blocks": "{\"Text\":13,\"Heading\":3,\"Image\":3,\"Template\":2,\"Asset Kit\":1}",
+  "notes": "[\"Template block 80320: \\\"Use this Template\\\" opens Frontify's template editor (not migrated); links to the Frontify page\",\"Template block 80323: \\\"Use this Template\\\" opens Frontify's template editor (not migrated); links to the Frontify page\",\"Asset Kit 80326: no package zip; \\\"Download package\\\" links to the Frontify page\",\"Asset Kit 80326: files Edge Delivery cannot serve: Beach Rules.zip\"]",
+  "missing": "[\"asset-584136\"]",
+  "importScript": "288e5a23882d"
+}

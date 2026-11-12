@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "http://localhost:8095/brand/application/inspiration.html",
+  "path": "the-mora/brand/application/inspiration",
+  "timestamp": "2026-11-12T06:56:42.466Z",
+  "frontifyPageId": 8294,
+  "originalUrl": "https://tui-brandhub.com/document/1887#/application/inspiration",
+  "blocks": "{\"Image\":26,\"Text\":27,\"Heading\":4}",
+  "notes": "[\"Image block 68552 has no image asset\",\"Image 68552: no output, empty cell kept\"]",
+  "missing": "[]",
+  "importScript": "288e5a23882d"
+}

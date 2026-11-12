@@ -1,0 +1,103 @@
+/* Quote (Frontify "Quote" block). Measured on The Mora (page 9981): marks 32px (size-large),
+ * top-aligned, 28px from the text; text in the theme's quote style; author right-aligned. */
+.quote {
+  --quote-mark-size: var(--quote-size, 24px);
+}
+
+.quote.size-small {
+  --quote-mark-size: var(--quote-size, 16px);
+}
+
+.quote.size-large {
+  --quote-mark-size: var(--quote-size, 32px);
+}
+
+.quote .quote-inner {
+  display: flex;
+  justify-content: space-between;
+  column-gap: 28px;
+}
+
+.quote.anchor-hug-text .quote-inner {
+  justify-content: flex-start;
+}
+
+.quote.anchor-hug-text.align-center .quote-inner {
+  justify-content: center;
+}
+
+.quote.anchor-hug-text.align-right .quote-inner {
+  justify-content: flex-end;
+}
+
+.quote .quote-mark {
+  display: flex;
+  flex: none;
+  align-self: flex-start;
+  width: var(--quote-mark-size);
+  height: var(--quote-mark-size);
+  color: var(--quote-marks-color, var(--f-theme-settings-quote-color));
+}
+
+.quote .quote-mark-right {
+  align-self: flex-end;
+}
+
+.quote .quote-mark svg {
+  width: 100%;
+  height: 100%;
+}
+
+.quote .quote-figure {
+  flex: 1 1 0;
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.quote.anchor-hug-text .quote-figure {
+  flex: 0 1 auto;
+}
+
+.quote .quote-text {
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+.quote.align-center .quote-text {
+  text-align: center;
+}
+
+.quote.align-right .quote-text {
+  text-align: right;
+}
+
+.quote.indentation .quote-text {
+  padding-left: 28px;
+  border-left: var(--quote-line, 0 none);
+}
+
+.quote .quote-text :is(p, li) {
+  margin: var(--f-theme-settings-quote-margin-top, 0) 0 var(--f-theme-settings-quote-margin-bottom, 0);
+  color: var(--f-theme-settings-quote-color);
+  font-family: var(--f-theme-settings-quote-font-family);
+  font-size: var(--f-theme-settings-quote-font-size);
+  font-style: var(--f-theme-settings-quote-font-style);
+  font-weight: var(--f-theme-settings-quote-font-weight);
+  line-height: var(--f-theme-settings-quote-line-height);
+  letter-spacing: var(--f-theme-settings-quote-letter-spacing);
+  text-transform: var(--f-theme-settings-quote-text-transform);
+  text-decoration: var(--f-theme-settings-quote-text-decoration);
+  overflow-wrap: break-word;
+}
+
+.quote .quote-author {
+  color: var(--f-theme-settings-body-color);
+  font-family: var(--f-theme-settings-body-font-family);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+  text-align: right;
+  word-break: break-all;
+}

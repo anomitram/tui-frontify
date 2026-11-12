@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "http://localhost:8095/brand/core-elements/motion.html",
+  "path": "the-mora/brand/core-elements/motion",
+  "timestamp": "2026-11-12T07:43:22.233Z",
+  "frontifyPageId": 8292,
+  "originalUrl": "https://tui-brandhub.com/document/1887#/core-elements/motion",
+  "blocks": "{\"Video\":10,\"Text\":9,\"Heading\":5,\"Divider\":3,\"Image\":12}",
+  "notes": "[]",
+  "missing": "[]",
+  "importScript": "390fe185f7ff"
+}

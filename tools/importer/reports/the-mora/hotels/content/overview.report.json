@@ -1,0 +1,16 @@
+{
+  "status": "success",
+  "url": "http://localhost:8095/hotels/content/overview.html",
+  "path": "the-mora/hotels/content/overview",
+  "timestamp": "2026-11-12T06:57:06.724Z",
+  "frontifyPageId": 8276,
+  "originalUrl": "https://tui-brandhub.com/document/1888#/content/overview",
+  "blocks": "{\"Text\":1,\"Image\":2}",
+  "notes": "[]",
+  "missing": "[]",
+  "fragments": [
+    "the-mora/hotels/sidebar",
+    "the-mora/hotels"
+  ],
+  "importScript": "288e5a23882d"
+}

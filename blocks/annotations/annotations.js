@@ -1,9 +1,10 @@
 /*
  * Annotations block (Frontify "Annotations").
- * Row 1: picture. Then one row per annotation: "<left>% <top>%[; <left>% <top>%...]" | rich text.
+ * Row 1: picture. Then one row per annotation: "<left>% <top>%[; <left>% <top>%...]" | rich text
+ * [| styles: "n: class: custom3" for the n-th top-level element of the note].
  * Optional rows: Bubble | colour, Background | colour, Caption | text.
- * Variants: mode-figure (default, notes beside the image), mode-text-top (notes above),
- * mode-full (notes below), border, bubble-light, fixed.
+ * Variants: mode-figure (default, notes beside the image), mode-text-left (notes left of the
+ * image), mode-text-top (notes above), mode-full (notes below), border, bubble-light, fixed.
  */
 
 const OPTION_LABELS = ['bubble', 'background', 'caption'];
@@ -32,7 +33,7 @@ function readBlock(block) {
       }
     }
     if (!cells.length) return;
-    const [first, second] = cells;
+    const [first, second, third] = cells;
     const label = first.textContent.trim();
     const key = label.toLowerCase();
     if (OPTION_LABELS.includes(key) && second) {
@@ -41,10 +42,26 @@ function readBlock(block) {
     }
     const positions = parsePositions(label);
     if (positions.length || second) {
-      notes.push({ positions, content: second || null });
+      notes.push({ positions, content: second || null, styles: third?.textContent || '' });
     }
   });
   return { picture, notes, options };
+}
+
+/** Frontify text styles of a note's elements ("n: class: custom3"; line breaks may be lost). */
+function applyStyles(content, spec) {
+  const els = [...content.children];
+  spec.split(/\s*\n\s*|\s+(?=\d+\s*:\s)/).forEach((line) => {
+    const m = /^\s*(\d+)\s*:\s*class\s*:\s*([\w-]+)/.exec(line);
+    if (m && els[Number(m[1]) - 1]) els[Number(m[1]) - 1].classList.add(m[2]);
+  });
+}
+
+/** Number colour on a bubble: dark on light colours, white on dark ones (brightness < 128). */
+function contrastColor(color) {
+  const [r, g, b] = (color.match(/\d+(\.\d+)?/g) || []).map(Number);
+  if ([r, g, b].some((v) => Number.isNaN(v) || v === undefined)) return '';
+  return (r * 299 + g * 587 + b * 114) / 1000 < 128 ? '#fff' : '#363d4a';
 }
 
 function setActive(block, index, on) {
@@ -61,10 +78,14 @@ export default function decorate(block) {
   }
   const img = picture.tagName === 'IMG' ? picture : picture.querySelector('img');
 
-  if (!['mode-figure', 'mode-text-top', 'mode-full'].some((c) => block.classList.contains(c))) {
+  if (!['mode-figure', 'mode-text-left', 'mode-text-top', 'mode-full'].some((c) => block.classList.contains(c))) {
     block.classList.add('mode-figure');
   }
-  if (options.bubble) block.style.setProperty('--annotations-bubble', options.bubble);
+  if (options.bubble) {
+    block.style.setProperty('--annotations-bubble', options.bubble);
+    const contrast = contrastColor(options.bubble);
+    if (contrast) block.style.setProperty('--annotations-bubble-contrast', contrast);
+  }
 
   const layout = document.createElement('div');
   layout.className = 'annotations-layout';
@@ -121,6 +142,7 @@ export default function decorate(block) {
     const content = document.createElement('div');
     content.className = 'annotations-item-content';
     if (note.content) content.append(...note.content.childNodes);
+    if (note.styles) applyStyles(content, note.styles);
     li.append(content);
     list.append(li);
   });

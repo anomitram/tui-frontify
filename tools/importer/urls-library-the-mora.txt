@@ -1,0 +1,4 @@
+http://localhost:8094/logotypes.html
+http://localhost:8094/media.html
+http://localhost:8094/iconography.html
+http://localhost:8094/documents.html

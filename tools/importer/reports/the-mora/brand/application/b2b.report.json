@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "http://localhost:8095/brand/application/b2b.html",
+  "path": "the-mora/brand/application/b2b",
+  "timestamp": "2026-11-12T06:56:58.201Z",
+  "frontifyPageId": 9984,
+  "originalUrl": "https://tui-brandhub.com/document/1887#/application/b2b",
+  "blocks": "{\"Text\":2}",
+  "notes": "[]",
+  "missing": "[]",
+  "importScript": "288e5a23882d"
+}

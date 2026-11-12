@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "http://localhost:8095/hotels/branding-toolkits/reception.html",
+  "path": "the-mora/hotels/branding-toolkits/reception",
+  "timestamp": "2026-11-12T06:57:43.232Z",
+  "frontifyPageId": 8539,
+  "originalUrl": "https://tui-brandhub.com/document/1888#/branding-toolkits/reception",
+  "blocks": "{\"Text\":35,\"Heading\":7,\"Image\":7,\"Template\":8,\"Asset Kit\":2}",
+  "notes": "[\"Template block 70092: \\\"Use this Template\\\" opens Frontify's template editor (not migrated); links to the Frontify page\",\"Template block 70098: \\\"Use this Template\\\" opens Frontify's template editor (not migrated); links to the Frontify page\",\"Template block 70105: \\\"Use this Template\\\" opens Frontify's template editor (not migrated); links to the Frontify page\",\"Template block 70111: \\\"Use this Template\\\" opens Frontify's template editor (not migrated); links to the Frontify page\",\"Asset Kit 70127: no package zip; \\\"Download package\\\" links to the Frontify page\",\"Asset Kit 70127: files Edge Delivery cannot serve: The Mora_Letterhead_A4.docx\",\"Template block 70123: \\\"Use this Template\\\" opens Frontify's template editor (not migrated); links to the Frontify page\",\"Template block 70126: \\\"Use this Template\\\" opens Frontify's template editor (not migrated); links to the Frontify page\",\"Template block 82998: \\\"Use this Template\\\" opens Frontify's template editor (not migrated); links to the Frontify page\",\"Template block 83002: \\\"Use this Template\\\" opens Frontify's template editor (not migrated); links to the Frontify page\",\"Asset Kit 70133: no package zip; \\\"Download package\\\" links to the Frontify page\",\"Asset Kit 70133: files Edge Delivery cannot serve: 12_The Mora_EmailSignature.docx\"]",
+  "missing": "[\"asset-561910\",\"asset-561916\"]",
+  "importScript": "288e5a23882d"
+}

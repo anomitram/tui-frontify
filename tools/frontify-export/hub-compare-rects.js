@@ -12,7 +12,12 @@ const { chromium } = require(process.env.PW_PATH);
   const [url, capDir, w] = process.argv.slice(2);
   const ref = JSON.parse(fs.readFileSync(`${capDir}/${w}.styles.json`, 'utf8')).els;
   const IMAGE_MAP = process.env.IMAGE_MAP ? JSON.parse(fs.readFileSync(process.env.IMAGE_MAP, 'utf8')) : {};
-  const b = await chromium.launch({ ignoreDefaultArgs: ['--hide-scrollbars'] });
+  // remote (protected) pages: go through the workspace proxy, which injects the site's auth header
+  const b = await chromium.launch({
+    ignoreDefaultArgs: ['--hide-scrollbars'],
+    args: process.env.PROXY_SPKI ? [`--ignore-certificate-errors-spki-list=${process.env.PROXY_SPKI}`] : [],
+    proxy: process.env.HTTPS_PROXY ? { server: process.env.HTTPS_PROXY, bypass: 'localhost,127.0.0.1' } : undefined,
+  });
   const p = await (await b.newContext({ viewport: { width: Number(w), height: 900 } })).newPage();
   // The local preview serves pages without a doctype (quirks mode); Edge Delivery serves
   // <!DOCTYPE html>. Add it so measurements match production layout.
@@ -52,9 +57,16 @@ const { chromium } = require(process.env.PW_PATH);
         const base = le.src.split('?')[0];
         const ent = Object.values(IMAGE_MAP).find((m) => m.path && m.path.split('/').pop() === base);
         const id = ent && ent.frontify_file ? ent.frontify_file.split('.')[0] : base.split('.')[0];
-        re = r.find((x) => x.src.includes(id)) || (base.startsWith('media_') || !ent ? r[i] : null);
-      }
-      else {
+        re = r.find((x) => x.src.includes(id));
+        if (!re) {
+          // renamed images: the unused reference image closest in size and position (order is not
+          // reliable, e.g. the reference list starts with the header logo)
+          const score = (x) => Math.abs(x.rect[2] - le.rect[2]) * 4 + Math.abs(x.rect[3] - le.rect[3]) * 2
+            + Math.abs(x.rect[0] - le.rect[0]) + Math.abs(x.rect[1] - le.rect[1]);
+          re = r.filter((x) => !x.used).sort((a, c) => score(a) - score(c))[0] || null;
+          if (re) re.used = true;
+        }
+      } else {
         // k-th element with the same (prefix-matched) text
         const key = norm(le.text);
         seen[key] = (seen[key] || 0) + 1;

@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "http://localhost:8095/hotels/hotel-expression/overview-1.html",
+  "path": "the-mora/hotels/hotel-expression/overview-1",
+  "timestamp": "2026-11-12T06:57:11.843Z",
+  "frontifyPageId": 8295,
+  "originalUrl": "https://tui-brandhub.com/document/1888#/hotel-expression/overview-1",
+  "blocks": "{\"Text\":1,\"Image\":3}",
+  "notes": "[]",
+  "missing": "[]",
+  "importScript": "288e5a23882d"
+}

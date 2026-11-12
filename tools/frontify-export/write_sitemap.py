@@ -16,7 +16,8 @@ L = [f"# Site map and migration status (status updated {st['updated']})", '',
      '| Item | Status |', '|---|---|',
      f"| Document 396 \"{d['title']}\" (portal {d['portal']}), all pages + {len(d['chrome'])} chrome documents | migrated; see the page table |"]
 for h in st['migrated_hubs']:
-    L.append(f"| Portal {h['portal']} home \"{h['title']}\" (`{'`, `'.join(h['paths'])}`) | {h['status']} |")
+    what = f"Portal {h['portal']}" + (' document' if 'document' in h['title'].lower() else ' home')
+    L.append(f"| {what} \"{h['title']}\" (`{'`, `'.join(h['paths'])}`) | {h['status']} |")
 L.append(f"| {len(st['not_migrated'])} other Frontify targets linked from the migrated pages | not migrated (out of scope); see the last table |")
 L += ['', '## Portals', '', '| Portal | Title | Home | Documents |', '|---|---|---|---|']
 for p in st['portals']:

@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "http://localhost:8095/brand/brand-essence/target-group-1.html",
+  "path": "the-mora/brand/brand-essence/target-group-1",
+  "timestamp": "2026-11-12T06:55:34.249Z",
+  "frontifyPageId": 9981,
+  "originalUrl": "https://tui-brandhub.com/document/1887#/brand-essence/target-group-1",
+  "blocks": "{\"Image\":3,\"Text\":44,\"Heading\":4,\"Cards Grid\":4,\"Quote\":2}",
+  "notes": "[]",
+  "missing": "[]",
+  "importScript": "288e5a23882d"
+}
