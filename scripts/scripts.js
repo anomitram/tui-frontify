@@ -201,7 +201,33 @@ function decorateButtons(main) {
  * @param {Element} main The main element
  */
 // eslint-disable-next-line import/prefer-default-export
+/**
+ * File links after the content upload: links to files (not shown as images) come back rewritten -
+ * "/assets/<dir>/<name>.mp4" as the page-style path "/assets/<dir>/<name>-mp4", image files as
+ * private https://content.da.live/... URLs. Restores the file extension of the first form (the
+ * files are uploaded to the same path with the extension). For the second form pass the image
+ * that shows the same file: its media URL is the public copy. Returns the usable href or null.
+ */
+const FILE_EXT = 'mp4|pdf|png|jpe?g|svg|webp|gif|avif';
+export function fileHref(a, img) {
+  const raw = a?.getAttribute('href') || '';
+  if (/^https:\/\/content\.da\.live\//.test(raw)) {
+    const src = img && (img.currentSrc || img.src);
+    return src ? src.split('?')[0] : null;
+  }
+  const m = new RegExp(`^((?:https?://[^/]+)?/assets/.+)-(${FILE_EXT})$`, 'i').exec(raw);
+  return m ? `${m[1]}.${m[2].toLowerCase()}` : raw;
+}
+
+function restoreFileLinks(main) {
+  main.querySelectorAll('a[href*="/assets/"]').forEach((a) => {
+    const href = fileHref(a);
+    if (href && href !== a.getAttribute('href')) a.setAttribute('href', href);
+  });
+}
+
 export function decorateMain(main) {
+  restoreFileLinks(main);
   decorateIcons(main);
   buildAutoBlocks(main);
   decorateSections(main);

@@ -85,32 +85,63 @@ var CustomImportScript = (() => {
     });
     return block(document, "Library Collections", rows);
   }
-  function libraryBlock(document, data, notes) {
+  var MAX_IMAGES = 190;
+  function assetRow(document, data, x) {
+    const pages = x.pageCount ? `${x.pageCount} page${x.pageCount === 1 ? "" : "s"}` : "";
+    return [
+      picture(document, x.path, x.title),
+      x.title,
+      x.ext.toUpperCase(),
+      x.width && x.height ? `${x.width} \xD7 ${x.height} px` : "",
+      x.isVideo ? duration(x.duration) : pages,
+      (x.created || "").slice(0, 10),
+      fileSize(x.fileSizeKb),
+      // SVG originals: the file (the block downloads the tile's own image, which survives the
+      // content upload); everything else opens the library on Frontify
+      x.file ? link(document, x.path, `Download ${x.title}`) : link(document, data.originalUrl, `${x.title} on Frontify`)
+    ];
+  }
+  function splitAssets(data, notes) {
+    const assets = data.assets.filter((x) => {
+      if (!x.path) notes.push(`no image for asset ${x.id}`);
+      return !!x.path;
+    });
+    const collageImages = data.collections.reduce((n, c) => n + c.images.length, 0);
+    const first = Math.max(0, MAX_IMAGES - collageImages);
+    const chunks = [assets.slice(0, first)];
+    for (let i = first; i < assets.length; i += MAX_IMAGES) chunks.push(assets.slice(i, i + MAX_IMAGES));
+    return chunks;
+  }
+  var partPath = (data, n) => `${data.pagePath}/assets-${n}`;
+  function libraryBlock(document, data, assets, partCount) {
     const rows = [["Title", heading(document, data.heading)]];
-    if (data.totalCount !== data.assets.length) rows.push(["Count", `${data.totalCount} items`]);
+    if (data.totalCount !== assets.length) rows.push(["Count", `${data.totalCount} items`]);
     if (data.viewAll) rows.push(["View All", link(document, data.viewAll, "View all")]);
     else rows.push(["Sort", data.sortLabel]);
     rows.push(["Row Height", `${data.layout.rowHeight}px`]);
     rows.push(["Details", data.layout.details]);
-    data.assets.forEach((x) => {
-      if (!x.path) {
-        notes.push(`no image for asset ${x.id}`);
-        return;
+    if (partCount > 1) {
+      const cell = document.createElement("div");
+      for (let n = 2; n <= partCount; n += 1) {
+        const p = document.createElement("p");
+        p.append(link(document, partPath(data, n), partPath(data, n)));
+        cell.append(p);
       }
-      const pages = x.pageCount ? `${x.pageCount} page${x.pageCount === 1 ? "" : "s"}` : "";
-      rows.push([
-        picture(document, x.path, x.title),
-        x.title,
-        x.ext.toUpperCase(),
-        x.width && x.height ? `${x.width} \xD7 ${x.height} px` : "",
-        x.isVideo ? duration(x.duration) : pages,
-        (x.created || "").slice(0, 10),
-        fileSize(x.fileSizeKb),
-        // SVG originals are local files (download); everything else opens the library on Frontify
-        x.file ? link(document, x.path, `Download ${x.title}`) : link(document, data.originalUrl, `${x.title} on Frontify`)
-      ]);
-    });
+      rows.push(["Parts", cell]);
+    }
+    assets.forEach((x) => rows.push(assetRow(document, data, x)));
     return block(document, `Library (${data.kind})`, rows);
+  }
+  function partPage(document, data, assets, n, total) {
+    const div = document.createElement("div");
+    const rows = [["Row Height", `${data.layout.rowHeight}px`], ["Details", data.layout.details]];
+    assets.forEach((x) => rows.push(assetRow(document, data, x)));
+    div.append(block(document, `Library (${data.kind})`, rows));
+    div.append(WebImporter.Blocks.getMetadataBlock(document, {
+      Title: `${data.tabTitle} (assets, part ${n} of ${total})`,
+      Robots: "noindex"
+    }));
+    return div;
   }
   var import_library_page_default = {
     onLoad: ({ document }) => {
@@ -120,11 +151,12 @@ var CustomImportScript = (() => {
     transform: ({ document }) => {
       const data = readPayload(document);
       const notes = [];
+      const chunks = splitAssets(data, notes);
       const main = document.createElement("div");
       const hr = () => document.createElement("hr");
       main.append(searchBlock(document, data));
       if (data.collections.length) main.append(hr(), collectionsBlock(document, data));
-      main.append(hr(), libraryBlock(document, data, notes));
+      main.append(hr(), libraryBlock(document, data, chunks[0], chunks.length));
       const meta = {
         Title: data.tabTitle,
         Template: "library",
@@ -143,6 +175,7 @@ var CustomImportScript = (() => {
       if (data.frontifyCount && data.frontifyCount !== `${data.totalCount} items`) {
         notes.push(`Frontify shows "${data.frontifyCount}", the export has ${data.totalCount}`);
       }
+      if (chunks.length > 1) notes.push(`split into ${chunks.length} pages (${chunks.map((c) => c.length).join(" + ")} assets)`);
       return [{
         element: main,
         path: data.pagePath,
@@ -153,7 +186,11 @@ var CustomImportScript = (() => {
           collections: data.collections.length,
           notes: JSON.stringify(notes)
         }
-      }];
+      }, ...chunks.slice(1).map((assets, i) => ({
+        element: partPage(document, data, assets, i + 2, chunks.length),
+        path: partPath(data, i + 2),
+        report: { frontifyDocument: data.doc.id, assets: assets.length, notes: "library part" }
+      }))];
     }
   };
   return __toCommonJS(import_library_page_exports);
