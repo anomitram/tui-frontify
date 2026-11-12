@@ -296,3 +296,29 @@
 .image .image-viewer-close::after {
   transform: translate(-50%, -50%) rotate(-45deg);
 }
+
+/* Frontify document theme (doc-sections pages): ratio frame and autosizing (measured, The Mora) */
+.doc-sections .image.autosize-fill .image-frame img {
+  object-fit: cover;
+}
+
+.doc-sections .image[class*='ratio-'] .image-frame img {
+  max-height: none;
+}
+
+.doc-sections .image.caption-above figcaption {
+  order: -1;
+}
+
+/* padding choices inside the frame (measured: Small 12px, Medium 20px, doc 1887 page 9976) */
+.doc-sections .image .image-frame {
+  box-sizing: border-box;
+}
+
+.doc-sections .image.padding-small .image-frame {
+  padding: 12px;
+}
+
+.doc-sections .image.padding-medium .image-frame {
+  padding: 20px;
+}

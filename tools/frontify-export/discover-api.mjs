@@ -39,7 +39,7 @@ page.on('response', async (res) => {
   calls.push(entry);
   // Save bodies of content APIs only. Session, CSRF, user, account, context, realtime-auth and tracking
   // responses carry tokens or personal data and must never be stored (hard rule).
-  const CONTENT = /^\/api\/(dashboard\/|portal\/|portal-navigation\/|document\/navigation\/|hub\/|guideline-stylesheets\/|custom-route\/|permanent-link\/)/;
+  const CONTENT = /^\/api\/(dashboard\/|portal\/|portal-navigation\/|document\/navigation\/|hub\/|guideline-stylesheets\/|custom-route\/|permanent-link\/|library|document-library|collection|asset|document\/\d+$|document-page|theme-context)/;
   const CONTENT_OPS = /^(getGuidelineDesignSettings|getListStyles|GetCoverPageThemeSettings|GetDocumentPageThemeSettings|getColorBlockColors)$/;
   const save = CONTENT.test(u.pathname) || (/graphql/.test(u.pathname) && CONTENT_OPS.test(op || u.searchParams.get('operationName') || ''));
   if (save && /json/.test(res.headers()['content-type'] || '') && status === 200) {

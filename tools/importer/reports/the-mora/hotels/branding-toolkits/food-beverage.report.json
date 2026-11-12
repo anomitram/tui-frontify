@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "http://localhost:8095/hotels/branding-toolkits/food-beverage.html",
+  "path": "the-mora/hotels/branding-toolkits/food-beverage",
+  "timestamp": "2026-11-12T06:57:52.626Z",
+  "frontifyPageId": 8541,
+  "originalUrl": "https://tui-brandhub.com/document/1888#/branding-toolkits/food-beverage",
+  "blocks": "{\"Text\":33,\"Heading\":7,\"Image\":9,\"Asset Kit\":6,\"Template\":1}",
+  "notes": "[\"Asset Kit 71904: no package zip; \\\"Download package\\\" links to the Frontify page\",\"Asset Kit 71904: files Edge Delivery cannot serve: mora-All-Day_Menu_Cover_Spread_305x400mm_Pkg.zip\",\"Asset Kit 71913: no package zip; \\\"Download package\\\" links to the Frontify page\",\"Asset Kit 71913: files Edge Delivery cannot serve: All_day_dining_new2.docx\",\"Asset Kit 71921: no package zip; \\\"Download package\\\" links to the Frontify page\",\"Asset Kit 71921: files Edge Delivery cannot serve: mora-Tempori_Menu_Cover_Spread_215x158mm_Pkg.zip\",\"Asset Kit 71924: no package zip; \\\"Download package\\\" links to the Frontify page\",\"Asset Kit 71924: files Edge Delivery cannot serve: Eclipse Bar menu_230724.docx\",\"Template block 72403: \\\"Use this Template\\\" opens Frontify's template editor (not migrated); links to the Frontify page\",\"Asset Kit 71968: no package zip; \\\"Download package\\\" links to the Frontify page\",\"Asset Kit 71968: files Edge Delivery cannot serve: TheMora_allergen_overview_french.pptx, TheMora_allergen_overview.pptx\",\"Asset Kit 71988: no package zip; \\\"Download package\\\" links to the Frontify page\",\"Asset Kit 71988: files Edge Delivery cannot serve: mora_Coasters_100x100mm_Pkg.zip\"]",
+  "missing": "[\"asset-566751\",\"asset-566750\",\"asset-566757\",\"asset-566756\",\"asset-566774\",\"asset-566775\",\"asset-566790\"]",
+  "importScript": "288e5a23882d"
+}

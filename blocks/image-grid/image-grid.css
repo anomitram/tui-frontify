@@ -33,6 +33,7 @@
 }
 
 .image-grid .image-grid-image {
+  position: relative;
   display: flex;
   overflow: hidden;
 }
@@ -154,4 +155,183 @@
 
 .image-grid .image-grid-viewer-close::after {
   transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* download button (Frontify: Fondue small round button, top right of the image) */
+.image-grid .image-grid-download {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 24px;
+  height: 24px;
+  border-radius: 9999px;
+  background-color: #e1e1db;
+  color: #111110;
+  transition: background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1), color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.image-grid .image-grid-download:hover {
+  background-color: #d7d7d0;
+  color: #353533;
+}
+
+.image-grid .image-grid-download:active {
+  background-color: #bfbfb8;
+}
+
+.image-grid .image-grid-download svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+.image-grid.no-viewer .image-grid-trigger {
+  cursor: default;
+}
+
+/* Document theme pages (The Mora): Frontify's b-imagegrid layout (container queries on the
+ * block width) and the theme's image title / caption styles */
+.doc-sections .image-grid {
+  container-type: inline-size;
+}
+
+.doc-sections .image-grid .image-grid-list {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0 20px;
+}
+
+.doc-sections .image-grid .image-grid-item {
+  margin-bottom: 20px;
+}
+
+.doc-sections .image-grid .image-grid-image {
+  display: block;
+  box-sizing: border-box;
+  min-height: 15px;
+  margin-bottom: 12px;
+}
+
+.doc-sections .image-grid figcaption {
+  margin-top: 0;
+}
+
+.doc-sections .image-grid .image-grid-title {
+  margin: var(--f-theme-settings-image-title-margin-top) 0 var(--f-theme-settings-image-title-margin-bottom);
+  color: var(--f-theme-settings-image-title-color);
+  font-family: var(--f-theme-settings-image-title-font-family);
+  font-size: var(--f-theme-settings-image-title-font-size);
+  font-style: var(--f-theme-settings-image-title-font-style);
+  font-weight: var(--f-theme-settings-image-title-font-weight);
+  line-height: var(--f-theme-settings-image-title-line-height);
+  letter-spacing: var(--f-theme-settings-image-title-letter-spacing);
+  text-transform: var(--f-theme-settings-image-title-text-transform);
+  text-decoration: var(--f-theme-settings-image-title-text-decoration);
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+
+.doc-sections .image-grid .image-grid-caption {
+  margin: var(--f-theme-settings-image-caption-margin-top) 0 var(--f-theme-settings-image-caption-margin-bottom);
+  color: var(--f-theme-settings-image-caption-color);
+  font-family: var(--f-theme-settings-image-caption-font-family);
+  font-size: var(--f-theme-settings-image-caption-font-size);
+  font-style: var(--f-theme-settings-image-caption-font-style);
+  font-weight: var(--f-theme-settings-image-caption-font-weight);
+  line-height: var(--f-theme-settings-image-caption-line-height);
+  letter-spacing: var(--f-theme-settings-image-caption-letter-spacing);
+  text-transform: var(--f-theme-settings-image-caption-text-transform);
+  text-decoration: var(--f-theme-settings-image-caption-text-decoration);
+  overflow-wrap: break-word;
+}
+
+@container (width >= 440px) {
+  .doc-sections .image-grid:is(.columns-2, .columns-3, .columns-4) .image-grid-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@container (width >= 740px) {
+  .doc-sections .image-grid:is(.columns-1, .columns-2, .columns-3, .columns-4) .image-grid-list {
+    grid-template-columns: repeat(var(--image-grid-columns, 2), minmax(0, 1fr));
+    column-gap: 30px;
+  }
+
+  .doc-sections .image-grid .image-grid-item {
+    margin-bottom: 30px;
+  }
+}
+
+/* caption text in heading / paragraph styles (Frontify rich text caption) */
+.doc-sections .image-grid .image-grid-caption > p {
+  font-family: var(--f-theme-settings-body-font-family);
+  font-size: var(--f-theme-settings-body-font-size);
+  font-style: var(--f-theme-settings-body-font-style);
+  font-weight: var(--f-theme-settings-body-font-weight);
+  line-height: var(--f-theme-settings-body-line-height);
+  letter-spacing: var(--f-theme-settings-body-letter-spacing);
+  text-transform: var(--f-theme-settings-body-text-transform);
+  text-decoration: var(--f-theme-settings-body-text-decoration);
+  color: var(--f-theme-settings-body-color);
+  margin-top: var(--f-theme-settings-body-margin-top);
+  margin-bottom: var(--f-theme-settings-body-margin-bottom);
+}
+
+.doc-sections .image-grid .image-grid-caption > h1 {
+  font-family: var(--f-theme-settings-heading1-font-family);
+  font-size: var(--f-theme-settings-heading1-font-size);
+  font-style: var(--f-theme-settings-heading1-font-style);
+  font-weight: var(--f-theme-settings-heading1-font-weight);
+  line-height: var(--f-theme-settings-heading1-line-height);
+  letter-spacing: var(--f-theme-settings-heading1-letter-spacing);
+  text-transform: var(--f-theme-settings-heading1-text-transform);
+  text-decoration: var(--f-theme-settings-heading1-text-decoration);
+  color: var(--f-theme-settings-heading1-color);
+  margin-top: var(--f-theme-settings-heading1-margin-top);
+  margin-bottom: var(--f-theme-settings-heading1-margin-bottom);
+}
+
+.doc-sections .image-grid .image-grid-caption > h2 {
+  font-family: var(--f-theme-settings-heading2-font-family);
+  font-size: var(--f-theme-settings-heading2-font-size);
+  font-style: var(--f-theme-settings-heading2-font-style);
+  font-weight: var(--f-theme-settings-heading2-font-weight);
+  line-height: var(--f-theme-settings-heading2-line-height);
+  letter-spacing: var(--f-theme-settings-heading2-letter-spacing);
+  text-transform: var(--f-theme-settings-heading2-text-transform);
+  text-decoration: var(--f-theme-settings-heading2-text-decoration);
+  color: var(--f-theme-settings-heading2-color);
+  margin-top: var(--f-theme-settings-heading2-margin-top);
+  margin-bottom: var(--f-theme-settings-heading2-margin-bottom);
+}
+
+.doc-sections .image-grid .image-grid-caption > h3 {
+  font-family: var(--f-theme-settings-heading3-font-family);
+  font-size: var(--f-theme-settings-heading3-font-size);
+  font-style: var(--f-theme-settings-heading3-font-style);
+  font-weight: var(--f-theme-settings-heading3-font-weight);
+  line-height: var(--f-theme-settings-heading3-line-height);
+  letter-spacing: var(--f-theme-settings-heading3-letter-spacing);
+  text-transform: var(--f-theme-settings-heading3-text-transform);
+  text-decoration: var(--f-theme-settings-heading3-text-decoration);
+  color: var(--f-theme-settings-heading3-color);
+  margin-top: var(--f-theme-settings-heading3-margin-top);
+  margin-bottom: var(--f-theme-settings-heading3-margin-bottom);
+}
+
+.doc-sections .image-grid .image-grid-caption > h4 {
+  font-family: var(--f-theme-settings-heading4-font-family);
+  font-size: var(--f-theme-settings-heading4-font-size);
+  font-style: var(--f-theme-settings-heading4-font-style);
+  font-weight: var(--f-theme-settings-heading4-font-weight);
+  line-height: var(--f-theme-settings-heading4-line-height);
+  letter-spacing: var(--f-theme-settings-heading4-letter-spacing);
+  text-transform: var(--f-theme-settings-heading4-text-transform);
+  text-decoration: var(--f-theme-settings-heading4-text-decoration);
+  color: var(--f-theme-settings-heading4-color);
+  margin-top: var(--f-theme-settings-heading4-margin-top);
+  margin-bottom: var(--f-theme-settings-heading4-margin-bottom);
 }

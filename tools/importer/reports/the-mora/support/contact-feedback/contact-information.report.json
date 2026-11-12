@@ -1,0 +1,16 @@
+{
+  "status": "success",
+  "url": "http://localhost:8095/support/contact-feedback/contact-information.html",
+  "path": "the-mora/support/contact-feedback/contact-information",
+  "timestamp": "2026-11-12T06:58:11.927Z",
+  "frontifyPageId": 8300,
+  "originalUrl": "https://tui-brandhub.com/document/1889#/contact-feedback/contact-information",
+  "blocks": "{\"Text\":3,\"Cards Grid\":1}",
+  "notes": "[]",
+  "missing": "[]",
+  "fragments": [
+    "the-mora/support/sidebar",
+    "the-mora/support"
+  ],
+  "importScript": "288e5a23882d"
+}

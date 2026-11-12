@@ -1,11 +1,12 @@
 /*
  * Image block (Frontify "Image").
  * Row 1: picture. Optional label rows: Title | Caption | Link | Background | Border | Download |
- * Attachments (one link per file; link text = original file name).
+ * Attachments (one link per file; link text = original file name) | Styles (Frontify text style
+ * per title/caption element: "title 1: class: image-title-text; text-align: left", one per line).
  * Variants: align-left / align-right, border, background, radius-*, downloadable.
  */
 
-const LABELS = ['title', 'caption', 'link', 'background', 'border', 'download', 'attachments'];
+const LABELS = ['title', 'caption', 'link', 'background', 'border', 'download', 'attachments', 'styles'];
 
 const SVG = (size, path) => `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="${path}"/></svg>`;
 const PAPERCLIP = SVG(16, 'M7.451 4.635c-.568.557-.951 1.405-.951 2.57v8.03C6.5 17.525 8.62 20 11.353 20c1.467 0 2.897-.393 3.94-1.174 1.016-.762 1.707-1.92 1.707-3.59V6.823h1.5v8.411c0 2.153-.92 3.752-2.308 4.792-1.363 1.020-3.132 1.473-4.839 1.473C7.737 21.500 5 18.298 5 15.235v-8.03c0-1.510.506-2.764 1.402-3.641.89-.874 2.107-1.314 3.422-1.314 1.317 0 2.504.443 3.362 1.327.856.884 1.314 2.137 1.314 3.629v8.03c0 1.612-1.257 2.661-2.765 2.661-1.586 0-2.700-1.303-2.735-2.642-.013-.497-.013-2.615-.010-4.590L8.996 8 9 7.143v-.322l.75.003.75.002v.084l-.001.238-.003.856-.006 2.664c-.003 1.990-.003 4.078.010 4.547a1.243 1.243 0 001.235 1.182c.786 0 1.265-.48 1.265-1.162v-8.03c0-1.183-.358-2.034-.892-2.584-.532-.549-1.308-.871-2.284-.871-.98 0-1.800.324-2.373.885m2.302 1.439a.75.75 0 01.747.752l-.75-.002L9 6.820a.75.75 0 01.753-.747m7.997 0a.75.75 0 01.75.75H17a.75.75 0 01.75-.75');
@@ -135,6 +136,23 @@ function readRows(block) {
   return { picture, data };
 }
 
+/** "title 2: class: image-title-text; text-align: left" -> class/style on the 2nd title element. */
+function applyStyles(data) {
+  const spec = data.styles.innerText ?? data.styles.textContent;
+  spec.split(/\s*\n\s*|\s+(?=(?:title|caption)\s+\d+\s*:\s)/).forEach((line) => {
+    const m = /^\s*(title|caption)\s+(\d+)\s*:\s*(.+)$/i.exec(line);
+    const cell = m && data[m[1].toLowerCase()];
+    const el = cell && [...cell.children][Number(m[2]) - 1];
+    if (!el) return;
+    m[3].split(';').map((d) => d.trim()).filter(Boolean).forEach((decl) => {
+      const [prop, ...rest] = decl.split(':');
+      const value = rest.join(':').trim();
+      if (prop.trim() === 'class') el.classList.add(value);
+      else el.style.setProperty(prop.trim(), value);
+    });
+  });
+}
+
 function setNaturalLimits(img) {
   const apply = () => {
     const h = Number(img.getAttribute('height')) || img.naturalHeight;
@@ -222,6 +240,7 @@ export default function decorate(block) {
   }
   figure.append(frame);
 
+  if (data.styles) applyStyles(data);
   const hasTitle = data.title && data.title.textContent.trim();
   const hasCaption = data.caption && data.caption.textContent.trim();
   if (hasTitle || hasCaption) {
@@ -237,8 +256,11 @@ export default function decorate(block) {
     figure.append(cap);
   }
 
+  // frame ratio variant "ratio-16-11" (Frontify ratio setting): the image fills that frame
+  const ratio = [...block.classList].map((c) => c.match(/^ratio-(\d+)-(\d+)$/)).find(Boolean);
+  if (img && ratio) img.style.aspectRatio = `${ratio[1]} / ${ratio[2]}`;
   if (img) {
-    setNaturalLimits(img);
+    if (!ratio) setNaturalLimits(img);
     const sections = [...document.querySelectorAll('main .section')];
     const idx = sections.indexOf(block.closest('.section'));
     if (idx > 1 && !img.hasAttribute('loading')) img.loading = 'lazy';

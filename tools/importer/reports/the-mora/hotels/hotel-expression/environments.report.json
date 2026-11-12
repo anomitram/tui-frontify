@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "http://localhost:8095/hotels/hotel-expression/environments.html",
+  "path": "the-mora/hotels/hotel-expression/environments",
+  "timestamp": "2026-11-12T06:57:27.299Z",
+  "frontifyPageId": 8298,
+  "originalUrl": "https://tui-brandhub.com/document/1888#/hotel-expression/environments",
+  "blocks": "{\"Image\":54,\"Text\":82,\"Heading\":7,\"Cards Grid\":2,\"Divider\":5}",
+  "notes": "[]",
+  "missing": "[]",
+  "importScript": "288e5a23882d"
+}

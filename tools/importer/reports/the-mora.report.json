@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8096/the-mora.html",
+  "path": "the-mora",
+  "timestamp": "2026-11-12T03:23:16.621Z",
+  "blocks": "{\"Text\":18,\"Divider\":10,\"Cards Grid\":1,\"Slider\":1,\"Image\":12}",
+  "notes": "[]",
+  "links": 3,
+  "missing": "[]",
+  "fragments": [
+    "the-mora/nav",
+    "the-mora/footer"
+  ],
+  "importScript": "7a99399d3d35"
+}

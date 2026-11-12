@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "http://localhost:8095/brand/application/teams-backgrounds.html",
+  "path": "the-mora/brand/application/teams-backgrounds",
+  "timestamp": "2026-11-12T06:56:47.815Z",
+  "frontifyPageId": 9975,
+  "originalUrl": "https://tui-brandhub.com/document/1887#/application/teams-backgrounds",
+  "blocks": "{\"Text\":2,\"Image grid\":1}",
+  "notes": "[]",
+  "missing": "[]",
+  "importScript": "288e5a23882d"
+}

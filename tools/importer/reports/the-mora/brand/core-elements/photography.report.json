@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "http://localhost:8095/brand/core-elements/photography.html",
+  "path": "the-mora/brand/core-elements/photography",
+  "timestamp": "2026-11-12T06:56:15.083Z",
+  "frontifyPageId": 8288,
+  "originalUrl": "https://tui-brandhub.com/document/1887#/core-elements/photography",
+  "blocks": "{\"Image\":9,\"Text\":22,\"Heading\":8,\"Cards Grid\":1,\"Annotations\":5,\"Do & Don't\":1}",
+  "notes": "[]",
+  "missing": "[]",
+  "importScript": "288e5a23882d"
+}

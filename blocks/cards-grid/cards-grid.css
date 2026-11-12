@@ -1,0 +1,341 @@
+/* Cards Grid: port of the Frontify "Cards Grid" block (cards-grid-block), measured on The Mora
+ * (home and guideline pages). Frontify choices -> values: padding small 12px, medium 30px;
+ * spacing S 10px; radius small 2px, large 12px; custom values come from the Settings row. */
+.cards-grid {
+  container-type: inline-size;
+}
+
+.cards-grid.padding-small { --cards-padding-choice: 12px; }
+.cards-grid.padding-medium { --cards-padding-choice: 30px; }
+.cards-grid.spacing-none { --cards-gap-choice: 0; }
+.cards-grid.spacing-s { --cards-gap-choice: 10px; }
+.cards-grid.radius-none { --cards-radius-choice: 0; }
+.cards-grid.radius-small { --cards-radius-choice: 2px; }
+.cards-grid.radius-large { --cards-radius-choice: 12px; }
+.cards-grid.ratio-1-1 { --cards-ratio-choice: 1 / 1; }
+.cards-grid.ratio-4-3 { --cards-ratio-choice: 4 / 3; }
+.cards-grid.ratio-3-2 { --cards-ratio-choice: 3 / 2; }
+.cards-grid.ratio-16-9 { --cards-ratio-choice: 16 / 9; }
+.cards-grid.image-1-1 { --cards-image-ratio-choice: 1 / 1; }
+.cards-grid.image-4-3 { --cards-image-ratio-choice: 4 / 3; }
+.cards-grid.image-3-2 { --cards-image-ratio-choice: 3 / 2; }
+.cards-grid.image-16-9 { --cards-image-ratio-choice: 16 / 9; }
+.cards-grid.width-75 { --cards-text-width-choice: 75%; }
+.cards-grid.width-100 { --cards-text-width-choice: 100%; }
+.cards-grid.h-left { --cards-pos-x: left; }
+.cards-grid.h-center { --cards-pos-x: center; }
+.cards-grid.h-right { --cards-pos-x: right; }
+.cards-grid.v-start { --cards-pos-y: top; }
+.cards-grid.v-middle { --cards-pos-y: center; }
+.cards-grid.v-bottom { --cards-pos-y: bottom; }
+.cards-grid.text-v-start { --cards-justify: flex-start; }
+.cards-grid.text-v-middle { --cards-justify: center; }
+.cards-grid.text-v-end { --cards-justify: flex-end; }
+
+.cards-grid .cards-grid-list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: var(--cards-gap, var(--cards-gap-choice, 10px));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* text cards stretch to the tallest card of the row */
+.cards-grid.type-text .cards-grid-list {
+  align-items: stretch;
+}
+
+@container (width >= 440px) {
+  .cards-grid:not(.columns-1) .cards-grid-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@container (width >= 740px) {
+  .cards-grid.columns-3 .cards-grid-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .cards-grid.columns-4 .cards-grid-list { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .cards-grid.columns-5 .cards-grid-list { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .cards-grid.columns-6 .cards-grid-list { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+}
+
+.cards-grid .cards-grid-item {
+  position: relative;
+  width: 100%;
+  margin: 0;
+}
+
+.cards-grid .cards-grid-card {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border: var(--cards-border, 0 none);
+  border-radius: var(--cards-radius, var(--cards-radius-choice, 2px));
+  background-color: var(--cards-bg, transparent);
+  color: inherit;
+  text-decoration: none;
+}
+
+.cards-grid.type-text .cards-grid-card {
+  aspect-ratio: var(--cards-ratio, var(--cards-ratio-choice, auto));
+}
+
+/* text below the image: image, 12px gap, text */
+.cards-grid.text-top:not(.type-text) .cards-grid-card {
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* the image of a card with the text below it */
+.cards-grid .cards-grid-image {
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+  height: var(--cards-image-height, auto);
+  overflow: hidden;
+  aspect-ratio: var(--cards-image-ratio, var(--cards-image-ratio-choice, var(--cards-asset-ratio, auto)));
+}
+
+/* text over the image (Frontify: background image of the text box) */
+.cards-grid .cards-grid-media {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: var(--cards-justify, flex-end);
+  box-sizing: border-box;
+  width: 100%;
+  height: var(--cards-image-height, auto);
+  aspect-ratio: var(--cards-image-ratio, var(--cards-image-ratio-choice, var(--cards-asset-ratio, auto)));
+}
+
+.cards-grid .cards-grid-media picture,
+.cards-grid .cards-grid-media > img,
+.cards-grid .cards-grid-image picture,
+.cards-grid .cards-grid-image > img {
+  position: absolute;
+  inset: 0;
+}
+
+/* Frontify: fill = cover, fit and none = contain; anchored by the h-/v- variants */
+.cards-grid .cards-grid-media img,
+.cards-grid .cards-grid-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--cards-pos-x, center) var(--cards-pos-y, center);
+}
+
+.cards-grid.display-fit img,
+.cards-grid.display-none img {
+  object-fit: contain;
+}
+
+.cards-grid .cards-grid-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: var(--cards-justify, flex-start);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.cards-grid .cards-grid-text {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--cards-text-width, var(--cards-text-width-choice, none));
+  margin: 0 auto 0 0;
+  padding: var(--cards-padding, var(--cards-padding-choice, 12px));
+  overflow-wrap: anywhere;
+  text-align: left;
+}
+
+.cards-grid.text-h-center .cards-grid-text {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.cards-grid.text-h-right .cards-grid-text {
+  margin: 0 0 0 auto;
+  text-align: right;
+}
+
+/* title and description are separate editors in Frontify (margins do not collapse across) */
+.cards-grid .cards-grid-title,
+.cards-grid .cards-grid-description {
+  display: flow-root;
+}
+
+/* Frontify text styles (the theme's resolved variables, as in the Text block) */
+.cards-grid .cards-grid-text .body {
+  font-family: var(--f-theme-settings-body-font-family);
+  font-size: var(--f-theme-settings-body-font-size);
+  font-style: var(--f-theme-settings-body-font-style);
+  font-weight: var(--f-theme-settings-body-font-weight);
+  line-height: var(--f-theme-settings-body-line-height);
+  letter-spacing: var(--f-theme-settings-body-letter-spacing);
+  text-transform: var(--f-theme-settings-body-text-transform);
+  text-decoration: var(--f-theme-settings-body-text-decoration);
+  color: var(--f-theme-settings-body-color);
+  margin-top: var(--f-theme-settings-body-margin-top);
+  margin-bottom: var(--f-theme-settings-body-margin-bottom);
+}
+
+.cards-grid .cards-grid-text .heading1 {
+  font-family: var(--f-theme-settings-heading1-font-family);
+  font-size: var(--f-theme-settings-heading1-font-size);
+  font-style: var(--f-theme-settings-heading1-font-style);
+  font-weight: var(--f-theme-settings-heading1-font-weight);
+  line-height: var(--f-theme-settings-heading1-line-height);
+  letter-spacing: var(--f-theme-settings-heading1-letter-spacing);
+  text-transform: var(--f-theme-settings-heading1-text-transform);
+  text-decoration: var(--f-theme-settings-heading1-text-decoration);
+  color: var(--f-theme-settings-heading1-color);
+  margin-top: var(--f-theme-settings-heading1-margin-top, 0);
+  margin-bottom: var(--f-theme-settings-heading1-margin-bottom, 10px);
+}
+
+.cards-grid .cards-grid-text .heading2 {
+  font-family: var(--f-theme-settings-heading2-font-family);
+  font-size: var(--f-theme-settings-heading2-font-size);
+  font-style: var(--f-theme-settings-heading2-font-style);
+  font-weight: var(--f-theme-settings-heading2-font-weight);
+  line-height: var(--f-theme-settings-heading2-line-height);
+  letter-spacing: var(--f-theme-settings-heading2-letter-spacing);
+  text-transform: var(--f-theme-settings-heading2-text-transform);
+  text-decoration: var(--f-theme-settings-heading2-text-decoration);
+  color: var(--f-theme-settings-heading2-color);
+  margin-top: var(--f-theme-settings-heading2-margin-top);
+  margin-bottom: var(--f-theme-settings-heading2-margin-bottom);
+}
+
+.cards-grid .cards-grid-text .heading3 {
+  font-family: var(--f-theme-settings-heading3-font-family);
+  font-size: var(--f-theme-settings-heading3-font-size);
+  font-style: var(--f-theme-settings-heading3-font-style);
+  font-weight: var(--f-theme-settings-heading3-font-weight);
+  line-height: var(--f-theme-settings-heading3-line-height);
+  letter-spacing: var(--f-theme-settings-heading3-letter-spacing);
+  text-transform: var(--f-theme-settings-heading3-text-transform);
+  text-decoration: var(--f-theme-settings-heading3-text-decoration);
+  color: var(--f-theme-settings-heading3-color);
+  margin-top: var(--f-theme-settings-heading3-margin-top);
+  margin-bottom: var(--f-theme-settings-heading3-margin-bottom);
+}
+
+.cards-grid .cards-grid-text .heading4 {
+  font-family: var(--f-theme-settings-heading4-font-family);
+  font-size: var(--f-theme-settings-heading4-font-size);
+  font-style: var(--f-theme-settings-heading4-font-style);
+  font-weight: var(--f-theme-settings-heading4-font-weight);
+  line-height: var(--f-theme-settings-heading4-line-height);
+  letter-spacing: var(--f-theme-settings-heading4-letter-spacing);
+  text-transform: var(--f-theme-settings-heading4-text-transform);
+  text-decoration: var(--f-theme-settings-heading4-text-decoration);
+  color: var(--f-theme-settings-heading4-color);
+  margin-top: var(--f-theme-settings-heading4-margin-top);
+  margin-bottom: var(--f-theme-settings-heading4-margin-bottom);
+}
+
+.cards-grid .cards-grid-text .custom1 {
+  font-family: var(--f-theme-settings-custom1-font-family);
+  font-size: var(--f-theme-settings-custom1-font-size);
+  font-style: var(--f-theme-settings-custom1-font-style);
+  font-weight: var(--f-theme-settings-custom1-font-weight);
+  line-height: var(--f-theme-settings-custom1-line-height);
+  letter-spacing: var(--f-theme-settings-custom1-letter-spacing);
+  text-transform: var(--f-theme-settings-custom1-text-transform);
+  text-decoration: var(--f-theme-settings-custom1-text-decoration);
+  color: var(--f-theme-settings-custom1-color);
+  margin-top: var(--f-theme-settings-custom1-margin-top);
+  margin-bottom: var(--f-theme-settings-custom1-margin-bottom);
+}
+
+.cards-grid .cards-grid-text .custom2 {
+  font-family: var(--f-theme-settings-custom2-font-family);
+  font-size: var(--f-theme-settings-custom2-font-size);
+  font-style: var(--f-theme-settings-custom2-font-style);
+  font-weight: var(--f-theme-settings-custom2-font-weight);
+  line-height: var(--f-theme-settings-custom2-line-height);
+  letter-spacing: var(--f-theme-settings-custom2-letter-spacing);
+  text-transform: var(--f-theme-settings-custom2-text-transform);
+  text-decoration: var(--f-theme-settings-custom2-text-decoration);
+  color: var(--f-theme-settings-custom2-color);
+  margin-top: var(--f-theme-settings-custom2-margin-top);
+  margin-bottom: var(--f-theme-settings-custom2-margin-bottom);
+}
+
+.cards-grid .cards-grid-text .custom3 {
+  font-family: var(--f-theme-settings-custom3-font-family);
+  font-size: var(--f-theme-settings-custom3-font-size);
+  font-style: var(--f-theme-settings-custom3-font-style);
+  font-weight: var(--f-theme-settings-custom3-font-weight);
+  line-height: var(--f-theme-settings-custom3-line-height);
+  letter-spacing: var(--f-theme-settings-custom3-letter-spacing);
+  text-transform: var(--f-theme-settings-custom3-text-transform);
+  text-decoration: var(--f-theme-settings-custom3-text-decoration);
+  color: var(--f-theme-settings-custom3-color);
+  margin-top: var(--f-theme-settings-custom3-margin-top);
+  margin-bottom: var(--f-theme-settings-custom3-margin-bottom);
+}
+
+.cards-grid .cards-grid-text .quote {
+  font-family: var(--f-theme-settings-quote-font-family);
+  font-size: var(--f-theme-settings-quote-font-size);
+  font-style: var(--f-theme-settings-quote-font-style);
+  font-weight: var(--f-theme-settings-quote-font-weight);
+  line-height: var(--f-theme-settings-quote-line-height);
+  letter-spacing: var(--f-theme-settings-quote-letter-spacing);
+  text-transform: var(--f-theme-settings-quote-text-transform);
+  text-decoration: var(--f-theme-settings-quote-text-decoration);
+  color: var(--f-theme-settings-quote-color);
+  margin-top: var(--f-theme-settings-quote-margin-top);
+  margin-bottom: var(--f-theme-settings-quote-margin-bottom);
+}
+
+.cards-grid .cards-grid-text .image-title {
+  font-family: var(--f-theme-settings-image-title-font-family);
+  font-size: var(--f-theme-settings-image-title-font-size);
+  font-style: var(--f-theme-settings-image-title-font-style);
+  font-weight: var(--f-theme-settings-image-title-font-weight);
+  line-height: var(--f-theme-settings-image-title-line-height);
+  letter-spacing: var(--f-theme-settings-image-title-letter-spacing);
+  text-transform: var(--f-theme-settings-image-title-text-transform);
+  text-decoration: var(--f-theme-settings-image-title-text-decoration);
+  color: var(--f-theme-settings-image-title-color);
+  margin-top: var(--f-theme-settings-image-title-margin-top);
+  margin-bottom: var(--f-theme-settings-image-title-margin-bottom);
+}
+
+.cards-grid .cards-grid-text .image-caption {
+  font-family: var(--f-theme-settings-image-caption-font-family);
+  font-size: var(--f-theme-settings-image-caption-font-size);
+  font-style: var(--f-theme-settings-image-caption-font-style);
+  font-weight: var(--f-theme-settings-image-caption-font-weight);
+  line-height: var(--f-theme-settings-image-caption-line-height);
+  letter-spacing: var(--f-theme-settings-image-caption-letter-spacing);
+  text-transform: var(--f-theme-settings-image-caption-text-transform);
+  text-decoration: var(--f-theme-settings-image-caption-text-decoration);
+  color: var(--f-theme-settings-image-caption-color);
+  margin-top: var(--f-theme-settings-image-caption-margin-top);
+  margin-bottom: var(--f-theme-settings-image-caption-margin-bottom);
+}
+
+/* the title's elements have no top margin (Frontify: [&>div>div>*]:!mt-0) */
+.cards-grid .cards-grid-text .cards-grid-title > * {
+  margin-top: 0;
+}
+
+.cards-grid .cards-grid-text a:any-link {
+  color: var(--f-theme-settings-link-color);
+  font-family: var(--f-theme-settings-link-font-family);
+  font-size: var(--f-theme-settings-link-font-size);
+  font-weight: var(--f-theme-settings-link-font-weight);
+  line-height: var(--f-theme-settings-link-line-height);
+  letter-spacing: var(--f-theme-settings-link-letter-spacing);
+  text-transform: var(--f-theme-settings-link-text-transform);
+  text-decoration: var(--f-theme-settings-link-text-decoration);
+}

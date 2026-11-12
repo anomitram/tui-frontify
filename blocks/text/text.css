@@ -36,3 +36,37 @@
   text-overflow: ellipsis;
   vertical-align: middle;
 }
+
+/* placeholder cell of a document-theme block without content (0px high, keeps its grid cell) */
+.doc-sections .text.cell.empty {
+  display: none;
+}
+
+/* Frontify checkbox items: row with a 16px checkbox centred on the first line, 6px before the
+   text, 8px below each item (measured, doc 1887 page 11314) */
+.text .checkbox-item {
+  display: flex;
+  padding-bottom: 8px;
+}
+
+.text .checkbox-item .checkbox-box {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  height: 1lh;
+  margin-right: 6px;
+  user-select: none;
+}
+
+.text .checkbox-item input {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  pointer-events: none;
+}
+
+.text .checkbox-item .checkbox-label {
+  flex: 1;
+  min-width: 10px;
+}

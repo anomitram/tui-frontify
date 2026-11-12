@@ -16,3 +16,5 @@ helix-importer-ui
 migration-work/frontify/
 migration-work/frontify-portal-*/
 migration-work/frontify-home/
+migration-work/frontify-document-*/
+migration-work/frontify-mora/

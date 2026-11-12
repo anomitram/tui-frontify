@@ -21,6 +21,12 @@ export const decodeEntities = (s) => String(s)
 export function rewriteLink(url, ctx) {
   if (!url) return { href: url, kind: 'empty' };
   let u = url.trim();
+  // Pages built by build-doc-cover-sources.mjs carry final hrefs (resolved /r/ links, migrated
+  // targets as local paths) in ctx.linkMap; use them as they are.
+  if (ctx.linkMap && Object.prototype.hasOwnProperty.call(ctx.linkMap, u)) {
+    const href = ctx.linkMap[u];
+    return { href, kind: href.startsWith('/') ? 'internal' : 'out-of-scope' };
+  }
   // Source bug: "https://ci-support@tui-brandhub.com" was meant as an e-mail address.
   const mailLike = /^https?:\/\/([^/@\s]+@[^/\s]+\.[a-z]{2,})\/?$/i.exec(u);
   if (mailLike) return { href: `mailto:${mailLike[1]}`, kind: 'email', fixed: true };
@@ -117,7 +123,13 @@ function inline(nodes, ctx) {
     if (n.type === 'button') {
       const { href, kind } = rewriteLink(n.url, ctx);
       ctx.links?.push({ source: n.url, href, kind });
-      return wrapKeepSpaces(`<strong><a href="${esc(href)}">`, inline(n.children, ctx), '</a></strong>');
+      // Frontify button styles -> the site's button markup: primary = bold, secondary = italic,
+      // tertiary = bold + italic (decorated as "accent")
+      const [open, close] = {
+        secondary: ['<em>', '</em>'],
+        tertiary: ['<em><strong>', '</strong></em>'],
+      }[n.buttonStyle] || ['<strong>', '</strong>'];
+      return wrapKeepSpaces(`${open}<a href="${esc(href)}">`, inline(n.children, ctx), `</a>${close}`);
     }
     if (n.children) return inline(n.children, ctx);
     let t = esc(decodeEntities(n.text || '')).replace(/\n/g, '<br>');
@@ -149,7 +161,12 @@ function blockNode(n, ctx, opts) {
   const tag = BLOCK_TAGS[n.type] || 'p';
   const body = inline(n.children, ctx);
   if (!body.replace(/<br>/g, '').trim()) {
-    return opts.keepEmpty === false ? '' : '<p>\u200B</p>'; // Frontify spacer paragraph (zero-width space survives html2md)
+    if (opts.keepEmpty === false) return '';
+    // An empty paragraph made of line breaks is as many lines tall in Frontify (cover pages keep
+    // them; zero-width spaces keep the breaks through html2md). Guideline pages keep one line.
+    const breaks = (body.match(/<br>/g) || []).length;
+    if (opts.keepEmptyBreaks && breaks) return `<p>${Array(breaks + 1).fill('\u200B').join('<br>')}</p>`;
+    return '<p>\u200B</p>'; // Frontify spacer paragraph (zero-width space survives html2md)
   }
   // A trailing line break renders as an extra blank line in Frontify; keep it with a zero-width space.
   const kept = body.endsWith('<br>') ? `${body}\u200B` : body;

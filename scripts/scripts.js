@@ -126,6 +126,38 @@ function buildAutoBlocks(main) {
 }
 
 /**
+ * Frontify puts several buttons in one paragraph (e.g. "Global Campaign Playbooks / Assets /
+ * Guidelines") or a button inside a heading (The Mora: "About our brand ->"). The site's
+ * decorateButtons() only handles a link that is alone in its paragraph, so formatted links in
+ * those places are turned into buttons here (hub-cell, text blocks), with the same mapping:
+ * bold = primary, italic = secondary, bold + italic = accent (Frontify tertiary).
+ */
+export function decorateInlineButtons(content) {
+  // only elements that hold nothing but formatted links (and spaces): a bold link inside a
+  // sentence stays a bold link
+  const onlyButtons = (el) => {
+    const links = [...el.querySelectorAll('a[href]')];
+    const rest = links.reduce((t, a) => t.replace(a.textContent, ''), el.textContent);
+    return links.length && !rest.replace(/[\s\u200b]/g, '');
+  };
+  content.querySelectorAll(':is(p, h1, h2, h3, h4, h5, h6) a[href]:not(.button)').forEach((a) => {
+    const strong = a.closest('strong');
+    const em = a.closest('em');
+    if ((!strong && !em) || a.querySelector('img')) return;
+    if (!onlyButtons(a.closest('p, h1, h2, h3, h4, h5, h6'))) return;
+    // the outermost formatting element around the link
+    let outer = strong || em;
+    if (strong && em) outer = strong.contains(em) ? strong : em;
+    if (outer.textContent.trim() !== a.textContent.trim()) return;
+    a.classList.add('button'); // keep classes set from a Styles row (e.g. the button's text style)
+    if (strong && em) a.classList.add('accent');
+    else a.classList.add(strong ? 'primary' : 'secondary');
+    outer.replaceWith(a);
+    a.closest('p, h1, h2, h3, h4, h5, h6').classList.add('button-wrapper');
+  });
+}
+
+/**
  * Decorates formatted links to style them as buttons.
  * @param {HTMLElement} main The main container element
  */
@@ -193,7 +225,7 @@ function compensateScrollbar() {
 
 /**
  * "redirect" template: forwards to the Redirect metadata path. Old Frontify routes
- * (/document/396#/category/page[/heading]) map to /category/page[#heading].
+ * (/document/396#/category/page[/heading]) map to [Redirect Base]/category/page[#heading].
  */
 function handleRedirectTemplate() {
   if (getMetadata('template') !== 'redirect') return false;
@@ -201,7 +233,9 @@ function handleRedirectTemplate() {
   const route = window.location.hash.replace(/^#\/?/, '').split('/').filter(Boolean);
   if (route.length >= 2) {
     const [cat, slug, heading] = route;
-    target = cat === '-' ? `/${slug}` : `/${cat}/${slug}`;
+    // "Redirect Base": path prefix of the document's pages (e.g. /the-mora/brand); doc 396: none
+    const base = (getMetadata('redirect-base') || '').replace(/\/$/, '');
+    target = cat === '-' ? `${base}/${slug}` : `${base}/${cat}/${slug}`;
     if (heading) target += `#${heading}`;
   }
   window.location.replace(contentPath(target));
@@ -216,6 +250,12 @@ async function loadEager(doc) {
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
+    // guideline pages of the new Frontify document theme (The Mora): column sections + schemes
+    if (document.body.classList.contains('guideline') && getMetadata('layout') === 'doc-sections') {
+      const { decorateDocCover, loadDocCoverTheme } = await import('./doc-cover.js');
+      decorateDocCover(main);
+      await loadDocCoverTheme();
+    }
     if (document.body.classList.contains('guideline')) {
       // eslint-disable-next-line import/no-cycle
       const { decorateGuidelineLayout } = await import('./guideline.js');
@@ -225,6 +265,16 @@ async function loadEager(doc) {
       const { decorateHub, loadHubTheme } = await import('./hub.js');
       decorateHub(main);
       await loadHubTheme();
+    }
+    if (document.body.classList.contains('doc-cover')) {
+      const { decorateDocCover, loadDocCoverTheme } = await import('./doc-cover.js');
+      decorateDocCover(main);
+      await loadDocCoverTheme();
+    }
+    // Frontify asset library pages (logos, media, icons, documents)
+    if (document.body.classList.contains('library')) {
+      const { loadLibraryTheme } = await import('./library.js');
+      await loadLibraryTheme();
     }
     document.body.classList.add('appear');
     await loadSection(main.querySelector('.section'), waitForFirstImage);

@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "http://localhost:8095/hotels/hotel-expression/sub-brands-framework.html",
+  "path": "the-mora/hotels/hotel-expression/sub-brands-framework",
+  "timestamp": "2026-11-12T06:57:16.767Z",
+  "frontifyPageId": 8296,
+  "originalUrl": "https://tui-brandhub.com/document/1888#/hotel-expression/sub-brands-framework",
+  "blocks": "{\"Image\":2,\"Text\":36,\"Heading\":7,\"Cards Grid\":21,\"Annotations\":3,\"Image grid\":1}",
+  "notes": "[]",
+  "missing": "[]",
+  "importScript": "288e5a23882d"
+}

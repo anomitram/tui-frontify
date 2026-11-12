@@ -138,3 +138,34 @@
 .video .video-viewer-close::after {
   transform: translate(-50%, -50%) rotate(-45deg);
 }
+
+/* caption alignment (Frontify title alignment) */
+.video.title-left .video-caption {
+  text-align: left;
+}
+
+.video.title-right .video-caption {
+  text-align: right;
+}
+
+/* ---------- new Frontify document theme (body.doc-sections, e.g. The Mora) ----------
+ * The title uses the theme's image-title style, 12px below the video (measured on page 8292). */
+.doc-sections .video .video-caption {
+  margin-top: 12px;
+  color: var(--f-theme-settings-image-title-color);
+  font-family: var(--f-theme-settings-image-title-font-family);
+  font-size: var(--f-theme-settings-image-title-font-size);
+  font-style: var(--f-theme-settings-image-title-font-style);
+  font-weight: var(--f-theme-settings-image-title-font-weight);
+  line-height: var(--f-theme-settings-image-title-line-height);
+  letter-spacing: var(--f-theme-settings-image-title-letter-spacing);
+  text-transform: var(--f-theme-settings-image-title-text-transform);
+  overflow-wrap: anywhere;
+}
+
+.doc-sections .video .video-caption p {
+  margin: var(--f-theme-settings-image-title-margin-top) 0 var(--f-theme-settings-image-title-margin-bottom);
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+}

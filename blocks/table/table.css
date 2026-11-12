@@ -1,0 +1,122 @@
+/* Table (Frontify "Table" block). Text styles: the page theme (--f-theme-settings-*), site fallbacks. */
+.table {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.table table {
+  width: auto;
+  max-width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  table-layout: auto;
+}
+
+.table th,
+.table td {
+  box-sizing: border-box;
+  padding: 8px 10px;
+  border: 1px solid rgb(225 225 219);
+  text-align: left;
+  vertical-align: top;
+  font-weight: inherit;
+}
+
+.table .table-cell,
+.table .table-cell p,
+.table .table-cell li {
+  margin: 0;
+  color: var(--f-theme-settings-body-color, var(--text-color));
+  font-family: var(--f-theme-settings-body-font-family, var(--body-font-family));
+  font-size: var(--f-theme-settings-body-font-size, var(--body-font-size-m));
+  font-style: var(--f-theme-settings-body-font-style, normal);
+  font-weight: var(--f-theme-settings-body-font-weight, normal);
+  line-height: var(--f-theme-settings-body-line-height, var(--line-height));
+  letter-spacing: var(--f-theme-settings-body-letter-spacing, normal);
+  text-transform: var(--f-theme-settings-body-text-transform, none);
+}
+
+/* Frontify breaks long words anywhere, so narrow tables keep the column proportions */
+.table th *,
+.table td * {
+  overflow-wrap: anywhere;
+}
+
+/* lists: 10px above and below, bullets indented 35px (measured) */
+.table .table-cell ul,
+.table .table-cell ol {
+  margin: 10px 0;
+  padding-left: 35px;
+}
+
+.table .table-cell > :last-child {
+  margin-bottom: 0;
+}
+
+.table .table-cell h1 {
+  margin-top: var(--f-theme-settings-heading1-margin-top, 0);
+  margin-bottom: var(--f-theme-settings-heading1-margin-bottom, 10px);
+  color: var(--f-theme-settings-heading1-color, var(--text-color));
+  font-family: var(--f-theme-settings-heading1-font-family, var(--heading-font-family));
+  font-size: var(--f-theme-settings-heading1-font-size, var(--heading-font-size-m));
+  font-style: var(--f-theme-settings-heading1-font-style, normal);
+  font-weight: var(--f-theme-settings-heading1-font-weight, bold);
+  line-height: var(--f-theme-settings-heading1-line-height, 1.3);
+  letter-spacing: var(--f-theme-settings-heading1-letter-spacing, normal);
+  text-transform: var(--f-theme-settings-heading1-text-transform, none);
+  text-decoration: var(--f-theme-settings-heading1-text-decoration, none);
+}
+
+.table .table-cell h2 {
+  margin-top: var(--f-theme-settings-heading2-margin-top, 0);
+  margin-bottom: var(--f-theme-settings-heading2-margin-bottom, 10px);
+  color: var(--f-theme-settings-heading2-color, var(--text-color));
+  font-family: var(--f-theme-settings-heading2-font-family, var(--heading-font-family));
+  font-size: var(--f-theme-settings-heading2-font-size, var(--heading-font-size-s));
+  font-style: var(--f-theme-settings-heading2-font-style, normal);
+  font-weight: var(--f-theme-settings-heading2-font-weight, bold);
+  line-height: var(--f-theme-settings-heading2-line-height, 1.3);
+  letter-spacing: var(--f-theme-settings-heading2-letter-spacing, normal);
+  text-transform: var(--f-theme-settings-heading2-text-transform, none);
+}
+
+.table .table-cell h3 {
+  margin-top: var(--f-theme-settings-heading3-margin-top, 0);
+  margin-bottom: var(--f-theme-settings-heading3-margin-bottom, 10px);
+  color: var(--f-theme-settings-heading3-color, var(--text-color));
+  font-family: var(--f-theme-settings-heading3-font-family, var(--heading-font-family));
+  font-size: var(--f-theme-settings-heading3-font-size, var(--heading-font-size-xs));
+  font-style: var(--f-theme-settings-heading3-font-style, normal);
+  font-weight: var(--f-theme-settings-heading3-font-weight, bold);
+  line-height: var(--f-theme-settings-heading3-line-height, 1.3);
+  letter-spacing: var(--f-theme-settings-heading3-letter-spacing, normal);
+  text-transform: var(--f-theme-settings-heading3-text-transform, none);
+}
+
+.table .table-cell h4 {
+  margin-top: var(--f-theme-settings-heading4-margin-top, 0);
+  margin-bottom: var(--f-theme-settings-heading4-margin-bottom, 5px);
+  color: var(--f-theme-settings-heading4-color, var(--text-color));
+  font-family: var(--f-theme-settings-heading4-font-family, var(--heading-font-family));
+  font-size: var(--f-theme-settings-heading4-font-size, var(--heading-font-size-xxs));
+  font-style: var(--f-theme-settings-heading4-font-style, normal);
+  font-weight: var(--f-theme-settings-heading4-font-weight, bold);
+  line-height: var(--f-theme-settings-heading4-line-height, 1.3);
+  letter-spacing: var(--f-theme-settings-heading4-letter-spacing, normal);
+  text-transform: var(--f-theme-settings-heading4-text-transform, none);
+}
+
+.table .table-cell a:any-link {
+  color: var(--f-theme-settings-link-color, var(--link-color));
+  font-family: var(--f-theme-settings-link-font-family, inherit);
+  font-size: var(--f-theme-settings-link-font-size, inherit);
+  font-weight: var(--f-theme-settings-link-font-weight, inherit);
+  line-height: var(--f-theme-settings-link-line-height, inherit);
+  text-decoration: var(--f-theme-settings-link-text-decoration, underline);
+}
+
+/* document theme: the legacy table block sits 20px below the cell top and ends 15px above the
+   cell bottom (measured at 1440/768/375, doc 1887 page 11314) */
+.doc-sections .table {
+  padding: 20px 0 15px;
+}

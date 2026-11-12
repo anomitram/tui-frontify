@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "http://localhost:8095/brand/brand-essence/tone-of-voice.html",
+  "path": "the-mora/brand/brand-essence/tone-of-voice",
+  "timestamp": "2026-11-12T06:55:43.603Z",
+  "frontifyPageId": 8282,
+  "originalUrl": "https://tui-brandhub.com/document/1887#/brand-essence/tone-of-voice",
+  "blocks": "{\"Image\":1,\"Text\":13,\"Heading\":7,\"Cards Grid\":15,\"Flip Card\":4}",
+  "notes": "[]",
+  "missing": "[]",
+  "importScript": "288e5a23882d"
+}

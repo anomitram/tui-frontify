@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "http://localhost:8095/brand/application/promotion.html",
+  "path": "the-mora/brand/application/promotion",
+  "timestamp": "2026-11-12T07:43:27.298Z",
+  "frontifyPageId": 10142,
+  "originalUrl": "https://tui-brandhub.com/document/1887#/application/promotion",
+  "blocks": "{\"Text\":2,\"Template\":1}",
+  "notes": "[\"Template block 83283: \\\"Use this Template\\\" opens Frontify's template editor (not migrated); links to the Frontify page\"]",
+  "missing": "[]",
+  "importScript": "390fe185f7ff"
+}

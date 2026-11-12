@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "http://localhost:8095/brand/core-elements/overview-2.html",
+  "path": "the-mora/brand/core-elements/overview-2",
+  "timestamp": "2026-11-12T06:55:51.455Z",
+  "frontifyPageId": 8283,
+  "originalUrl": "https://tui-brandhub.com/document/1887#/core-elements/overview-2",
+  "blocks": "{\"Text\":3,\"Image\":9}",
+  "notes": "[]",
+  "missing": "[]",
+  "importScript": "288e5a23882d"
+}

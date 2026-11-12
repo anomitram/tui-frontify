@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "http://localhost:8095/hotels/branding-toolkits/kids-family.html",
+  "path": "the-mora/hotels/branding-toolkits/kids-family",
+  "timestamp": "2026-11-12T06:57:57.093Z",
+  "frontifyPageId": 8542,
+  "originalUrl": "https://tui-brandhub.com/document/1888#/branding-toolkits/kids-family",
+  "blocks": "{\"Text\":17,\"Heading\":3,\"Image\":4,\"Asset Kit\":2,\"Template\":2}",
+  "notes": "[\"Asset Kit 71997: no package zip; \\\"Download package\\\" links to the Frontify page\",\"Asset Kit 71997: files Edge Delivery cannot serve: The Outliners_Stacked_Charcoal.ai, The Outliners_Stacked_Colour.ai\",\"Asset Kit 72002: no package zip; \\\"Download package\\\" links to the Frontify page\",\"Asset Kit 72002: files Edge Delivery cannot serve: The OutlinersPlay_Logo_Stacked_charcoal.ai\",\"Template block 86554: \\\"Use this Template\\\" opens Frontify's template editor (not migrated); links to the Frontify page\",\"Template block 86555: \\\"Use this Template\\\" opens Frontify's template editor (not migrated); links to the Frontify page\"]",
+  "missing": "[\"asset-566804\",\"asset-566805\",\"asset-566809\"]",
+  "importScript": "288e5a23882d"
+}

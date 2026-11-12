@@ -45,6 +45,7 @@ export function migratedPath(url) {
   const rest = u.slice(CFG.host.length);
   if (rest === '' || rest === '/') return M.root || '/';
   let m = /^\/document\/(\d+)(#.*)?$/.exec(rest);
+  if (m && M.documentPages?.[m[1]]) return M.documentPages[m[1]];
   if (m && docRedirects[m[1]]) {
     const map = docRedirects[m[1]];
     if (map.has(u)) return map.get(u);

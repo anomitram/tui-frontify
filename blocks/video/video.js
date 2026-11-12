@@ -2,7 +2,10 @@
  * Video block (Frontify "Video").
  * 1 column; the single content row holds the video link (optional poster image)
  * followed by optional title paragraph(s).
- * Variants: autoplay, loop, width-<n>px (e.g. width-400px, width-200px).
+ * Variants: autoplay, loop, width-<n>px (e.g. width-400px, width-200px),
+ * no-controls (no player controls and no asset-viewer button, Frontify "controls: none"),
+ * radius-<n>px (corner radius of the video), title-left|center|right (caption alignment),
+ * ratio-<width>-<height> (frame size, used until the file's own size is known).
  */
 
 const INFO_ICON = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2m0 1.5a8.5 8.5 0 100 17 8.5 8.5 0 000-17m-.002 6.385q.39 0 .645.27.254.255.255.645v5.67q0 .39-.255.66a.87.87 0 01-.645.255.88.88 0 01-.646-.255.93.93 0 01-.254-.66V10.8q0-.39.254-.645a.85.85 0 01.646-.27m0-3.284q.524 0 .734.164.21.165.21.586v.284q0 .435-.224.6-.226.15-.736.15t-.72-.165-.21-.585V7.35q0-.435.225-.586.24-.165.721-.164"/></svg>';
@@ -125,13 +128,18 @@ export default function decorate(block) {
   const autoplay = block.classList.contains('autoplay');
   const loop = block.classList.contains('loop');
   const widthClass = [...block.classList].find((c) => /^width-\d+px$/.test(c));
+  const noControls = block.classList.contains('no-controls');
+  const radiusClass = [...block.classList].find((c) => /^radius-\d+px$/.test(c));
 
   const frame = document.createElement('div');
   frame.className = 'video-frame';
   if (widthClass) frame.style.width = widthClass.replace('width-', '');
 
   const video = document.createElement('video');
-  video.controls = true;
+  video.controls = !noControls;
+  if (radiusClass) video.style.borderRadius = radiusClass.replace('radius-', '');
+  const ratio = [...block.classList].map((c) => c.match(/^ratio-(\d+)-(\d+)$/)).find(Boolean);
+  if (ratio) video.style.aspectRatio = `${ratio[1]} / ${ratio[2]}`;
   video.setAttribute('controlslist', 'nodownload');
   video.playsInline = true;
   video.setAttribute('playsinline', '');
@@ -164,7 +172,7 @@ export default function decorate(block) {
     video.pause();
     openViewer(block, href, name, poster);
   });
-  actions.append(info);
+  if (!noControls) actions.append(info);
   frame.append(video, actions);
 
   const container = document.createElement('div');

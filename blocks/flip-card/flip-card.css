@@ -1,0 +1,245 @@
+/* Flip Card (Frontify "Flip Card" marketplace block). Values measured on The Mora captures:
+ * cards stack front and back in one grid cell, so a card is as tall as its taller face (at least
+ * --flip-min-height) and cards in a row share the row height; faces keep their text at the top. */
+.flip-card {
+  --flip-rotate: rotateY(-180deg);
+  --flip-back: rotateY(180deg);
+}
+
+.flip-card.direction-right {
+  --flip-rotate: rotateY(180deg);
+}
+
+.flip-card.direction-up {
+  --flip-rotate: rotateX(180deg);
+  --flip-back: rotateX(180deg);
+}
+
+.flip-card.direction-down {
+  --flip-rotate: rotateX(-180deg);
+  --flip-back: rotateX(180deg);
+}
+
+.flip-card .flip-card-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--flip-cols, 1), minmax(0, 1fr));
+  gap: var(--flip-gap, 5px);
+}
+
+.flip-card .flip-card-card {
+  display: grid;
+  min-width: 0;
+  perspective: var(--flip-perspective, 600px);
+  outline-offset: 2px;
+}
+
+.flip-card .flip-card-inner {
+  display: grid;
+  min-height: var(--flip-min-height, 0);
+  transform-style: preserve-3d;
+  transition: transform var(--flip-duration, 500ms) var(--flip-timing, ease-in-out);
+}
+
+.flip-card.hover .flip-card-card:hover .flip-card-inner,
+.flip-card.hover .flip-card-card:focus-within .flip-card-inner,
+.flip-card.click .flip-card-card.is-flipped .flip-card-inner {
+  transform: var(--flip-rotate);
+}
+
+.flip-card.click .flip-card-card {
+  cursor: pointer;
+}
+
+.flip-card .flip-card-face {
+  grid-area: 1 / 1;
+  position: relative;
+  box-sizing: border-box;
+  min-width: 0;
+  overflow: hidden;
+  padding: var(--flip-padding, 0);
+  border: var(--flip-border, none);
+  border-radius: var(--flip-radius, 0);
+  box-shadow: var(--flip-shadow, none);
+  color: var(--fc-color, var(--f-theme-settings-body-color));
+  backface-visibility: hidden;
+  overflow-wrap: break-word;
+}
+
+.flip-card .flip-card-front {
+  --fc-color: var(--front-color);
+  --fc-size: var(--front-size, cover);
+  --fc-position: var(--front-position, center);
+
+  background-color: var(--front-bg, transparent);
+}
+
+.flip-card .flip-card-back {
+  --fc-color: var(--back-color);
+  --fc-size: var(--back-size, cover);
+  --fc-position: var(--back-position, center);
+
+  background-color: var(--back-bg, transparent);
+  transform: var(--flip-back);
+}
+
+/* face picture = Frontify's face background image (background-size contain|cover) */
+.flip-card .flip-card-media {
+  position: absolute;
+  inset: 0;
+}
+
+.flip-card .flip-card-media picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.flip-card .flip-card-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: var(--fc-size, cover);
+  object-position: var(--fc-position, center);
+}
+
+.flip-card .flip-card-content {
+  position: relative;
+}
+
+/* text styles: the theme's Frontify text styles, in the face colour */
+.flip-card .flip-card-content :is(p, li, ul, ol) {
+  margin: var(--f-theme-settings-body-margin-top, 0) 0 var(--f-theme-settings-body-margin-bottom, 0);
+  color: var(--fc-color, var(--f-theme-settings-body-color));
+  font-family: var(--f-theme-settings-body-font-family);
+  font-size: var(--f-theme-settings-body-font-size);
+  font-style: var(--f-theme-settings-body-font-style);
+  font-weight: var(--f-theme-settings-body-font-weight);
+  line-height: var(--f-theme-settings-body-line-height);
+  letter-spacing: var(--f-theme-settings-body-letter-spacing);
+  text-transform: var(--f-theme-settings-body-text-transform);
+  text-decoration: var(--f-theme-settings-body-text-decoration);
+}
+
+.flip-card .flip-card-content :is(ul, ol) {
+  padding-left: 1.5em;
+}
+
+.flip-card .flip-card-content li {
+  margin: 0;
+}
+
+.flip-card .flip-card-content .heading1 {
+  margin: var(--f-theme-settings-heading1-margin-top) 0 var(--f-theme-settings-heading1-margin-bottom);
+  color: var(--fc-color, var(--f-theme-settings-heading1-color));
+  font-family: var(--f-theme-settings-heading1-font-family);
+  font-size: var(--f-theme-settings-heading1-font-size);
+  font-style: var(--f-theme-settings-heading1-font-style);
+  font-weight: var(--f-theme-settings-heading1-font-weight);
+  line-height: var(--f-theme-settings-heading1-line-height);
+  letter-spacing: var(--f-theme-settings-heading1-letter-spacing);
+  text-transform: var(--f-theme-settings-heading1-text-transform);
+  text-decoration: var(--f-theme-settings-heading1-text-decoration);
+}
+
+.flip-card .flip-card-content .heading2 {
+  margin: var(--f-theme-settings-heading2-margin-top) 0 var(--f-theme-settings-heading2-margin-bottom);
+  color: var(--fc-color, var(--f-theme-settings-heading2-color));
+  font-family: var(--f-theme-settings-heading2-font-family);
+  font-size: var(--f-theme-settings-heading2-font-size);
+  font-style: var(--f-theme-settings-heading2-font-style);
+  font-weight: var(--f-theme-settings-heading2-font-weight);
+  line-height: var(--f-theme-settings-heading2-line-height);
+  letter-spacing: var(--f-theme-settings-heading2-letter-spacing);
+  text-transform: var(--f-theme-settings-heading2-text-transform);
+  text-decoration: var(--f-theme-settings-heading2-text-decoration);
+}
+
+.flip-card .flip-card-content .heading3 {
+  margin: var(--f-theme-settings-heading3-margin-top) 0 var(--f-theme-settings-heading3-margin-bottom);
+  color: var(--fc-color, var(--f-theme-settings-heading3-color));
+  font-family: var(--f-theme-settings-heading3-font-family);
+  font-size: var(--f-theme-settings-heading3-font-size);
+  font-style: var(--f-theme-settings-heading3-font-style);
+  font-weight: var(--f-theme-settings-heading3-font-weight);
+  line-height: var(--f-theme-settings-heading3-line-height);
+  letter-spacing: var(--f-theme-settings-heading3-letter-spacing);
+  text-transform: var(--f-theme-settings-heading3-text-transform);
+  text-decoration: var(--f-theme-settings-heading3-text-decoration);
+}
+
+.flip-card .flip-card-content .heading4 {
+  margin: var(--f-theme-settings-heading4-margin-top) 0 var(--f-theme-settings-heading4-margin-bottom);
+  color: var(--fc-color, var(--f-theme-settings-heading4-color));
+  font-family: var(--f-theme-settings-heading4-font-family);
+  font-size: var(--f-theme-settings-heading4-font-size);
+  font-style: var(--f-theme-settings-heading4-font-style);
+  font-weight: var(--f-theme-settings-heading4-font-weight);
+  line-height: var(--f-theme-settings-heading4-line-height);
+  letter-spacing: var(--f-theme-settings-heading4-letter-spacing);
+  text-transform: var(--f-theme-settings-heading4-text-transform);
+  text-decoration: var(--f-theme-settings-heading4-text-decoration);
+}
+
+.flip-card .flip-card-content .custom1 {
+  margin: var(--f-theme-settings-custom1-margin-top) 0 var(--f-theme-settings-custom1-margin-bottom);
+  color: var(--fc-color, var(--f-theme-settings-custom1-color));
+  font-family: var(--f-theme-settings-custom1-font-family);
+  font-size: var(--f-theme-settings-custom1-font-size);
+  font-style: var(--f-theme-settings-custom1-font-style);
+  font-weight: var(--f-theme-settings-custom1-font-weight);
+  line-height: var(--f-theme-settings-custom1-line-height);
+  letter-spacing: var(--f-theme-settings-custom1-letter-spacing);
+  text-transform: var(--f-theme-settings-custom1-text-transform);
+  text-decoration: var(--f-theme-settings-custom1-text-decoration);
+}
+
+.flip-card .flip-card-content .custom2 {
+  margin: var(--f-theme-settings-custom2-margin-top) 0 var(--f-theme-settings-custom2-margin-bottom);
+  color: var(--fc-color, var(--f-theme-settings-custom2-color));
+  font-family: var(--f-theme-settings-custom2-font-family);
+  font-size: var(--f-theme-settings-custom2-font-size);
+  font-style: var(--f-theme-settings-custom2-font-style);
+  font-weight: var(--f-theme-settings-custom2-font-weight);
+  line-height: var(--f-theme-settings-custom2-line-height);
+  letter-spacing: var(--f-theme-settings-custom2-letter-spacing);
+  text-transform: var(--f-theme-settings-custom2-text-transform);
+  text-decoration: var(--f-theme-settings-custom2-text-decoration);
+}
+
+.flip-card .flip-card-content .custom3 {
+  margin: var(--f-theme-settings-custom3-margin-top) 0 var(--f-theme-settings-custom3-margin-bottom);
+  color: var(--fc-color, var(--f-theme-settings-custom3-color));
+  font-family: var(--f-theme-settings-custom3-font-family);
+  font-size: var(--f-theme-settings-custom3-font-size);
+  font-style: var(--f-theme-settings-custom3-font-style);
+  font-weight: var(--f-theme-settings-custom3-font-weight);
+  line-height: var(--f-theme-settings-custom3-line-height);
+  letter-spacing: var(--f-theme-settings-custom3-letter-spacing);
+  text-transform: var(--f-theme-settings-custom3-text-transform);
+  text-decoration: var(--f-theme-settings-custom3-text-decoration);
+}
+
+.flip-card .flip-card-content .quote,
+.flip-card .flip-card-content .quote p {
+  margin: var(--f-theme-settings-quote-margin-top) 0 var(--f-theme-settings-quote-margin-bottom);
+  color: var(--fc-color, var(--f-theme-settings-quote-color));
+  font-family: var(--f-theme-settings-quote-font-family);
+  font-size: var(--f-theme-settings-quote-font-size);
+  font-style: var(--f-theme-settings-quote-font-style);
+  font-weight: var(--f-theme-settings-quote-font-weight);
+  line-height: var(--f-theme-settings-quote-line-height);
+  letter-spacing: var(--f-theme-settings-quote-letter-spacing);
+  text-transform: var(--f-theme-settings-quote-text-transform);
+  text-decoration: var(--f-theme-settings-quote-text-decoration);
+}
+
+.flip-card .flip-card-content a:any-link {
+  color: var(--f-theme-settings-link-color);
+  text-decoration: var(--f-theme-settings-link-text-decoration);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flip-card .flip-card-inner {
+    transition: none;
+  }
+}

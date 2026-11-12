@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "http://localhost:8095/hotels/branding-toolkits/overview-2.html",
+  "path": "the-mora/hotels/branding-toolkits/overview-2",
+  "timestamp": "2026-11-12T06:57:32.509Z",
+  "frontifyPageId": 8545,
+  "originalUrl": "https://tui-brandhub.com/document/1888#/branding-toolkits/overview-2",
+  "blocks": "{\"Text\":2,\"Image\":7}",
+  "notes": "[]",
+  "missing": "[]",
+  "importScript": "288e5a23882d"
+}

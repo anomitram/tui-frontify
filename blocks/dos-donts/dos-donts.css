@@ -1,0 +1,145 @@
+/* Dos Donts (Frontify "Do & Don't" block). Measured on The Mora captures (1440/768/375):
+ * 1 column, 2 from a 440px block width, 3 (columns-3) from 740px (Frontify's @sm/@md container
+ * sizes); image 12px radius + 12px gap; 3px line (radius 4px) 12px above and below; body text in
+ * the theme's body style. */
+.dos-donts {
+  --dd-do: var(--dd-do-color, rgb(0 200 165));
+  --dd-dont: var(--dd-dont-color, rgb(255 55 90));
+
+  container-type: inline-size;
+}
+
+.dos-donts .dos-donts-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--dd-row-gap, 30px) var(--dd-col-gap, 30px);
+}
+
+@container (width >= 440px) {
+  .dos-donts:is(.columns-2, .columns-3, .columns-4) .dos-donts-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@container (width >= 740px) {
+  .dos-donts.columns-3 .dos-donts-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .dos-donts.columns-4 .dos-donts-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.dos-donts .dos-donts-item {
+  --dd-color: var(--dd-dont);
+
+  position: relative;
+  min-width: 0;
+  box-sizing: border-box;
+  border: var(--dd-border, 0 none);
+  border-radius: var(--dd-radius, 0);
+}
+
+.dos-donts .dos-donts-item.is-do {
+  --dd-color: var(--dd-do);
+}
+
+.dos-donts .dos-donts-image {
+  position: relative;
+  overflow: hidden;
+  height: var(--dd-image-height, auto);
+  margin-bottom: 12px;
+  border-radius: 12px;
+}
+
+.dos-donts .dos-donts-image picture {
+  display: block;
+  height: 100%;
+}
+
+.dos-donts .dos-donts-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dos-donts.image-fit .dos-donts-image {
+  background-color: var(--dd-bg, transparent);
+}
+
+.dos-donts.image-fit .dos-donts-image img {
+  object-fit: contain;
+}
+
+.dos-donts.mode-text .dos-donts-image {
+  display: none;
+}
+
+.dos-donts .dos-donts-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  color: var(--dd-color);
+  font-weight: 600;
+}
+
+.dos-donts .dos-donts-title {
+  font-size: var(--f-theme-settings-heading3-font-size);
+  line-height: var(--f-theme-settings-heading3-line-height);
+  overflow-wrap: break-word;
+}
+
+.dos-donts .dos-donts-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.dos-donts .dos-donts-icon {
+  display: flex;
+  flex: none;
+}
+
+.dos-donts .dos-donts-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.dos-donts .dos-donts-line {
+  height: 3px;
+  margin: 12px 0;
+  border-radius: 4px;
+  background-color: var(--dd-color);
+}
+
+.dos-donts .dos-donts-text {
+  margin-top: 8px;
+}
+
+.dos-donts .dos-donts-text :is(p, li) {
+  margin: var(--f-theme-settings-body-margin-top, 0) 0 var(--f-theme-settings-body-margin-bottom, 0);
+  color: var(--f-theme-settings-body-color);
+  font-family: var(--f-theme-settings-body-font-family);
+  font-size: var(--f-theme-settings-body-font-size);
+  font-style: var(--f-theme-settings-body-font-style);
+  font-weight: var(--f-theme-settings-body-font-weight);
+  line-height: var(--f-theme-settings-body-line-height);
+  letter-spacing: var(--f-theme-settings-body-letter-spacing);
+  text-transform: var(--f-theme-settings-body-text-transform);
+  text-decoration: var(--f-theme-settings-body-text-decoration);
+  overflow-wrap: break-word;
+}
+
+.dos-donts .dos-donts-text a:any-link {
+  color: var(--f-theme-settings-link-color);
+  text-decoration: var(--f-theme-settings-link-text-decoration);
+}
+
+.dos-donts.strikethrough .is-dont .dos-donts-text {
+  text-decoration: line-through;
+}

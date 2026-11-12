@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "http://localhost:8095/libraries/-/overview.html",
+  "path": "the-mora/libraries/overview",
+  "timestamp": "2026-11-12T06:58:17.670Z",
+  "frontifyPageId": 8299,
+  "originalUrl": "https://tui-brandhub.com/document/1893#/-/overview",
+  "blocks": "{\"Text\":2,\"Image\":4}",
+  "notes": "[]",
+  "missing": "[]",
+  "fragments": [
+    "the-mora/libraries"
+  ],
+  "importScript": "288e5a23882d"
+}

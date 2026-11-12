@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-11",
+ "updated": "2026-11-12",
  "note": "Status data for SITEMAP.md. Edit here, then run tools/frontify-export/write_sitemap.py.",
  "surfaces_legend": "local = content/ in this repo; DA = Document Authoring; preview = .aem.page; live = .aem.live",
  "document_396": {
@@ -47,6 +47,130 @@
     "/tuimagiclife/footer"
    ],
    "status": "migrated: local, DA, preview, live; re-published 17:00 UTC 2026-11-11 with descriptive image names. Rendering of the new publish not checked (site answers 401 since ~16:50 UTC)"
+  },
+  {
+   "title": "The Mora brand home (document 1896, single cover page)",
+   "portal": 292,
+   "url": "https://tui-brandhub.com/document/1896#/-/cover",
+   "paths": [
+    "/the-mora",
+    "/the-mora/nav",
+    "/the-mora/footer"
+   ],
+   "status": "migrated: local only (2026-11-12); template doc-cover, theme the-mora; homepage tile \"the mora\" links to it. Not uploaded to DA, previewed or published yet"
+  },
+  {
+   "title": "The Mora: Brand (document 1887, 23 pages)",
+   "portal": 292,
+   "url": "https://tui-brandhub.com/document/1887",
+   "paths": [
+    "/the-mora/brand",
+    "/the-mora/brand/sidebar",
+    "/the-mora/brand/content/overview",
+    "/the-mora/brand/brand-essence/overview-1",
+    "/the-mora/brand/brand-essence/strategy",
+    "/the-mora/brand/brand-essence/target-group-1",
+    "/the-mora/brand/brand-essence/concept",
+    "/the-mora/brand/brand-essence/tone-of-voice",
+    "/the-mora/brand/brand-essence/ai-code-of-conduct",
+    "/the-mora/brand/core-elements/overview-2",
+    "/the-mora/brand/core-elements/logotype",
+    "/the-mora/brand/core-elements/colours",
+    "/the-mora/brand/core-elements/textures",
+    "/the-mora/brand/core-elements/typography",
+    "/the-mora/brand/core-elements/photography",
+    "/the-mora/brand/core-elements/outlines",
+    "/the-mora/brand/core-elements/layouts",
+    "/the-mora/brand/core-elements/iconography",
+    "/the-mora/brand/core-elements/motion",
+    "/the-mora/brand/application/overview-3",
+    "/the-mora/brand/application/inspiration",
+    "/the-mora/brand/application/teams-backgrounds",
+    "/the-mora/brand/application/social-media",
+    "/the-mora/brand/application/b2b",
+    "/the-mora/brand/application/promotion"
+   ],
+   "status": "migrated: local only (2026-11-12); template guideline + layout doc-sections, theme the-mora; sections within 3px of the capture at 1440/768/375 (see CONTEXT). Not uploaded to DA, previewed or published yet"
+  },
+  {
+   "title": "The Mora: Hotels (document 1888, 13 pages)",
+   "portal": 292,
+   "url": "https://tui-brandhub.com/document/1888",
+   "paths": [
+    "/the-mora/hotels",
+    "/the-mora/hotels/sidebar",
+    "/the-mora/hotels/content/overview",
+    "/the-mora/hotels/hotel-expression/overview-1",
+    "/the-mora/hotels/hotel-expression/sub-brands-framework",
+    "/the-mora/hotels/hotel-expression/wayfinding",
+    "/the-mora/hotels/hotel-expression/environments",
+    "/the-mora/hotels/branding-toolkits/overview-2",
+    "/the-mora/hotels/branding-toolkits/public-areas",
+    "/the-mora/hotels/branding-toolkits/reception",
+    "/the-mora/hotels/branding-toolkits/guest-rooms",
+    "/the-mora/hotels/branding-toolkits/food-beverage",
+    "/the-mora/hotels/branding-toolkits/kids-family",
+    "/the-mora/hotels/branding-toolkits/fitness-wellbeing-1",
+    "/the-mora/hotels/branding-toolkits/pool-beach"
+   ],
+   "status": "migrated: local only (2026-11-12); template guideline + layout doc-sections, theme the-mora; sections within 3px of the capture at 1440/768/375 (see CONTEXT). Not uploaded to DA, previewed or published yet"
+  },
+  {
+   "title": "The Mora: Support (document 1889, 1 pages)",
+   "portal": 292,
+   "url": "https://tui-brandhub.com/document/1889",
+   "paths": [
+    "/the-mora/support",
+    "/the-mora/support/sidebar",
+    "/the-mora/support/contact-feedback/contact-information"
+   ],
+   "status": "migrated: local only (2026-11-12); template guideline + layout doc-sections, theme the-mora; sections within 3px of the capture at 1440/768/375 (see CONTEXT). Not uploaded to DA, previewed or published yet"
+  },
+  {
+   "title": "The Mora: Libraries Overview (document 1893, 1 pages)",
+   "portal": 292,
+   "url": "https://tui-brandhub.com/document/1893",
+   "paths": [
+    "/the-mora/libraries",
+    "/the-mora/libraries/overview"
+   ],
+   "status": "migrated: local only (2026-11-12); template guideline + layout doc-sections, theme the-mora; sections within 3px of the capture at 1440/768/375 (see CONTEXT). Not uploaded to DA, previewed or published yet"
+  },
+  {
+   "title": "The Mora: library Logotypes (document 1891)",
+   "portal": 292,
+   "url": "https://tui-brandhub.com/document/1891",
+   "paths": [
+    "/the-mora/libraries/logotypes"
+   ],
+   "status": "migrated: local only (2026-11-12); template library (asset grid, local search/filters); originals stay on Frontify (tiles link there, SVGs download locally). Not uploaded/published"
+  },
+  {
+   "title": "The Mora: library Media (document 1892)",
+   "portal": 292,
+   "url": "https://tui-brandhub.com/document/1892",
+   "paths": [
+    "/the-mora/libraries/media"
+   ],
+   "status": "migrated: local only (2026-11-12); template library (asset grid, local search/filters); originals stay on Frontify (tiles link there, SVGs download locally). Not uploaded/published"
+  },
+  {
+   "title": "The Mora: library Iconography (document 1894)",
+   "portal": 292,
+   "url": "https://tui-brandhub.com/document/1894",
+   "paths": [
+    "/the-mora/libraries/iconography"
+   ],
+   "status": "migrated: local only (2026-11-12); template library (asset grid, local search/filters); originals stay on Frontify (tiles link there, SVGs download locally). Not uploaded/published"
+  },
+  {
+   "title": "The Mora: library Documents (document 1908)",
+   "portal": 292,
+   "url": "https://tui-brandhub.com/document/1908",
+   "paths": [
+    "/the-mora/libraries/documents"
+   ],
+   "status": "migrated: local only (2026-11-12); template library (asset grid, local search/filters); originals stay on Frontify (tiles link there, SVGs download locally). Not uploaded/published"
   }
  ],
  "portals": [
@@ -67,6 +191,12 @@
    "title": "TUI MAGIC LIFE",
    "home": "migrated (/tuimagiclife)",
    "documents": "none migrated. In its navigation: documents 708, 710, 753, 755, 757, 766, 842, 933, 1169, 1226, 1506, 1833, 2428; document 758 is linked from the home but not in the navigation"
+  },
+  {
+   "portal": 292,
+   "title": "The Mora brand home",
+   "home": "not migrated (the portal home was not requested)",
+   "documents": "all migrated: 1896 Home -> /the-mora; 1887 Brand, 1888 Hotels, 1889 Support, 1893 Libraries Overview (guideline pages); libraries 1891 Logotypes, 1892 Media, 1894 Iconography, 1908 Documents"
   }
  ],
  "not_migrated": [
@@ -941,19 +1071,6 @@
    "title_source": "document/portal API (title lookup)",
    "urls": [
     "https://tui-brandhub.com/document/1879?#/dine-discover/dine-discover"
-   ],
-   "linked_from_doc396": 0,
-   "linked_from_hub162": 0,
-   "status": "not migrated (out of scope)",
-   "linked_from_hub161": 2
-  },
-  {
-   "kind": "document",
-   "id": 1896,
-   "title": "Home",
-   "title_source": "document/portal API (title lookup)",
-   "urls": [
-    "https://tui-brandhub.com/document/1896#/-/cover"
    ],
    "linked_from_doc396": 0,
    "linked_from_hub162": 0,

@@ -1,0 +1,16 @@
+{
+  "status": "success",
+  "url": "http://localhost:8095/brand/content/overview.html",
+  "path": "the-mora/brand/content/overview",
+  "timestamp": "2026-11-12T06:55:21.792Z",
+  "frontifyPageId": 8275,
+  "originalUrl": "https://tui-brandhub.com/document/1887#/content/overview",
+  "blocks": "{\"Text\":3,\"Image\":3}",
+  "notes": "[]",
+  "missing": "[]",
+  "fragments": [
+    "the-mora/brand/sidebar",
+    "the-mora/brand"
+  ],
+  "importScript": "288e5a23882d"
+}

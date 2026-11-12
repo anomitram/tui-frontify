@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "http://localhost:8095/brand/core-elements/layouts.html",
+  "path": "the-mora/brand/core-elements/layouts",
+  "timestamp": "2026-11-12T06:56:25.285Z",
+  "frontifyPageId": 8290,
+  "originalUrl": "https://tui-brandhub.com/document/1887#/core-elements/layouts",
+  "blocks": "{\"Image\":24,\"Text\":23,\"Heading\":6,\"Annotations\":5,\"Do & Don't\":1}",
+  "notes": "[]",
+  "missing": "[]",
+  "importScript": "288e5a23882d"
+}

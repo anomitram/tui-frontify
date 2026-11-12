@@ -57,7 +57,16 @@ export function parseSidebar(root) {
   }).filter(Boolean);
 }
 
+/*
+ * Pages in Frontify's new document theme (body class "doc-sections", e.g. The Mora): all categories
+ * stay expanded (sidebarItemNestingChoice "always-visible"), the pagination stays inside the
+ * current category and is left out on a category's first page, and the first heading counts as
+ * active until another one is scrolled to (all measured on the captures).
+ */
+const isDocTheme = () => document.body.classList.contains('doc-sections');
+
 function renderSidebar(categories, current) {
+  const docTheme = isDocTheme();
   const nav = document.createElement('nav');
   nav.className = 'guideline-sidebar';
   nav.setAttribute('aria-label', 'Guideline navigation');
@@ -78,17 +87,20 @@ function renderSidebar(categories, current) {
       return;
     }
     const li = document.createElement('li');
-    li.className = `category${isCurrentCat ? ' open active' : ''}`;
+    const open = isCurrentCat || docTheme;
+    li.className = `category${open ? ' open' : ''}${isCurrentCat ? ' active' : ''}`;
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'category-title';
     btn.textContent = cat.title;
-    btn.setAttribute('aria-expanded', isCurrentCat ? 'true' : 'false');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
     btn.setAttribute('aria-controls', `sidebar-cat-${ci}`);
-    btn.addEventListener('click', () => {
-      const open = li.classList.toggle('open');
-      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
+    if (!docTheme) {
+      btn.addEventListener('click', () => {
+        const isOpen = li.classList.toggle('open');
+        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+    }
     li.append(btn);
     const pages = document.createElement('ul');
     pages.id = `sidebar-cat-${ci}`;
@@ -196,12 +208,87 @@ function pagination(flat, current) {
   return navEl;
 }
 
+/* Frontify's caret icons (inline, so they take the theme colour) */
+const DOC_CARETS = {
+  prev: 'M16.31 19.78a.75.75 0 01-1.06 0L8 12.53 7.47 12l.53-.53 7.25-7.25a.75.75 0 011.06 1.06L9.59 12l6.72 6.72a.75.75 0 010 1.06',
+  next: 'M7.69 4.22a.75.75 0 011.06 0L16 11.47l.53.53-.53.53-7.25 7.25a.75.75 0 01-1.06-1.06L14.41 12 7.69 5.28a.75.75 0 010-1.06',
+};
+
+/**
+ * Document theme pagination: previous / next page of the current category, two halves around a 1px
+ * divider (Frontify markup: row > box (max 1200px + content padding) > nav > grid 1fr 1px 1fr).
+ * Not shown on a category's first page.
+ */
+function docPagination(categories, current) {
+  // Frontify: previous/next page in document order, across categories (e.g. the last page of a
+  // category links to the first page of the next one); a page can hide it ("Pagination: hide",
+  // from the page's resolved theme setting paginationVisibility).
+  if (getMetadata('pagination') === 'hide') return null;
+  const pages = categories.flatMap((c) => c.pages.filter((p) => !p.hidden)
+    .map((p) => ({ ...p, category: c.title || p.label || '' })));
+  const i = pages.findIndex((p) => p.href === current);
+  // the first page of a document has none (measured: no capture shows a lone "next")
+  if (i < 1) return null;
+  const make = (p, dir) => {
+    const a = document.createElement('a');
+    a.href = p.href;
+    a.className = dir;
+    a.setAttribute('aria-label', `${dir === 'prev' ? 'Previous' : 'Next'} page: ${p.title}`);
+    a.innerHTML = `<span class="label"><span class="category"></span><span class="title"></span></span><span class="caret"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="${DOC_CARETS[dir]}"/></svg></span>`;
+    a.querySelector('.category').textContent = p.category;
+    a.querySelector('.title').textContent = p.title;
+    return a;
+  };
+  const row = document.createElement('div');
+  row.className = 'guideline-pagination-row';
+  const box = document.createElement('div');
+  box.className = 'guideline-pagination-box';
+  const nav = document.createElement('nav');
+  nav.className = 'guideline-pagination';
+  nav.setAttribute('aria-label', 'Pagination of the current page');
+  const grid = document.createElement('div');
+  grid.className = 'guideline-pagination-grid';
+  const prev = document.createElement('div');
+  prev.className = 'slot prev-slot';
+  if (pages[i - 1]) prev.append(make(pages[i - 1], 'prev'));
+  else prev.setAttribute('aria-hidden', 'true');
+  const divider = document.createElement('hr');
+  divider.setAttribute('aria-orientation', 'vertical');
+  const next = document.createElement('div');
+  next.className = 'slot next-slot';
+  if (pages[i + 1]) next.append(make(pages[i + 1], 'next'));
+  else next.setAttribute('aria-hidden', 'true');
+  grid.append(prev, divider, next);
+  nav.append(grid);
+  box.append(nav);
+  row.append(box);
+  return row;
+}
+
+/**
+ * Frontify lays the page out in a table that grows to the widest content: on narrow screens a
+ * pagination wider than the content column widens the column (up to 100vw, the right part then
+ * scrolls). Expose the pagination's min-content width for the column's min-width.
+ */
+function fitDocPagination(content, row) {
+  const nav = row.querySelector('.guideline-pagination');
+  const measure = () => {
+    nav.style.width = 'min-content';
+    const w = nav.getBoundingClientRect().width;
+    nav.style.width = '';
+    content.style.setProperty('--pagination-min-width', `${Math.ceil(w)}px`);
+  };
+  measure();
+  document.fonts?.ready.then(measure);
+  document.fonts?.addEventListener?.('loadingdone', measure);
+}
+
 function scrollSpy(sidebar) {
   const items = [...sidebar.querySelectorAll('.page.active .heading')];
   if (!items.length) return;
   const targets = items.map((li) => document.getElementById(li.dataset.slug)).filter(Boolean);
   const update = () => {
-    let active = null;
+    let active = isDocTheme() && targets[0] ? targets[0].id : null;
     targets.forEach((t) => { if (t.getBoundingClientRect().top < window.innerHeight * 0.3) active = t.id; }); // eslint-disable-line max-len
     items.forEach((li) => li.classList.toggle('active', li.dataset.slug === active));
   };
@@ -231,6 +318,35 @@ export function decorateGuidelineLayout(main) {
   const placeholder = document.createElement('nav');
   placeholder.className = 'guideline-sidebar';
   main.append(placeholder, content);
+  // metadata "Sidebar: none" (document with one uncategorised page): known before first paint
+  if (getMetadata('sidebar') === 'none') document.body.classList.add('no-sidebar');
+}
+
+/**
+ * The sidebar's heading links carry the Frontify slugs as "#slug", but publishing drops the "#..."
+ * of same-site links. Fill missing slugs from scripts/guideline-slugs.json (the exported Frontify
+ * slugs per page, in order; tools/frontify-export/write_heading_slugs.py).
+ */
+async function fillMissingSlugs(categories) {
+  const pages = categories.flatMap((c) => c.pages);
+  if (!pages.some((p) => p.headings.some((h) => !h.slug))) return;
+  let known = {};
+  try {
+    const res = await fetch(`${window.hlx.codeBasePath}/scripts/guideline-slugs.json`);
+    if (res.ok) known = await res.json();
+  } catch (e) { /* fall back to text-derived slugs */ }
+  const norm = (t) => t.replace(/\s+/g, ' ').trim().toLowerCase();
+  pages.forEach((p) => {
+    const list = (known[p.href] || [])
+      .map(([title, slug]) => ({ title: norm(title), slug, used: false }));
+    p.headings.forEach((h) => {
+      if (h.slug) return;
+      const hit = list.find((k) => !k.used && k.title === norm(h.title));
+      if (hit) hit.used = true;
+      h.slug = hit ? hit.slug
+        : norm(h.title).replace(/[^0-9a-z]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+    });
+  });
 }
 
 /** Async part: sidebar, anchors, pagination, last modified. */
@@ -238,8 +354,12 @@ export async function loadGuideline(main) {
   const current = normalizePath(window.location.pathname);
   let categories = [];
   try {
-    const frag = await loadFragment(contentPath('/sidebar'));
+    // per-document sidebar (metadata "Sidebar", e.g. /the-mora/brand/sidebar); doc 396: /sidebar
+    const sidebarMeta = getMetadata('sidebar');
+    const sidebarPath = sidebarMeta ? new URL(sidebarMeta, window.location).pathname : '/sidebar';
+    const frag = sidebarMeta === 'none' ? null : await loadFragment(contentPath(sidebarPath));
     if (frag) categories = parseSidebar(frag);
+    await fillMissingSlugs(categories);
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error('sidebar failed to load', e);
@@ -255,18 +375,33 @@ export async function loadGuideline(main) {
   localizeLinks(sidebar);
 
   const content = main.querySelector('.guideline-content');
-  const pag = pagination(flat, current);
+  const docTheme = isDocTheme();
+  // document theme: a document with a single uncategorised page has no sidebar (measured)
+  const single = flat.filter((p) => !p.hidden).length <= 1
+    && categories.every((c) => c.title === null);
+  if (docTheme && single) document.body.classList.add('no-sidebar');
+  const pag = docTheme ? docPagination(categories, current) : pagination(flat, current);
   if (pag) {
     content.append(pag);
     decorateIcons(pag);
     localizeLinks(pag);
+    if (docTheme) fitDocPagination(content, pag);
   }
   const lm = getMetadata('last-modified');
   if (lm) {
     const p = document.createElement('p');
     p.className = 'guideline-last-modified';
     p.textContent = `Last modified on ${lm}`;
-    content.append(p);
+    if (docTheme) {
+      // same row + box as the pagination (Frontify markup)
+      const row = document.createElement('div');
+      row.className = 'guideline-last-modified-row';
+      const box = document.createElement('div');
+      box.className = 'guideline-last-modified-box';
+      box.append(p);
+      row.append(box);
+      content.append(row);
+    } else content.append(p);
   }
   scrollSpy(sidebar);
   goToTop();

@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "http://localhost:8094/media.html",
+  "path": "the-mora/libraries/media",
+  "timestamp": "2026-11-12T07:27:37.899Z",
+  "frontifyDocument": 1892,
+  "originalUrl": "https://tui-brandhub.com/document/1892",
+  "assets": 766,
+  "collections": 8,
+  "notes": "[\"filters not migrated: Hotel, AI Label\",\"Frontify shows \\\"781 items\\\", the export has 766\"]",
+  "importScript": "0d15d90d495b"
+}

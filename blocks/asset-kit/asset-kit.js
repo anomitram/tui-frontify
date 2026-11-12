@@ -5,10 +5,14 @@
  * `Package | link`, `Border | css border`, `Thumbnail background | css colour`,
  * then one row per asset: thumbnail | link to file | title | extension.
  * Block classes: thumbnails, count, border, background, thumbnail-border,
- * thumbnail-background, radius-<none|small|medium|large>.
+ * thumbnail-background, radius-<none|small|medium|large>; optional row `Radius | css radius`.
+ * New Frontify document theme (body class doc-sections): the thumbnails/count classes are
+ * explicit (none = neither is shown, the empty list keeps its spacing), and a kit without a
+ * Package row links "Download package" to the Frontify page (metadata "Original Url"), because
+ * Edge Delivery cannot serve Frontify's zip of the kit.
  */
 
-const META_KEYS = ['title', 'description', 'package', 'border', 'thumbnail background', 'background'];
+const META_KEYS = ['title', 'description', 'package', 'border', 'thumbnail background', 'background', 'radius'];
 const DOWNLOAD_ICON = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M12 3.25a.75.75 0 01.75.75v9.19l3.22-3.22a.75.75 0 111.06 1.06l-4.5 4.5a.75.75 0 01-1.06 0l-4.5-4.5a.75.75 0 111.06-1.06l3.22 3.22V4a.75.75 0 01.75-.75M4.75 15a.75.75 0 01.75.75v2.5c0 .414.336.75.75.75h11.5a.75.75 0 00.75-.75v-2.5a.75.75 0 011.5 0v2.5A2.250 2.250 0 0117.75 20.5H6.25A2.250 2.250 0 014 18.25v-2.5a.75.75 0 01.75-.75"/></svg>';
 
 const text = (el) => (el?.textContent || '').replace(/\s+/g, ' ').trim();
@@ -100,7 +104,8 @@ export default function decorate(block) {
   });
 
   const cls = block.classList;
-  const hasFlags = ['thumbnails', 'count'].some((c) => cls.contains(c));
+  const newTheme = document.body.classList.contains('doc-sections');
+  const hasFlags = newTheme || ['thumbnails', 'count'].some((c) => cls.contains(c));
   const showThumbnails = !hasFlags || cls.contains('thumbnails');
   const showCount = !hasFlags || cls.contains('count');
 
@@ -108,6 +113,10 @@ export default function decorate(block) {
   container.className = 'asset-kit-container';
   if (cls.contains('border')) {
     container.style.border = text(meta.border) || '1px solid rgb(230 230 230)';
+  }
+  const radius = text(meta.radius);
+  if (/^\d+(\.\d+)?(px|rem|em|%)?( \d+(\.\d+)?(px|rem|em|%)?){0,3}$/.test(radius)) {
+    container.style.borderRadius = radius.replace(/(\d)(?=\s|$)/g, '$1px');
   }
   if (cls.contains('background')) {
     container.style.backgroundColor = text(meta.background) || 'rgb(241 241 241)';
@@ -142,7 +151,14 @@ export default function decorate(block) {
   intro.append(title, description);
   head.append(intro);
 
-  const pkg = meta.package?.querySelector('a[href]');
+  let pkg = meta.package?.querySelector('a[href]');
+  const original = document.querySelector('meta[name="original-url"]')?.content;
+  if (!pkg && newTheme && original) {
+    pkg = document.createElement('a');
+    pkg.href = original;
+    pkg.textContent = 'Download package';
+    pkg.dataset.external = 'true';
+  }
   if (pkg) {
     const action = document.createElement('div');
     action.className = 'asset-kit-action';
@@ -150,8 +166,12 @@ export default function decorate(block) {
     button.className = 'button asset-kit-download';
     button.href = pkg.href;
     button.textContent = text(pkg) || 'Download package';
-    const zipName = decodeURIComponent(pkg.pathname.split('/').pop() || '');
-    button.setAttribute('download', zipName);
+    if (pkg.dataset.external) {
+      button.title = 'Download the package on Frontify';
+    } else {
+      const zipName = decodeURIComponent(pkg.pathname.split('/').pop() || '');
+      button.setAttribute('download', zipName);
+    }
     action.append(button);
     head.append(action);
   }
@@ -174,7 +194,7 @@ export default function decorate(block) {
     assetRows.forEach((cells) => grid.append(buildThumbnail(cells, thumbStyle)));
     assets.append(grid);
   }
-  if (assets.children.length) container.append(assets);
+  if (assets.children.length || newTheme) container.append(assets);
 
   block.replaceChildren(container);
 }

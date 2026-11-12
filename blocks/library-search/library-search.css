@@ -1,0 +1,145 @@
+/* Library Search: Frontify library search bar (settings of the The Mora libraries: 800px wide,
+   2px border rgb(25 11 10), radius 10px) and filter pills, measured on the captures of 2026-11-12. */
+.library-search {
+  --library-ui-font: diatype, geist, arial, sans-serif;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--library-ui-font);
+}
+
+.library-search .library-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 800px;
+  min-height: 48px;
+  padding: 8px 8px 8px 16px;
+  border: 2px solid rgb(25 11 10);
+  border-radius: 10px;
+  background: #fff;
+  color: rgb(17 17 16);
+}
+
+.library-search .library-search-bar svg {
+  flex: none;
+}
+
+.library-search .library-search-bar input {
+  flex: 1;
+  min-width: 0;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: rgb(17 17 16);
+  font-family: inherit;
+  font-size: 14px;
+  appearance: none;
+}
+
+.library-search .library-search-bar input::placeholder {
+  color: rgb(156 163 175);
+  opacity: 1;
+}
+
+.library-search .library-search-bar input::-webkit-search-cancel-button {
+  cursor: pointer;
+}
+
+.library-search .library-search-bar:focus-within {
+  outline: 2px solid rgb(25 11 10 / 25%);
+  outline-offset: 2px;
+}
+
+/* filter pills: white, 1px rgb(225 225 219), 14px/21; the row keeps its height without filters
+   (Frontify keeps the space) */
+.library-search .library-search-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 8px;
+  min-height: 33px;
+  margin-top: 43px;
+}
+
+.library-search .library-filter {
+  position: relative;
+}
+
+.library-search .library-filter-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  box-sizing: border-box;
+  height: 33px;
+  padding: 0 16px;
+  border: 1px solid rgb(225 225 219);
+  border-radius: 4px;
+  background: #fff;
+  color: #000;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  cursor: pointer;
+}
+
+.library-search .library-filter.active .library-filter-button {
+  border-color: rgb(25 11 10);
+}
+
+.library-search .library-filter-panel {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 30;
+  min-width: 180px;
+  padding: 8px;
+  border: 1px solid rgb(225 225 219);
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0 4px 24px rgb(17 17 16 / 20%);
+}
+
+.library-search .library-filter-panel fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.library-search .library-filter-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 4px;
+  color: rgb(17 17 16);
+  font-size: 14px;
+  line-height: 18px;
+  cursor: pointer;
+}
+
+.library-search .library-filter-option:hover {
+  background: rgb(248 248 245);
+}
+
+.library-search .library-filter-option input {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: rgb(255 116 19); /* searchBarCheckboxColor */
+}
+
+.library-search .library-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

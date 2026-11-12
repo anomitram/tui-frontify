@@ -138,3 +138,164 @@
   margin-top: 0;
   margin-bottom: 0;
 }
+
+/* ---------- new Frontify document theme (body.doc-sections, e.g. The Mora) ----------
+ * Accents are the portal's callout colours (portal appearance: info Charcoal, note and warning
+ * Sunrise, tip green). Light text = the accent darkened (mixed with black in 0.5% steps) until it
+ * has 4.5:1 contrast on the light background (accent at 10% on the page background, Off White):
+ * warning measured rgb(157 71 12) on page 11314; note and tip are computed the same way.
+ * Inside, every theme text style takes the callout colour (Frontify overrides the colour
+ * variables) and links are underlined. */
+.doc-sections .callout {
+  --callout-accent: rgb(25 11 10);
+  --callout-text: rgb(25 11 10);
+  --callout-bg: rgb(25 11 10 / 10%);
+  --f-theme-settings-heading1-color: var(--callout-text);
+  --f-theme-settings-heading2-color: var(--callout-text);
+  --f-theme-settings-heading3-color: var(--callout-text);
+  --f-theme-settings-heading4-color: var(--callout-text);
+  --f-theme-settings-custom1-color: var(--callout-text);
+  --f-theme-settings-custom2-color: var(--callout-text);
+  --f-theme-settings-custom3-color: var(--callout-text);
+  --f-theme-settings-body-color: var(--callout-text);
+  --f-theme-settings-quote-color: var(--callout-text);
+  --f-theme-settings-link-color: var(--callout-text);
+  --f-theme-settings-link-text-decoration: underline;
+
+  font-family: var(--f-theme-settings-body-font-family);
+  font-size: var(--f-theme-settings-body-font-size);
+  font-weight: var(--f-theme-settings-body-font-weight);
+  line-height: var(--f-theme-settings-body-line-height);
+}
+
+.doc-sections .callout.note,
+.doc-sections .callout.warning {
+  --callout-accent: rgb(255 116 19);
+  --callout-text: rgb(157 71 12);
+  --callout-bg: rgb(255 116 19 / 10%);
+}
+
+.doc-sections .callout.tip {
+  --callout-accent: rgb(92 184 92);
+  --callout-text: rgb(55 109 55);
+  --callout-bg: rgb(92 184 92 / 10%);
+}
+
+/* strong: solid accent, black or white text (whichever contrasts more) */
+.doc-sections .callout.strong {
+  --callout-bg: var(--callout-accent);
+  --callout-text: #fff;
+}
+
+.doc-sections .callout.strong:is(.note, .warning, .tip) {
+  --callout-text: #000;
+}
+
+.doc-sections .callout .callout-text p,
+.doc-sections .callout .callout-text li {
+  margin: var(--f-theme-settings-body-margin-top) 0 var(--f-theme-settings-body-margin-bottom);
+  color: var(--f-theme-settings-body-color);
+  font-family: var(--f-theme-settings-body-font-family);
+  font-size: var(--f-theme-settings-body-font-size);
+  font-style: var(--f-theme-settings-body-font-style);
+  font-weight: var(--f-theme-settings-body-font-weight);
+  line-height: var(--f-theme-settings-body-line-height);
+  letter-spacing: var(--f-theme-settings-body-letter-spacing);
+  text-transform: var(--f-theme-settings-body-text-transform);
+  overflow-wrap: break-word;
+}
+
+/* lists: 10px below, items at 25px, their text 21px further in (measured on page 11314) */
+.doc-sections .callout .callout-text :is(ul, ol) {
+  margin: 0 0 10px;
+  padding-left: 25px;
+}
+
+.doc-sections .callout .callout-text li {
+  padding-left: 21px;
+}
+
+.doc-sections .callout .callout-text h1 {
+  margin: var(--f-theme-settings-heading1-margin-top) 0 var(--f-theme-settings-heading1-margin-bottom);
+  color: var(--f-theme-settings-heading1-color);
+  font-family: var(--f-theme-settings-heading1-font-family);
+  font-size: var(--f-theme-settings-heading1-font-size);
+  font-style: var(--f-theme-settings-heading1-font-style);
+  font-weight: var(--f-theme-settings-heading1-font-weight);
+  line-height: var(--f-theme-settings-heading1-line-height);
+  letter-spacing: var(--f-theme-settings-heading1-letter-spacing);
+  text-transform: var(--f-theme-settings-heading1-text-transform);
+}
+
+.doc-sections .callout .callout-text h2 {
+  margin: var(--f-theme-settings-heading2-margin-top) 0 var(--f-theme-settings-heading2-margin-bottom);
+  color: var(--f-theme-settings-heading2-color);
+  font-family: var(--f-theme-settings-heading2-font-family);
+  font-size: var(--f-theme-settings-heading2-font-size);
+  font-style: var(--f-theme-settings-heading2-font-style);
+  font-weight: var(--f-theme-settings-heading2-font-weight);
+  line-height: var(--f-theme-settings-heading2-line-height);
+  letter-spacing: var(--f-theme-settings-heading2-letter-spacing);
+  text-transform: var(--f-theme-settings-heading2-text-transform);
+}
+
+.doc-sections .callout .callout-text h3 {
+  margin: var(--f-theme-settings-heading3-margin-top) 0 var(--f-theme-settings-heading3-margin-bottom);
+  color: var(--f-theme-settings-heading3-color);
+  font-family: var(--f-theme-settings-heading3-font-family);
+  font-size: var(--f-theme-settings-heading3-font-size);
+  font-style: var(--f-theme-settings-heading3-font-style);
+  font-weight: var(--f-theme-settings-heading3-font-weight);
+  line-height: var(--f-theme-settings-heading3-line-height);
+  letter-spacing: var(--f-theme-settings-heading3-letter-spacing);
+  text-transform: var(--f-theme-settings-heading3-text-transform);
+}
+
+.doc-sections .callout .callout-text h4 {
+  margin: var(--f-theme-settings-heading4-margin-top) 0 var(--f-theme-settings-heading4-margin-bottom);
+  color: var(--f-theme-settings-heading4-color);
+  font-family: var(--f-theme-settings-heading4-font-family);
+  font-size: var(--f-theme-settings-heading4-font-size);
+  font-style: var(--f-theme-settings-heading4-font-style);
+  font-weight: var(--f-theme-settings-heading4-font-weight);
+  line-height: var(--f-theme-settings-heading4-line-height);
+  letter-spacing: var(--f-theme-settings-heading4-letter-spacing);
+  text-transform: var(--f-theme-settings-heading4-text-transform);
+}
+
+/* bold text: Frontify's font-bold (700), synthesised for fonts without a bold face */
+.doc-sections .callout .callout-text strong {
+  font-weight: 700;
+}
+
+.doc-sections .callout .callout-text blockquote,
+.doc-sections .callout .callout-text blockquote p {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: var(--f-theme-settings-quote-color);
+  font-family: var(--f-theme-settings-quote-font-family);
+  font-size: var(--f-theme-settings-quote-font-size);
+  font-style: var(--f-theme-settings-quote-font-style);
+  font-weight: var(--f-theme-settings-quote-font-weight);
+  line-height: var(--f-theme-settings-quote-line-height);
+  letter-spacing: var(--f-theme-settings-quote-letter-spacing);
+  text-transform: var(--f-theme-settings-quote-text-transform);
+}
+
+.doc-sections .callout .callout-text a:any-link:not(.button) {
+  color: var(--f-theme-settings-link-color);
+  font-family: var(--f-theme-settings-link-font-family);
+  font-size: var(--f-theme-settings-link-font-size);
+  font-weight: var(--f-theme-settings-link-font-weight);
+  text-decoration: var(--f-theme-settings-link-text-decoration);
+}
+
+/* Frontify zeroes the outer margins of the first and last text element */
+.doc-sections .callout .callout-text > :first-child {
+  margin-top: 0;
+}
+
+.doc-sections .callout .callout-text > :last-child {
+  margin-bottom: 0;
+}
