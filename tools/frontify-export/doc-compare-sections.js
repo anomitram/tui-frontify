@@ -14,7 +14,18 @@ const widths = widthsArg.split(',').map(Number);
 const pages = JSON.parse(fs.readFileSync(report, 'utf8')).filter((r) => !filter || r.path.includes(filter));
 
 (async () => {
-  const browser = await chromium.launch({ ignoreDefaultArgs: ['--hide-scrollbars'] });
+  // remote hosts (aem.page) go through the workspace proxy, which injects the site's auth header
+  const remote = /^https:/.test(host);
+  const browser = await chromium.launch({
+    ignoreDefaultArgs: ['--hide-scrollbars'],
+    args: remote && process.env.PROXY_SPKI ? [`--ignore-certificate-errors-spki-list=${process.env.PROXY_SPKI}`] : [],
+    proxy: remote && process.env.HTTPS_PROXY ? { server: process.env.HTTPS_PROXY, bypass: 'localhost,127.0.0.1' } : undefined,
+  });
+  // CODE_LOCAL=1: serve /scripts, /styles, /blocks, /fonts, /icons from this repo (code not yet merged)
+  const REPO = require('path').resolve(__dirname, '..', '..');
+  const TYPES = {
+    '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.woff2': 'font/woff2', '.ttf': 'font/ttf', '.woff': 'font/woff',
+  };
   const results = [];
   for (const r of pages) {
     for (const w of widths) {
@@ -22,12 +33,19 @@ const pages = JSON.parse(fs.readFileSync(report, 'utf8')).filter((r) => !filter 
       if (!fs.existsSync(capFile)) continue;
       const cap = JSON.parse(fs.readFileSync(capFile, 'utf8'));
       const ctx = await browser.newContext({ viewport: { width: w, height: 900 } });
+      if (remote && process.env.CODE_LOCAL) {
+        await ctx.route(/^https:\/\/[^/]+\/(scripts|styles|blocks|fonts|icons)\//, async (route) => {
+          const file = require('path').join(REPO, new URL(route.request().url()).pathname);
+          if (!fs.existsSync(file)) { await route.fulfill({ status: 404, body: 'not found' }); return; }
+          await route.fulfill({ status: 200, contentType: TYPES[require('path').extname(file)] || 'application/octet-stream', body: fs.readFileSync(file) });
+        });
+      }
       const p = await ctx.newPage();
       p.setDefaultTimeout(30000);
       const errs = [];
       p.on('pageerror', (e) => errs.push(e.message.slice(0, 120)));
       try {
-        await p.goto(`${host}/content${r.path}.html`, { waitUntil: 'networkidle', timeout: 60000 });
+        await p.goto(remote ? `${host}${r.path}` : `${host}/content${r.path}.html`, { waitUntil: 'networkidle', timeout: 60000 });
         await p.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 600) { window.scrollTo(0, y); await new Promise((res) => { setTimeout(res, 60); }); } window.scrollTo(0, 0); });
         await p.waitForTimeout(1200);
         for (let i = 0; i < 4; i += 1) {

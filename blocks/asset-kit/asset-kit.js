@@ -12,6 +12,8 @@
  * Edge Delivery cannot serve Frontify's zip of the kit.
  */
 
+import { fileHref } from '../../scripts/scripts.js';
+
 const META_KEYS = ['title', 'description', 'package', 'border', 'thumbnail background', 'background', 'radius'];
 const DOWNLOAD_ICON = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M12 3.25a.75.75 0 01.75.75v9.19l3.22-3.22a.75.75 0 111.06 1.06l-4.5 4.5a.75.75 0 01-1.06 0l-4.5-4.5a.75.75 0 111.06-1.06l3.22 3.22V4a.75.75 0 01.75-.75M4.75 15a.75.75 0 01.75.75v2.5c0 .414.336.75.75.75h11.5a.75.75 0 00.75-.75v-2.5a.75.75 0 011.5 0v2.5A2.250 2.250 0 0117.75 20.5H6.25A2.250 2.250 0 014 18.25v-2.5a.75.75 0 01.75-.75"/></svg>';
 
@@ -62,11 +64,14 @@ function buildThumbnail(cells, thumbStyle) {
   const item = document.createElement('li');
   item.className = 'asset-kit-thumbnail';
 
-  const frame = document.createElement(link ? 'a' : 'div');
+  // file links rewritten by the content upload: restore them, or use the thumbnail's public copy
+  const thumbImg = thumbCell?.querySelector('img');
+  const href = link ? fileHref(link, thumbImg) : null;
+  const frame = document.createElement(href ? 'a' : 'div');
   frame.className = 'asset-kit-thumbnail-frame';
   Object.assign(frame.style, thumbStyle);
-  if (link) {
-    frame.href = link.href;
+  if (href) {
+    frame.href = new URL(href, window.location.href).href;
     frame.setAttribute('download', fileName || '');
     frame.setAttribute('aria-label', `Download ${title || fileName}`);
   }
@@ -81,7 +86,7 @@ function buildThumbnail(cells, thumbStyle) {
     frame.append(fileIcon(ext));
   }
 
-  if (link) {
+  if (href) {
     const badge = document.createElement('span');
     badge.className = 'asset-kit-thumbnail-download';
     badge.innerHTML = DOWNLOAD_ICON;

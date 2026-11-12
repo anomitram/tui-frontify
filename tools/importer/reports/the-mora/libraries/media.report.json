@@ -2,11 +2,17 @@
   "status": "success",
   "url": "http://localhost:8094/media.html",
   "path": "the-mora/libraries/media",
-  "timestamp": "2026-11-12T07:27:37.899Z",
+  "timestamp": "2026-11-12T09:49:02.593Z",
   "frontifyDocument": 1892,
   "originalUrl": "https://tui-brandhub.com/document/1892",
   "assets": 766,
   "collections": 8,
-  "notes": "[\"filters not migrated: Hotel, AI Label\",\"Frontify shows \\\"781 items\\\", the export has 766\"]",
-  "importScript": "0d15d90d495b"
+  "notes": "[\"filters not migrated: Hotel, AI Label\",\"Frontify shows \\\"781 items\\\", the export has 766\",\"split into 5 pages (160 + 190 + 190 + 190 + 36 assets)\"]",
+  "fragments": [
+    "the-mora/libraries/media/assets-2",
+    "the-mora/libraries/media/assets-3",
+    "the-mora/libraries/media/assets-4",
+    "the-mora/libraries/media/assets-5"
+  ],
+  "importScript": "101337647fad"
 }

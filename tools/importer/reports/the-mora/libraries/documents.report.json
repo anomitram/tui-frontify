@@ -2,11 +2,11 @@
   "status": "success",
   "url": "http://localhost:8094/documents.html",
   "path": "the-mora/libraries/documents",
-  "timestamp": "2026-11-12T07:27:45.744Z",
+  "timestamp": "2026-11-12T09:49:11.908Z",
   "frontifyDocument": 1908,
   "originalUrl": "https://tui-brandhub.com/document/1908",
   "assets": 4,
   "collections": 0,
   "notes": "[\"filters not migrated: Categories\"]",
-  "importScript": "0d15d90d495b"
+  "importScript": "101337647fad"
 }

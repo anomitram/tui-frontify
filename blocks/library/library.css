@@ -152,7 +152,7 @@
   display: flex;
 }
 
-.library .library-card:any-link {
+.library .library-card {
   position: relative;
   display: flex;
   flex-direction: column;

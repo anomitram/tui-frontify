@@ -2,11 +2,11 @@
   "status": "success",
   "url": "http://localhost:8094/iconography.html",
   "path": "the-mora/libraries/iconography",
-  "timestamp": "2026-11-12T07:27:42.159Z",
+  "timestamp": "2026-11-12T09:49:07.504Z",
   "frontifyDocument": 1894,
   "originalUrl": "https://tui-brandhub.com/document/1894",
   "assets": 87,
   "collections": 0,
   "notes": "[\"\\\"Download all\\\" not migrated\",\"Frontify shows \\\"90 items\\\", the export has 87\"]",
-  "importScript": "0d15d90d495b"
+  "importScript": "101337647fad"
 }

@@ -9,6 +9,7 @@
  * rendered in batches as the page scrolls; the Library Search block filters them.
  */
 import { readLibraryRows, LIBRARY_ICONS, LIBRARY_FILTER_EVENT } from '../../scripts/library.js';
+import { contentPath } from '../../scripts/scripts.js';
 
 const KINDS = ['logos', 'media', 'icons', 'documents'];
 const SPACING = 8;
@@ -75,7 +76,35 @@ export function justify(aspects, width, target) {
   return rows;
 }
 
-function parseItem(cells, index) {
+/** The file an <img> shows: its src without the query (published: ./media_<hash>.svg). */
+function imageFile(img) {
+  const src = img.getAttribute('src') || '';
+  try {
+    const u = new URL(src, window.location.href);
+    return `${u.origin === window.location.origin ? '' : u.origin}${u.pathname}`;
+  } catch (e) {
+    return src.split('?')[0];
+  }
+}
+
+/**
+ * The link cell, if it is a working link: the content upload rewrites links to files into
+ * content.da.live URLs (401 for visitors) or into "<name>-pdf" page paths (404).
+ */
+function workingLink(a) {
+  const href = a?.getAttribute('href');
+  if (!href) return '';
+  try {
+    const u = new URL(href, window.location.href);
+    if (/(^|\.)da\.live$/.test(u.hostname)) return '';
+    if (u.origin === window.location.origin && /-(svg|jpe?g|png|gif|webp|pdf|mp4|mov|zip)$/i.test(u.pathname)) return '';
+  } catch (e) {
+    return '';
+  }
+  return href;
+}
+
+function parseItem(cells, index, kind) {
   const [picCell, titleCell, typeCell, dimCell, extraCell, dateCell, sizeCell, linkCell] = cells;
   const img = picCell?.querySelector('img');
   if (!img) return null;
@@ -83,18 +112,22 @@ function parseItem(cells, index) {
   const w = dims ? Number(dims[1]) : Number(img.getAttribute('width')) || 1;
   const h = dims ? Number(dims[2]) : Number(img.getAttribute('height')) || 1;
   const ext = (typeCell?.textContent || '').trim();
-  const a = linkCell?.querySelector('a');
+  const title = (titleCell?.textContent || img.alt || '').trim();
+  // logo and icon tiles show the SVG file itself: download it from the tile's own image
+  const isFile = ['logos', 'icons'].includes(kind) && ext.toLowerCase() === 'svg';
+  const href = isFile ? imageFile(img) : workingLink(linkCell?.querySelector('a'));
   return {
     index,
     picture: img.closest('picture') || img,
     img,
-    title: (titleCell?.textContent || img.alt || '').trim(),
+    title,
     ext,
     dims: dims ? `${w} × ${h} px` : '',
     extra: (extraCell?.textContent || '').trim(),
     date: (dateCell?.textContent || '').trim(),
     size: (sizeCell?.textContent || '').trim(),
-    href: a?.getAttribute('href') || '',
+    href,
+    download: isFile ? `${title.replace(/[\\/:*?"<>|]+/g, '_')}.svg` : '',
     aspect: w / h,
     type: VIDEO_EXT.includes(ext.toLowerCase()) ? 'video' : 'image',
     orientation: (w === h && 'square') || (w > h ? 'landscape' : 'portrait'),
@@ -103,15 +136,16 @@ function parseItem(cells, index) {
 
 function buildCard(item, kind) {
   const li = el('li', 'library-tile');
-  const card = el('a', 'library-card');
-  card.href = item.href || '#';
-  if (/\.svg$/i.test(item.href) && item.href.startsWith('/')) {
-    card.setAttribute('download', item.href.split('/').pop());
-  } else if (/^https?:/.test(item.href)) {
-    card.target = '_blank';
-    card.rel = 'noopener';
+  const card = el(item.href ? 'a' : 'div', 'library-card');
+  if (item.href) {
+    card.href = item.href;
+    if (item.download) card.setAttribute('download', item.download);
+    else if (/^https?:/.test(item.href)) {
+      card.target = '_blank';
+      card.rel = 'noopener';
+    }
+    card.setAttribute('aria-label', `${item.download ? 'Download' : 'Open'} ${item.title}`);
   }
-  card.setAttribute('aria-label', `Open ${item.title}`);
   const preview = el('span', 'library-preview');
   item.img.loading = 'lazy';
   item.img.removeAttribute('fetchpriority');
@@ -123,12 +157,33 @@ function buildCard(item, kind) {
     if (item.ext) meta.append(el('span', 'library-badge', item.ext));
     const parts = [item.extra || item.dims, item.date && formatDate(item.date), item.size]
       .filter(Boolean);
-    meta.append(el('span', 'library-meta-text', parts.join('  •  ')));
+    meta.append(el('span', 'library-meta-text', parts.join('  •  ')));
     info.append(meta);
   }
   card.append(preview, info);
   li.append(card);
   return li;
+}
+
+/**
+ * Rows of a further part of the library (a page with the same Library block, e.g.
+ * /the-mora/libraries/media/assets-2): fetched as plain HTML and parsed without rendering, so
+ * its images only load when their tiles are shown. Media paths are relative to the part page.
+ */
+async function fetchPart(href) {
+  const { pathname } = new URL(href, window.location.href);
+  const path = contentPath(pathname.replace(/\.(plain\.)?html$/, ''));
+  const resp = await fetch(`${path}.plain.html`);
+  if (!resp.ok) return [];
+  const doc = new DOMParser().parseFromString(await resp.text(), 'text/html');
+  const base = new URL(path, window.location.href);
+  doc.querySelectorAll('img[src^="./media_"]').forEach((i) => { i.src = new URL(i.getAttribute('src'), base).href; });
+  doc.querySelectorAll('source[srcset^="./media_"]').forEach((x) => { x.srcset = new URL(x.getAttribute('srcset'), base).href; });
+  const block = doc.querySelector('.library');
+  if (!block) return [];
+  const rows = [...block.children].map((r) => [...r.children]);
+  return rows.filter((cells) => cells[0]?.querySelector('img'))
+    .map((cells) => cells.map((c) => document.adoptNode(c)));
 }
 
 function buildSort(label) {
@@ -172,10 +227,12 @@ function buildSort(label) {
 
 export default function decorate(block) {
   const kind = KINDS.find((k) => block.classList.contains(k)) || 'media';
-  const { settings, items: rows } = readLibraryRows(block, ['title', 'count', 'sort', 'view-all', 'row-height', 'details']);
+  const { settings, items: rows } = readLibraryRows(block, ['title', 'count', 'sort', 'view-all', 'row-height', 'details', 'parts']);
   const target = Number.parseFloat(settings['row-height']?.textContent) || 220;
   const details = (settings.details?.textContent || (['icons', 'documents'].includes(kind) ? 'always' : 'hover')).trim().toLowerCase();
-  const items = rows.map((cells, i) => parseItem(cells, i)).filter(Boolean);
+  const items = rows.map((cells, i) => parseItem(cells, i, kind)).filter(Boolean);
+  // further parts of a large library (Edge Delivery allows 200 images per page): loaded in order
+  const parts = [...(settings.parts?.querySelectorAll('a') || [])].map((a) => a.getAttribute('href'));
   // Details "always": the info bar (48px title only, 72px with metadata) is part of the tile
   const bar = kind === 'icons' ? 48 : 72;
   const tileAspect = (a) => (details === 'always' ? (a * target) / (target + bar) : a);
@@ -250,8 +307,39 @@ export default function decorate(block) {
     // keep the DOM order = the view order (keyboard focus order)
     [...visible].sort((a, b) => a.dataset.pos - b.dataset.pos).forEach((li) => grid.append(li));
     grid.style.height = `${bottom}px`;
-    empty.hidden = view.length > 0;
-    sentinel.hidden = visible.size >= view.length;
+    empty.hidden = view.length > 0 || parts.length > 0;
+    sentinel.hidden = visible.size >= view.length && !parts.length;
+  };
+
+  let loading = null;
+  const loadNext = () => {
+    if (!loading && parts.length) {
+      loading = fetchPart(parts[0]).catch(() => []).then((cellRows) => {
+        parts.shift();
+        cellRows.forEach((cells) => {
+          const it = parseItem(cells, items.length, kind);
+          if (it) items.push(it);
+        });
+        loading = null;
+      });
+    }
+    return loading || Promise.resolve();
+  };
+  const loadAll = async () => {
+    // eslint-disable-next-line no-await-in-loop -- parts are appended in order
+    while (parts.length) await loadNext();
+  };
+
+  const filtering = () => !!state.query || Object.values(state.filters).some((x) => x.size);
+  const computeView = () => {
+    const q = state.query.toLowerCase();
+    let view = items.filter((it) => (!q || it.title.toLowerCase().includes(q))
+      && Object.entries(state.filters).every(([key, set]) => !set.size || set.has(it[key])));
+    // the authored order is Frontify's "Date added, newest first"
+    if (state.order === 'oldest') view = view.slice().reverse();
+    state.view = view;
+    const total = authoredCount || itemsLabel(items.length);
+    count.textContent = filtering() ? itemsLabel(view.length) : total;
   };
 
   // render more rows while the end of the grid is near the viewport
@@ -261,26 +349,32 @@ export default function decorate(block) {
     filling = true;
     requestAnimationFrame(() => {
       filling = false;
-      if (state.shown >= state.view.length || !grid.clientWidth) return;
-      if (sentinel.getBoundingClientRect().top < window.innerHeight + 600) {
+      const near = sentinel.getBoundingClientRect().top < window.innerHeight + 600;
+      if (!grid.clientWidth || !near) return;
+      if (state.shown < state.view.length) {
         state.shown += BATCH;
         layout();
         fill();
+      } else if (parts.length) {
+        // the tiles of this page are shown: append the next part (same order)
+        loadNext().then(() => { computeView(); layout(); fill(); });
       }
     });
   };
 
-  const update = () => {
-    const q = state.query.toLowerCase();
-    let view = items.filter((it) => (!q || it.title.toLowerCase().includes(q))
-      && Object.entries(state.filters).every(([key, set]) => !set.size || set.has(it[key])));
-    // the authored order is Frontify's "Date added, newest first"
-    if (state.order === 'oldest') view = view.slice().reverse();
-    state.view = view;
+  // search, filters and sort cover all parts: load the remaining parts first
+  let run = 0;
+  const update = async () => {
+    run += 1;
+    const mine = run;
+    if (parts.length && (filtering() || state.order !== 'newest')) {
+      block.setAttribute('aria-busy', 'true');
+      await loadAll();
+      block.removeAttribute('aria-busy');
+      if (mine !== run) return;
+    }
+    computeView();
     state.shown = BATCH;
-    const filtered = q || Object.values(state.filters).some((s) => s.size);
-    const total = authoredCount || itemsLabel(items.length);
-    count.textContent = filtered ? itemsLabel(view.length) : total;
     layout();
     fill();
   };
