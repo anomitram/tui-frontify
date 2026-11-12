@@ -226,3 +226,19 @@ export function block(ctx, name, rows) {
 }
 
 export const variants = (...v) => v.filter(Boolean).map((x) => String(x).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')).join(', ');
+
+// File types Edge Delivery serves from content (images, svg, pdf, mp4); anything else (zip, ai,
+// docx, pptx, mp3, wav ...) cannot be downloaded from the site.
+const SERVABLE_EXT = ['png', 'jpg', 'jpeg', 'gif', 'webp', 'avif', 'svg', 'pdf', 'mp4'];
+export const isServable = (href) => SERVABLE_EXT.includes(String(href || '').split(/[?#]/)[0].split('.').pop().toLowerCase());
+
+/**
+ * Link target for a downloadable file: the local copy when the site can serve it, otherwise the
+ * Frontify page the file sits on (ctx.frontifyUrl), where it can still be downloaded.
+ */
+export function fileTarget(ctx, href) {
+  if (!href) return null;
+  if (isServable(href) || !ctx.frontifyUrl) return href;
+  ctx.notes.push(`file ${href.split('/').pop()} cannot be served by the site; links to the Frontify page`);
+  return ctx.frontifyUrl;
+}

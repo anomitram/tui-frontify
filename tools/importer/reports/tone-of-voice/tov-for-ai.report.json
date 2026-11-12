@@ -2,7 +2,7 @@
   "status": "success",
   "url": "http://localhost:8099/tone-of-voice/tov-for-ai.html",
   "path": "tone-of-voice/tov-for-ai",
-  "timestamp": "2026-11-11T02:38:00.543Z",
+  "timestamp": "2026-11-12T12:54:02.063Z",
   "frontifyPageId": 8066,
   "originalUrl": "https://tui-brandhub.com/document/396#/tone-of-voice/tov-for-ai",
   "blockCounts": "{\"Heading\":1,\"Text\":1,\"Attachments\":1}",
@@ -10,6 +10,6 @@
   "rewrittenLinks": "[]",
   "fixedLinks": "[]",
   "missing": "[]",
-  "notes": "[]",
-  "importScript": "b22187ef4dc7"
+  "notes": "[\"file TUI-Tone-of-Voice-guidelines-in-English---to-use-in-TUI-Assistant.docx cannot be served by the site; links to the Frontify page\",\"file TUI-Tone-of-Voice-guidelines-in-Dutch-for-BeNe-market---to-use-in-TUI-Assistant.docx cannot be served by the site; links to the Frontify page\"]",
+  "importScript": "4ce897e12938"
 }

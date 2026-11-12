@@ -57,6 +57,8 @@ function makeCtx(document, data) {
     order: data.nav.order,
     firstPath: data.nav.order[0].path,
     permalinks: data.permalinks || {},
+    // files the site cannot serve link to their Frontify page (utils/frontify.js fileTarget)
+    frontifyUrl: data.frontifyUrl,
     links: [],
     missing: [],
     notes: [],

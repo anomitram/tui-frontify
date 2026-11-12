@@ -2,7 +2,7 @@
   "status": "success",
   "url": "http://localhost:8099/sales-mechanics/luggage-tag.html",
   "path": "sales-mechanics/luggage-tag",
-  "timestamp": "2026-11-11T02:37:01.048Z",
+  "timestamp": "2026-11-12T12:53:26.608Z",
   "frontifyPageId": 7433,
   "originalUrl": "https://tui-brandhub.com/document/396#/sales-mechanics/luggage-tag",
   "blockCounts": "{\"Text\":3,\"Image grid\":2,\"Image\":1,\"Asset Kit\":1}",
@@ -10,6 +10,6 @@
   "rewrittenLinks": "[]",
   "fixedLinks": "[]",
   "missing": "[]",
-  "notes": "[]",
-  "importScript": "b22187ef4dc7"
+  "notes": "[\"Asset Kit 60023: files Edge Delivery cannot serve: Luggage tag with copy_cmyk.ai, Luggage tag with copy_rgb.ai\",\"file Luggage-tag-with-copy_cmyk.ai cannot be served by the site; links to the Frontify page\",\"file Luggage-tag-with-copy_rgb.ai cannot be served by the site; links to the Frontify page\"]",
+  "importScript": "4ce897e12938"
 }

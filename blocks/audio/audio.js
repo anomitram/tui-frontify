@@ -40,6 +40,18 @@ export default function decorate(block) {
   header.append(text);
 
   const elements = [header];
+  // a file the site cannot serve (mp3, wav) links to its Frontify page instead: show that link
+  if (fileLink && !AUDIO_EXT.test(fileLink.getAttribute('href'))) {
+    const p = document.createElement('p');
+    p.className = 'audio-external';
+    const a = fileLink.cloneNode(true);
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.textContent = `Listen on the TUI Brand Hub: ${(fileLink.textContent || '').trim()}`;
+    p.append(a);
+    elements.push(p);
+    fileLink = null;
+  }
   if (fileLink) {
     const href = fileLink.getAttribute('href');
     const audio = document.createElement('audio');

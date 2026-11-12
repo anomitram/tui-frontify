@@ -1,5 +1,5 @@
 import {
-  slateToHtml, slateIsEmpty, frag, block, variants, img, link, rgbaToCss,
+  slateToHtml, slateIsEmpty, frag, block, variants, img, link, rgbaToCss, isServable, fileTarget,
 } from '../utils/frontify.js';
 
 // file types Edge Delivery serves from content (images, svg, pdf, mp4)
@@ -29,7 +29,9 @@ export default function parse(b, ctx) {
   const files = b.assets?.images || [];
   const single = files.length === 1 && SERVABLE.includes(String(files[0].ext).toLowerCase())
     ? ctx.assets[`asset-${files[0].id}`] : null;
-  if (pkg) rows.push(['Package', link(ctx, pkg, 'Download package')]);
+  // a local zip cannot be served either: the button then opens the Frontify page (ctx.frontifyUrl)
+  if (pkg && isServable(pkg)) rows.push(['Package', link(ctx, pkg, 'Download package')]);
+  else if (pkg && ctx.frontifyUrl) rows.push(['Package', link(ctx, ctx.frontifyUrl, 'Download package')]);
   else if (single) rows.push(['Package', link(ctx, single, 'Download package')]);
   else ctx.notes.push(`Asset Kit ${b.id}: no package zip; "Download package" links to the Frontify page`);
   if (s.hasRadius_blocks && s.radiusValue_blocks) rows.push(['Radius', s.radiusValue_blocks]);
@@ -50,7 +52,7 @@ export default function parse(b, ctx) {
       thumb.src = icon;
       thumb.alt = `${a.ext} file`;
     }
-    rows.push([thumb || '', file ? link(ctx, file, a.file_name) : a.file_name, a.title || '', String(a.ext || '')]);
+    rows.push([thumb || '', file ? link(ctx, fileTarget(ctx, file), a.file_name) : a.file_name, a.title || '', String(a.ext || '')]);
   });
   return [block(ctx, v ? `Asset Kit (${v})` : 'Asset Kit', rows)];
 }
