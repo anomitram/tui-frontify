@@ -10,7 +10,9 @@ import path from 'node:path';
 
 const [org, repo, planFile, contentDir = 'content'] = process.argv.slice(2);
 const DA = `https://admin.da.live/source/${org}/${repo}`;
-const TYPES = { mp4: 'video/mp4', pdf: 'application/pdf' };
+const TYPES = {
+  mp4: 'video/mp4', pdf: 'application/pdf', png: 'image/png', jpg: 'image/jpeg', jpeg: 'image/jpeg', svg: 'image/svg+xml',
+};
 const sha = (b) => createHash('sha256').update(b).digest('hex');
 const sleep = (ms) => new Promise((r) => { setTimeout(r, ms); });
 const plan = JSON.parse(await readFile(planFile, 'utf8'));

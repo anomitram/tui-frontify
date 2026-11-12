@@ -2,7 +2,7 @@
   "status": "success",
   "url": "http://localhost:8099/tone-of-voice/editorial-guidelines.html",
   "path": "tone-of-voice/editorial-guidelines",
-  "timestamp": "2026-11-11T02:38:05.606Z",
+  "timestamp": "2026-11-12T12:53:57.744Z",
   "frontifyPageId": 9601,
   "originalUrl": "https://tui-brandhub.com/document/396#/tone-of-voice/editorial-guidelines",
   "blockCounts": "{\"Heading\":2,\"Text\":3,\"Divider\":1,\"Attachments\":1}",
@@ -10,6 +10,6 @@
   "rewrittenLinks": "[]",
   "fixedLinks": "[]",
   "missing": "[]",
-  "notes": "[]",
-  "importScript": "b22187ef4dc7"
+  "notes": "[\"file AEO-Guidelines-2026.pptx cannot be served by the site; links to the Frontify page\"]",
+  "importScript": "4ce897e12938"
 }

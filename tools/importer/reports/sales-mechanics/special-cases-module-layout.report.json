@@ -2,7 +2,7 @@
   "status": "success",
   "url": "http://localhost:8099/sales-mechanics/special-cases-module-layout.html",
   "path": "sales-mechanics/special-cases-module-layout",
-  "timestamp": "2026-11-11T02:36:53.050Z",
+  "timestamp": "2026-11-12T12:53:36.116Z",
   "frontifyPageId": 7253,
   "originalUrl": "https://tui-brandhub.com/document/396#/sales-mechanics/special-cases-module-layout",
   "blockCounts": "{\"Text\":13,\"Heading\":12,\"Image\":8,\"Divider\":12,\"Image grid\":13,\"Asset Kit\":2}",
@@ -10,6 +10,6 @@
   "rewrittenLinks": "[]",
   "fixedLinks": "[]",
   "missing": "[]",
-  "notes": "[]",
-  "importScript": "b22187ef4dc7"
+  "notes": "[\"Asset Kit 57965: files Edge Delivery cannot serve: IND templates.zip\",\"file IND-templates.zip cannot be served by the site; links to the Frontify page\",\"Asset Kit 59915: files Edge Delivery cannot serve: TUI fly Ticket Sale.zip\",\"file TUI-fly-Ticket-Sale.zip cannot be served by the site; links to the Frontify page\"]",
+  "importScript": "4ce897e12938"
 }

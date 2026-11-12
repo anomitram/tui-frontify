@@ -2,7 +2,7 @@
   "status": "success",
   "url": "http://localhost:8099/stationery-b2c/letterhead-b2c.html",
   "path": "stationery-b2c/letterhead-b2c",
-  "timestamp": "2026-11-11T02:39:01.998Z",
+  "timestamp": "2026-11-12T12:53:41.444Z",
   "frontifyPageId": 3792,
   "originalUrl": "https://tui-brandhub.com/document/396#/stationery-b2c/letterhead-b2c",
   "blockCounts": "{\"Text\":2,\"Image\":1,\"Heading\":1,\"Attachments\":2}",
@@ -10,6 +10,6 @@
   "rewrittenLinks": "[]",
   "fixedLinks": "[]",
   "missing": "[]",
-  "notes": "[]",
-  "importScript": "b22187ef4dc7"
+  "notes": "[\"file Envelop-C5_B2C_Jun23-map.zip cannot be served by the site; links to the Frontify page\",\"file Letterhead_B2C_Jun23-map.zip cannot be served by the site; links to the Frontify page\"]",
+  "importScript": "4ce897e12938"
 }

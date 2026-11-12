@@ -2,7 +2,7 @@
   "status": "success",
   "url": "http://localhost:8099/stationery-b2c/envelop.html",
   "path": "stationery-b2c/envelop",
-  "timestamp": "2026-11-11T02:39:07.463Z",
+  "timestamp": "2026-11-12T12:53:47.166Z",
   "frontifyPageId": 3793,
   "originalUrl": "https://tui-brandhub.com/document/396#/stationery-b2c/envelop",
   "blockCounts": "{\"Heading\":1,\"Text\":1,\"Image\":1,\"Attachments\":1}",
@@ -10,6 +10,6 @@
   "rewrittenLinks": "[]",
   "fixedLinks": "[]",
   "missing": "[]",
-  "notes": "[]",
-  "importScript": "b22187ef4dc7"
+  "notes": "[\"file Envelop-C5_B2C_Jun23-map.zip cannot be served by the site; links to the Frontify page\"]",
+  "importScript": "4ce897e12938"
 }

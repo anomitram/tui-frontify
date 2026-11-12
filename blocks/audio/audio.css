@@ -88,3 +88,13 @@
   outline: 4px solid rgb(53 103 246 / 50%);
   outline-offset: 2px;
 }
+
+/* file not served by the site: link to the Frontify page instead of a player */
+.audio .audio-external {
+  margin: 10px 0 0;
+}
+
+.audio .audio-external a:any-link {
+  color: #3567f6;
+  text-decoration: underline;
+}

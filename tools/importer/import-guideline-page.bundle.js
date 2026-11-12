@@ -31,6 +31,10 @@ var CustomImportScript = (() => {
   function rewriteLink(url, ctx) {
     if (!url) return { href: url, kind: "empty" };
     let u = url.trim();
+    if (ctx.linkMap && Object.prototype.hasOwnProperty.call(ctx.linkMap, u)) {
+      const href = ctx.linkMap[u];
+      return { href, kind: href.startsWith("/") ? "internal" : "out-of-scope" };
+    }
     const mailLike = /^https?:\/\/([^/@\s]+@[^/\s]+\.[a-z]{2,})\/?$/i.exec(u);
     if (mailLike) return { href: `mailto:${mailLike[1]}`, kind: "email", fixed: true };
     const HOST2 = ctx.host;
@@ -130,7 +134,11 @@ var CustomImportScript = (() => {
       if (n.type === "button") {
         const { href, kind } = rewriteLink(n.url, ctx);
         (_d = ctx.links) == null ? void 0 : _d.push({ source: n.url, href, kind });
-        return wrapKeepSpaces(`<strong><a href="${esc(href)}">`, inline(n.children, ctx), "</a></strong>");
+        const [open, close] = {
+          secondary: ["<em>", "</em>"],
+          tertiary: ["<em><strong>", "</strong></em>"]
+        }[n.buttonStyle] || ["<strong>", "</strong>"];
+        return wrapKeepSpaces(`${open}<a href="${esc(href)}">`, inline(n.children, ctx), `</a>${close}`);
       }
       if (n.children) return inline(n.children, ctx);
       let t = esc(decodeEntities(n.text || "")).replace(/\n/g, "<br>");
@@ -160,7 +168,10 @@ var CustomImportScript = (() => {
     const tag = BLOCK_TAGS[n.type] || "p";
     const body = inline(n.children, ctx);
     if (!body.replace(/<br>/g, "").trim()) {
-      return opts.keepEmpty === false ? "" : "<p>\u200B</p>";
+      if (opts.keepEmpty === false) return "";
+      const breaks = (body.match(/<br>/g) || []).length;
+      if (opts.keepEmptyBreaks && breaks) return `<p>${Array(breaks + 1).fill("\u200B").join("<br>")}</p>`;
+      return "<p>\u200B</p>";
     }
     const kept = body.endsWith("<br>") ? `${body}\u200B` : body;
     return `<${tag}>${kept}</${tag}>`;
@@ -217,6 +228,14 @@ var CustomImportScript = (() => {
     return ctx.WebImporter.Blocks.createBlock(ctx.document, { name, cells: rows });
   }
   var variants = (...v) => v.filter(Boolean).map((x) => String(x).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")).join(", ");
+  var SERVABLE_EXT = ["png", "jpg", "jpeg", "gif", "webp", "avif", "svg", "pdf", "mp4"];
+  var isServable = (href) => SERVABLE_EXT.includes(String(href || "").split(/[?#]/)[0].split(".").pop().toLowerCase());
+  function fileTarget(ctx, href) {
+    if (!href) return null;
+    if (isServable(href) || !ctx.frontifyUrl) return href;
+    ctx.notes.push(`file ${href.split("/").pop()} cannot be served by the site; links to the Frontify page`);
+    return ctx.frontifyUrl;
+  }
 
   // tools/importer/parsers/text.js
   function parse(b, ctx, { prevType } = {}) {
@@ -262,6 +281,7 @@ var CustomImportScript = (() => {
   }
 
   // tools/importer/parsers/image.js
+  var STYLE_CLASS = { imageTitle: "image-title-text", imageCaption: "image-caption-text" };
   function parse4(b, ctx) {
     var _a, _b, _c, _d;
     const s = b.settings || {};
@@ -274,7 +294,12 @@ var CustomImportScript = (() => {
     const v = variants(
       s.alignment && s.alignment !== "Center" && `align-${s.alignment}`,
       s.positioning && s.positioning !== "Below" && `caption-${s.positioning}`,
-      s.hasCustomRatio && `ratio-${s.ratioChoice}`,
+      // frame ratio (measured in the Mora captures): hasCustomRatio = the custom value
+      // (ratioCustom, e.g. 16:11), otherwise the ratio choice ("none" = the image's own ratio)
+      (() => {
+        const r = s.hasCustomRatio ? s.ratioCustom : s.ratioChoice;
+        return /^\d+(\.\d+)?:\d+(\.\d+)?$/.test(r || "") && `ratio-${r}`;
+      })(),
       s.autosizing && s.autosizing !== "none" && `autosize-${s.autosizing}`,
       !s.hasCustomPadding && s.paddingChoice && s.paddingChoice !== "None" && `padding-${s.paddingChoice}`,
       s.hasBackground && "background",
@@ -283,8 +308,29 @@ var CustomImportScript = (() => {
       s.downloadable && "downloadable"
     );
     const rows = [[pic || ""]];
-    if (!slateIsEmpty(s.name)) rows.push(["Title", frag(ctx, slateToHtml(s.name, ctx, { keepEmpty: false }))]);
-    if (!slateIsEmpty(s.description)) rows.push(["Caption", frag(ctx, slateToHtml(s.description, ctx, { keepEmpty: false }))]);
+    if (ctx.docTheme) {
+      const styles = [];
+      [["Title", s.name], ["Caption", s.description]].forEach(([label, value]) => {
+        if (slateIsEmpty(value)) return;
+        let nodes = value;
+        try {
+          nodes = typeof value === "string" ? JSON.parse(value) : value;
+        } catch (e) {
+          nodes = [];
+        }
+        rows.push([label, frag(ctx, slateToHtml(value, ctx, { keepEmptyBreaks: true }))]);
+        (Array.isArray(nodes) ? nodes : []).forEach((n, i) => {
+          const decl = [];
+          if (n.type && !["ul", "ol"].includes(n.type)) decl.push(`class: ${STYLE_CLASS[n.type] || n.type}`);
+          if (n.align) decl.push(`text-align: ${n.align}`);
+          if (decl.length) styles.push(`${label.toLowerCase()} ${i + 1}: ${decl.join("; ")}`);
+        });
+      });
+      if (styles.length) rows.push(["Styles", styles.join("\n")]);
+    } else {
+      if (!slateIsEmpty(s.name)) rows.push(["Title", frag(ctx, slateToHtml(s.name, ctx, { keepEmpty: false }))]);
+      if (!slateIsEmpty(s.description)) rows.push(["Caption", frag(ctx, slateToHtml(s.description, ctx, { keepEmpty: false }))]);
+    }
     if (s.hasLink && ((_c = (_b = s.linkObject) == null ? void 0 : _b.link) == null ? void 0 : _c.link)) rows.push(["Link", s.linkObject.link.link]);
     if (s.hasBackground) rows.push(["Background", rgbaToCss(s.backgroundColor)]);
     if (s.hasBorder) rows.push(["Border", `${s.borderWidth} ${String(s.borderStyle).toLowerCase()} ${rgbaToCss(s.borderColor)}`]);
@@ -305,6 +351,13 @@ var CustomImportScript = (() => {
   }
 
   // tools/importer/parsers/video.js
+  var parseTitle = (t) => {
+    try {
+      return typeof t === "string" ? JSON.parse(t) : t || [];
+    } catch (e) {
+      return [];
+    }
+  };
   function parse5(b, ctx) {
     const s = b.settings || {};
     const ad = s.asset_data || {};
@@ -316,7 +369,18 @@ var CustomImportScript = (() => {
       return [];
     }
     const width = s.isCustomWidth ? s.widthCustom : s.widthSimple;
-    const v = variants(s.autoplay && "autoplay", s.loop && "loop", width && width !== "auto" && `width-${width}`);
+    const radius = s.isBorderRadiusCustom ? s.borderRadiusCustom : s.borderRadiusSimple;
+    const titleAlign = !slateIsEmpty(s.title) && (parseTitle(s.title)[0] || {}).align;
+    const v = variants(
+      s.autoplay && "autoplay",
+      s.loop && "loop",
+      width && width !== "auto" && `width-${width}`,
+      s.controls === "none" && "no-controls",
+      radius && radius !== "0px" && `radius-${radius}`,
+      titleAlign && `title-${titleAlign}`,
+      // frame size (new theme settings), so the layout is right before the file loads
+      s.video_width && s.video_height && `ratio-${s.video_width}-${s.video_height}`
+    );
     const cell = ctx.document.createElement("div");
     const p = ctx.document.createElement("p");
     p.append(link(ctx, href, href));
@@ -326,6 +390,16 @@ var CustomImportScript = (() => {
   }
 
   // tools/importer/parsers/annotations.js
+  function noteStyles(html, ctx) {
+    const tpl = ctx.document.createElement("div");
+    tpl.innerHTML = html || "";
+    return [...tpl.children].map((el, i) => {
+      const cls = (el.getAttribute("class") || "").split(/\s+/).find((c) => /^custom\d$/.test(c));
+      return cls ? `${i + 1}: class: ${cls}` : "";
+    }).filter(Boolean).join("\n");
+  }
+  var LEGACY_DOCS = [396];
+  var keepEmpty = (html) => html.replace(/<p>(\s|<br[^>]*>)*<\/p>/g, "<p>\u200B</p>");
   function parse6(b, ctx) {
     const s = b.settings || {};
     const ad = s.asset_data || {};
@@ -334,7 +408,10 @@ var CustomImportScript = (() => {
     const rows = [[pic || ""]];
     (s.annotations || []).forEach((an) => {
       const pos = (an.bubbles || []).map((p) => `${Number(p.left).toFixed(4)}% ${Number(p.top).toFixed(4)}%`).join("; ");
-      rows.push([pos, frag(ctx, cleanHtml(an.content, ctx))]);
+      const styles = noteStyles(an.content, ctx);
+      let html = cleanHtml(an.content, ctx);
+      if (!LEGACY_DOCS.includes(Number(ctx.docId))) html = keepEmpty(html);
+      rows.push(styles ? [pos, frag(ctx, html), styles] : [pos, frag(ctx, html)]);
     });
     if (s.bubble) rows.push(["Bubble", s.bubble]);
     if (s.background_color && s.background_color !== "transparent") rows.push(["Background", s.background_color]);
@@ -343,14 +420,32 @@ var CustomImportScript = (() => {
   }
 
   // tools/importer/parsers/image-grid.js
+  var LEGACY_DOCS2 = [396];
+  function captionStyles(html, ctx) {
+    const tpl = ctx.document.createElement("div");
+    tpl.innerHTML = html || "";
+    return [...tpl.children].map((el, i) => {
+      const m = /\bql-align-(left|center|right|justify)\b/.exec(el.getAttribute("class") || "");
+      return m ? `${i + 1}: text-align: ${m[1]}` : "";
+    }).filter(Boolean).join("\n");
+  }
   function parse7(b, ctx) {
     const s = b.settings || {};
-    const v = variants(`columns-${s.columns || 2}`, s.border && "border");
+    const legacy = LEGACY_DOCS2.includes(Number(ctx.docId));
+    const v = variants(
+      `columns-${s.columns || 2}`,
+      s.border && "border",
+      !legacy && s.downloadable && "download",
+      !legacy && s.asset_viewer_enabled === false && "no-viewer"
+    );
     const rows = (s.assets || []).map((it) => {
       const ad = it.asset_data || {};
       const pic = img(ctx, `asset-${ad.id || it.asset}`, it.alt || it.title || "", { width: ad.width, height: ad.height });
       const row = [pic || "", it.title || "", it.caption || ""];
-      if (it.background && it.background !== "transparent") row.push(it.background);
+      const bg = it.background && it.background !== "transparent" ? it.background : "";
+      const styles = legacy ? "" : captionStyles(it.caption, ctx);
+      if (bg || styles) row.push(bg);
+      if (styles) row.push(styles);
       return row;
     });
     return [block(ctx, `Image Grid (${v})`, rows)];
@@ -379,7 +474,7 @@ var CustomImportScript = (() => {
       const href = ctx.assets[`attachment-${d.attachment}`];
       if (!href) ctx.missing.push(`attachment-${d.attachment}`);
       const title = decodeEntities(d.title || "");
-      return [href ? link(ctx, href, title) : title, d.size || "", d.ext || ""];
+      return [href ? link(ctx, fileTarget(ctx, href), title) : title, d.size || "", d.ext || ""];
     });
     return [block(ctx, "Attachments", rows)];
   }
@@ -448,8 +543,9 @@ var CustomImportScript = (() => {
   }
 
   // tools/importer/parsers/asset-kit.js
+  var SERVABLE = ["png", "jpg", "jpeg", "gif", "webp", "svg", "pdf", "mp4"];
   function parse11(b, ctx) {
-    var _a;
+    var _a, _b;
     const s = b.settings || {};
     const v = variants(
       s.showThumbnails && "thumbnails",
@@ -458,17 +554,25 @@ var CustomImportScript = (() => {
       s.hasBackgroundBlocks && "background",
       s.hasBorder_thumbnails && "thumbnail-border",
       s.hasBackgroundThumbnails && "thumbnail-background",
-      s.hasRadius_blocks && `radius-${s.radiusChoice_blocks}`
+      // Frontify's radius switch (hasRadius_blocks) selects a custom value; off = the radius choice
+      !s.hasRadius_blocks && s.radiusChoice_blocks && `radius-${s.radiusChoice_blocks}`
     );
     const rows = [];
     if (!slateIsEmpty(s.title)) rows.push(["Title", frag(ctx, slateToHtml(s.title, ctx, { keepEmpty: false }))]);
     if (!slateIsEmpty(s.description)) rows.push(["Description", frag(ctx, slateToHtml(s.description, ctx, { keepEmpty: false }))]);
     const pkg = ctx.assets[`assetkit-${b.id}`];
-    if (pkg) rows.push(["Package", link(ctx, pkg, "Download package")]);
-    else ctx.notes.push(`Asset Kit ${b.id}: no package zip`);
+    const files = ((_a = b.assets) == null ? void 0 : _a.images) || [];
+    const single = files.length === 1 && SERVABLE.includes(String(files[0].ext).toLowerCase()) ? ctx.assets[`asset-${files[0].id}`] : null;
+    if (pkg && isServable(pkg)) rows.push(["Package", link(ctx, pkg, "Download package")]);
+    else if (pkg && ctx.frontifyUrl) rows.push(["Package", link(ctx, ctx.frontifyUrl, "Download package")]);
+    else if (single) rows.push(["Package", link(ctx, single, "Download package")]);
+    else ctx.notes.push(`Asset Kit ${b.id}: no package zip; "Download package" links to the Frontify page`);
+    if (s.hasRadius_blocks && s.radiusValue_blocks) rows.push(["Radius", s.radiusValue_blocks]);
+    const unservable = files.filter((a) => !SERVABLE.includes(String(a.ext).toLowerCase()));
+    if (unservable.length) ctx.notes.push(`Asset Kit ${b.id}: files Edge Delivery cannot serve: ${unservable.map((a) => a.file_name || `${a.id}.${a.ext}`).join(", ")}`);
     if (s.hasBorder_blocks) rows.push(["Border", `${s.borderWidth_blocks} ${String(s.borderStyle_blocks).toLowerCase()} ${rgbaToCss(s.borderColor_blocks)}`]);
     if (s.hasBackgroundThumbnails) rows.push(["Thumbnail background", rgbaToCss(s.backgroundColorThumbnails)]);
-    (((_a = b.assets) == null ? void 0 : _a.images) || []).forEach((a) => {
+    (((_b = b.assets) == null ? void 0 : _b.images) || []).forEach((a) => {
       const key = `asset-${a.id}`;
       const file = ctx.assets[key];
       if (!file) ctx.missing.push(key);
@@ -481,7 +585,7 @@ var CustomImportScript = (() => {
         thumb.src = icon;
         thumb.alt = `${a.ext} file`;
       }
-      rows.push([thumb || "", file ? link(ctx, file, a.file_name) : a.file_name, a.title || "", String(a.ext || "")]);
+      rows.push([thumb || "", file ? link(ctx, fileTarget(ctx, file), a.file_name) : a.file_name, a.title || "", String(a.ext || "")]);
     });
     return [block(ctx, v ? `Asset Kit (${v})` : "Asset Kit", rows)];
   }
@@ -500,12 +604,13 @@ var CustomImportScript = (() => {
     const v = variants(s.downloadable && "downloadable", s.positioning && s.positioning !== "Above" && `title-${s.positioning}`);
     const rows = [];
     if (!slateIsEmpty(s.title)) rows.push(["Title", frag(ctx, slateToHtml(s.title, ctx, { keepEmpty: false }))]);
-    rows.push([href ? link(ctx, href, a.file_name) : a.file_name]);
+    rows.push([href ? link(ctx, fileTarget(ctx, href), a.file_name) : a.file_name]);
     return [block(ctx, v ? `Audio (${v})` : "Audio", rows)];
   }
 
   // tools/importer/import-guideline-page.js
   var HOST = "https://tui-brandhub.com";
+  var HOME = "/";
   var PARSERS = {
     Text: parse,
     Heading: parse2,
@@ -540,6 +645,8 @@ var CustomImportScript = (() => {
       order: data.nav.order,
       firstPath: data.nav.order[0].path,
       permalinks: data.permalinks || {},
+      // files the site cannot serve link to their Frontify page (utils/frontify.js fileTarget)
+      frontifyUrl: data.frontifyUrl,
       links: [],
       missing: [],
       notes: []
@@ -615,7 +722,7 @@ var CustomImportScript = (() => {
     const div = document.createElement("div");
     const logo = data.assets[data.logoKey];
     div.innerHTML = `<p><a href="${data.nav.order[0].path}"><img src="${logo}" alt="${data.portalTitle} logo"></a></p>
-    <p><a href="${HOST}/dashboard">Back to dashboard</a></p>`;
+    <p><a href="${HOME}">Back to dashboard</a></p>`;
     div.append(hr(document));
     const ul = document.createElement("ul");
     data.portalNav.filter((n) => !n.is_hidden_in_navigation).forEach((n) => {
@@ -647,7 +754,7 @@ var CustomImportScript = (() => {
     div.append(ul);
     div.append(hr(document));
     div.insertAdjacentHTML("beforeend", `<ul>
-    <li><a href="${HOST}/dashboard">:brand-hub: Brand Hub</a></li>
+    <li><a href="${HOME}">:brand-hub: Brand Hub</a></li>
     <li>:search: Search</li>
     <li><a href="${HOST}/document/${data.doc.id}">:brand-assistant: Brand Assistant</a></li>
   </ul>`);
@@ -748,7 +855,6 @@ var CustomImportScript = (() => {
         results.push({ element: buildNav(document, data), path: "/nav" });
         results.push({ element: buildSidebar(document, data), path: "/sidebar" });
         results.push({ element: buildFooter(document), path: "/footer" });
-        results.push({ element: buildRedirect(document, data, data.doc.title), path: "/index" });
         results.push({ element: buildRedirect(document, data, data.doc.title), path: `/document/${data.doc.id}` });
       }
       return results;
