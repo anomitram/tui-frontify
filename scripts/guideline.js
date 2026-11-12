@@ -350,6 +350,37 @@ async function fillMissingSlugs(categories) {
 }
 
 /** Async part: sidebar, anchors, pagination, last modified. */
+/**
+ * In-content links to a heading ("/page#slug") lose their "#slug" in the content upload. Put it
+ * back from scripts/link-anchors.json ({page: [[link text, target path, slug], ...]}, written by
+ * tools/frontify-export/write_link_anchors.py), matching links by target and text, in order.
+ */
+async function restoreLinkAnchors(main, current) {
+  const content = main.querySelector('.guideline-content') || main;
+  const candidates = [...content.querySelectorAll('a[href]')].filter((a) => {
+    const u = new URL(a.href, window.location);
+    return u.origin === window.location.origin && !u.hash && !/\.\w{2,5}$/.test(u.pathname);
+  });
+  if (!candidates.length) return;
+  let map = {};
+  try {
+    const res = await fetch(`${window.hlx.codeBasePath}/scripts/link-anchors.json`);
+    if (res.ok) map = await res.json();
+  } catch (e) { return; }
+  const list = (map[current] || []).map(([text, target, slug]) => ({
+    text: text.replace(/\s+/g, ' ').trim(), target, slug, used: false,
+  }));
+  if (!list.length) return;
+  candidates.forEach((a) => {
+    const target = normalizePath(new URL(a.href, window.location).pathname);
+    const text = a.textContent.replace(/\s+/g, ' ').trim();
+    const hit = list.find((l) => !l.used && l.target === target && l.text === text);
+    if (!hit) return;
+    hit.used = true;
+    a.hash = hit.slug;
+  });
+}
+
 export async function loadGuideline(main) {
   const current = normalizePath(window.location.pathname);
   let categories = [];
@@ -405,6 +436,7 @@ export async function loadGuideline(main) {
   }
   scrollSpy(sidebar);
   goToTop();
+  await restoreLinkAnchors(main, current);
 
   const { hash } = window.location;
   if (hash) {
