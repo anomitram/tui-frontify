@@ -2,7 +2,7 @@
   "status": "success",
   "url": "http://localhost:8099/colour/core-palette.html",
   "path": "colour/core-palette",
-  "timestamp": "2026-11-11T02:33:37.276Z",
+  "timestamp": "2026-11-12T22:16:20.094Z",
   "frontifyPageId": 1703,
   "originalUrl": "https://tui-brandhub.com/document/396#/colour/core-palette",
   "blockCounts": "{\"Heading\":4,\"Text\":5,\"Callout\":4,\"Colors\":2,\"Attachments\":1,\"Image\":4}",
@@ -10,6 +10,6 @@
   "rewrittenLinks": "[]",
   "fixedLinks": "[\"https://ci-support@tui-brandhub.com -> mailto:ci-support@tui-brandhub.com\"]",
   "missing": "[]",
-  "notes": "[\"Empty section 11238 kept as spacer\"]",
-  "importScript": "b22187ef4dc7"
+  "notes": "[\"Empty section 11238 kept as spacer\",\"file TUI_Colour_Pallet_CMYK_250926.ase cannot be served by the site; links to the Frontify page\",\"file TUI_Colour_Pallet_RGB_250926.ase cannot be served by the site; links to the Frontify page\"]",
+  "importScript": "4ce897e12938"
 }

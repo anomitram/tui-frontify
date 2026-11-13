@@ -2,8 +2,8 @@
   "status": "failed",
   "url": "http://localhost:8099/colour/core-palette.html",
   "path": "colour/core-palette.html",
-  "timestamp": "2026-11-10T23:48:53.961Z",
-  "error": "page.evaluate: Error: Failed to import page: No #frontify-export payload in source page\n    at eval (eval at evaluate (:290:30), <anonymous>:31:15)\n    at async <anonymous>:316:30",
-  "errorStack": "page.evaluate: Error: Failed to import page: No #frontify-export payload in source page\n    at eval (eval at evaluate (:290:30), <anonymous>:31:15)\n    at async <anonymous>:316:30\n    at processUrl (/home/node/.excat-marketplaces/excat-marketplace/excat/skills/excat-content-import/scripts/run-bulk-import.js:795:40)\n    at async main (/home/node/.excat-marketplaces/excat-marketplace/excat/skills/excat-content-import/scripts/run-bulk-import.js:1077:22)",
-  "importScript": "4a7368fbc0c0"
+  "timestamp": "2026-11-12T22:16:00.100Z",
+  "error": "page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:8099/colour/core-palette.html\nCall log:\n  - navigating to \"http://localhost:8099/colour/core-palette.html\", waiting until \"domcontentloaded\"\n",
+  "errorStack": "page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:8099/colour/core-palette.html\nCall log:\n  - navigating to \"http://localhost:8099/colour/core-palette.html\", waiting until \"domcontentloaded\"\n\n    at processUrl (/home/node/.excat-marketplaces/excat-marketplace/excat/skills/excat-content-import/scripts/run-bulk-import.js:711:20)\n    at async main (/home/node/.excat-marketplaces/excat-marketplace/excat/skills/excat-content-import/scripts/run-bulk-import.js:1077:22)",
+  "importScript": "4ce897e12938"
 }
